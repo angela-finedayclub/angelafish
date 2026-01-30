@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 廈門雙商場攻略</title>
+    <title>2026 沖繩出差行程</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;600;700&display=swap');
 
         :root {
+            /* Warm Natural Palette */
             --misty-beige: #FCFAF5;
             --mossy-green: #5A5A4C;
             --golden-brown: #B8860B;
             --warm-sandstone: #D4C090;
+            
+            /* Text Colors */
             --text-primary: #5A5A4C;
             --text-secondary: #8C8C7A;
             --radius-md: 16px;
@@ -20,7 +23,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: #E8E5DF;
+            background-color: #E8E5DF; /* Outer background */
             font-family: 'Noto Sans TC', sans-serif;
             color: var(--text-primary);
             display: flex;
@@ -30,7 +33,7 @@
 
         .itinerary-card {
             width: 100%;
-            max-width: 460px;
+            max-width: 480px;
             background-color: var(--misty-beige);
             border-radius: 24px;
             overflow: hidden;
@@ -38,7 +41,7 @@
             position: relative;
         }
 
-        /* Header */
+        /* --- Header Section --- */
         .header {
             background-color: var(--mossy-green);
             color: var(--misty-beige);
@@ -48,99 +51,166 @@
 
         .header h1 {
             font-family: 'Noto Serif TC', serif;
-            font-size: 24px;
+            font-size: 22px;
             margin-bottom: 8px;
             letter-spacing: 0.05em;
+            line-height: 1.4;
         }
 
-        .header p {
+        .header-meta {
             font-size: 13px;
             opacity: 0.9;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.05em;
+            margin-top: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
         }
 
-        /* Map Line Visual */
-        .route-visual {
-            padding: 24px;
-            background-color: #F5F2EA;
+        .header-meta span {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        /* --- Downloads Section --- */
+        .downloads-section {
+            padding: 24px 24px 0 24px;
+        }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            background-color: #fff;
+            border: 1px dashed var(--golden-brown);
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            color: var(--mossy-green);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        .download-btn:hover {
+            background-color: #FCF9F2;
+        }
+
+        .download-icon {
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
+        .download-arrow {
+            color: var(--golden-brown);
+        }
+
+        /* --- Content & Timeline --- */
+        .content {
+            padding: 24px 24px 40px 24px;
+        }
+
+        .day-header {
+            display: flex;
+            align-items: center;
+            margin: 32px 0 20px 0;
+            color: var(--mossy-green);
+        }
+
+        .day-tag {
+            background-color: var(--mossy-green);
+            color: var(--misty-beige);
+            padding: 4px 12px;
+            border-radius: 50px;
             font-size: 12px;
             font-weight: 700;
-            color: var(--golden-brown);
-            position: relative;
+            margin-right: 12px;
+            font-family: 'Noto Serif TC', serif;
         }
 
-        .route-visual::after {
+        .day-title {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 12px;
+        }
+
+        /* Connecting line */
+        .timeline::before {
             content: "";
             position: absolute;
-            top: 50%;
-            left: 40px;
-            right: 40px;
-            height: 2px;
-            background: repeating-linear-gradient(to right, var(--golden-brown) 0, var(--golden-brown) 4px, transparent 4px, transparent 8px);
-            z-index: 0;
+            left: 7px;
+            top: 10px;
+            bottom: 0;
+            width: 1px;
+            background-color: var(--warm-sandstone);
             opacity: 0.4;
         }
 
-        .route-point {
-            z-index: 1;
-            background-color: #F5F2EA;
-            padding: 0 4px;
-            text-align: center;
-        }
-
-        .content {
-            padding: 24px;
-        }
-
-        /* Timeline Items */
         .time-block {
-            display: flex;
-            gap: 16px;
-            margin-bottom: 28px;
             position: relative;
+            padding-left: 24px;
+            margin-bottom: 24px;
         }
 
         .time-block:last-child { margin-bottom: 0; }
 
-        /* Connecting line */
-        .time-block:not(:last-child)::before {
-            content: "";
+        .timeline-dot {
             position: absolute;
-            left: 24px;
-            top: 40px;
-            bottom: -20px;
-            width: 1px;
-            background-color: var(--warm-sandstone);
-            opacity: 0.5;
+            left: 0;
+            top: 6px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background-color: var(--misty-beige);
+            border: 2px solid var(--golden-brown);
+            z-index: 1;
         }
 
-        .time-display {
-            min-width: 50px;
-            text-align: right;
+        .time-label {
             font-family: 'Noto Serif TC', serif;
+            font-size: 14px;
             font-weight: 700;
-            font-size: 15px;
             color: var(--golden-brown);
-            padding-top: 2px;
+            margin-bottom: 6px;
+            display: inline-block;
         }
 
-        .event-details {
-            flex: 1;
+        .event-card {
             background-color: #fff;
             padding: 16px;
             border-radius: var(--radius-md);
             border: 1px solid rgba(212, 192, 144, 0.3);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 12px rgba(90, 90, 76, 0.03);
+        }
+
+        /* Special Card Styles */
+        .flight-card {
+            background-color: #F7F5F0;
+            border-left: 3px solid var(--mossy-green);
+        }
+
+        .highlight-card {
+            background-color: #FCF9F2;
+            border: 1px solid var(--golden-brown);
         }
 
         .event-title {
             font-weight: 700;
-            font-size: 16px;
-            margin-bottom: 6px;
+            font-size: 15px;
             color: var(--mossy-green);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .event-desc {
@@ -149,20 +219,42 @@
             line-height: 1.5;
         }
 
-        .tag {
-            display: inline-block;
-            font-size: 11px;
-            padding: 2px 8px;
-            background-color: #F2EFE9;
-            color: var(--mossy-green);
-            border-radius: 4px;
-            margin-top: 8px;
-            margin-right: 4px;
+        /* Map Image Style */
+        .map-image {
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 12px;
+            border: 1px solid #E0E0E0;
         }
 
-        .highlight-card {
-            background-color: #FAF8F2;
-            border-left: 3px solid var(--golden-brown);
+        .tag-row {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tag {
+            font-size: 11px;
+            padding: 3px 8px;
+            background-color: #EFECE5;
+            color: var(--text-primary);
+            border-radius: 4px;
+        }
+
+        .tag.golden {
+            background-color: rgba(184, 134, 11, 0.1);
+            color: var(--golden-brown);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 11px;
+            color: var(--warm-sandstone);
+            letter-spacing: 0.1em;
+            font-family: 'Noto Serif TC', serif;
         }
 
     </style>
@@ -170,72 +262,185 @@
 <body>
 
     <div class="itinerary-card">
+        <!-- Header -->
         <div class="header">
-            <h1>Day 1：雙商場＋海邊攻略</h1>
-            <p>1/17 (六) 由遠而近・順路不繞道</p>
+            <h1>Shinryo Acceleration<br>2026 DemoDay</h1>
+            <div class="header-meta">
+                <span>📅 2026/02/04 (三) — 02/06 (五)</span>
+                <span>🏨 THE NEST Naha (那霸)</span>
+            </div>
         </div>
 
-        <div class="route-visual">
-            <div class="route-point">朗豪<br>出發</div>
-            <div class="route-point">寶龍<br>午餐</div>
-            <div class="route-point">觀音山<br>咖啡</div>
-            <div class="route-point">灣悅城<br>採買</div>
-            <div class="route-point">飯店<br>化妝</div>
+        <!-- Document Downloads -->
+        <div class="downloads-section">
+            <a href="Peach.confirmation.AZHWZF.pdf" class="download-btn" download>
+                <span><span class="download-icon">🎫</span> 機票 AZHWZF (TU PEIYU)</span>
+                <span class="download-arrow">📥</span>
+            </a>
+            <a href="Peach.confirmation.YAKXZ5.pdf" class="download-btn" download>
+                <span><span class="download-icon">🎫</span> 機票 YAKXZ5 (TSAI CHINGFANG)</span>
+                <span class="download-arrow">📥</span>
+            </a>
         </div>
 
         <div class="content">
-            <!-- Item 1 -->
-            <div class="time-block">
-                <div class="time-display">11:15</div>
-                <div class="event-details">
-                    <div class="event-title">🏨 朗豪酒店</div>
-                    <div class="event-desc">抵達飯店，寄放行李。直接叫車往南走。</div>
-                    <div class="tag">🚕 車程約 18 分鐘</div>
+
+            <!-- Day 1 -->
+            <div class="day-header">
+                <span class="day-tag">DAY 1</span>
+                <span class="day-title">02/04 (三) 抵達 & 交流</span>
+            </div>
+
+            <div class="timeline">
+                <!-- Flight Out -->
+                <div class="time-block">
+                    <div class="timeline-dot"></div>
+                    <span class="time-label">09:45 - 12:25</span>
+                    <div class="event-card flight-card">
+                        <div class="event-title">✈️ 去程航班 (MM922)</div>
+                        <div class="event-desc">
+                            <strong>TPE 台北桃園 ➔ OKA 沖繩那霸</strong><br>
+                            抵達後前往飯店 Check-in。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hotel Info -->
+                <div class="time-block">
+                    <div class="timeline-dot"></div>
+                    <span class="time-label">13:30 (預估)</span>
+                    <div class="event-card">
+                        <div class="event-title">🏨 THE NEST Naha</div>
+                        <div class="event-desc">
+                            <strong>地址：</strong>1-6-1 Nishi, Naha City<br>
+                            (沖縄県那覇市西１丁目６－１)<br><br>
+                            <strong>交通：</strong>單軌「那霸機場」搭至「旭橋站」(5站)，下車步行 6 分鐘。
+                        </div>
+                        <!-- Monorail Map Image -->
+                        <img src="routemap_pc_jp-2.jpg" alt="沖繩單軌電車圖" class="map-image">
+                        
+                        <div class="tag-row">
+                            <span class="tag">Check-in</span>
+                            <span class="tag">Free Wi-Fi</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Transfer -->
+                <div class="time-block">
+                    <div class="timeline-dot"></div>
+                    <span class="time-label">14:30</span>
+                    <div class="event-card">
+                        <div class="event-title">🚕 飯店集合 & 接送</div>
+                        <div class="event-desc">由主辦方安排車輛前往沖繩市 (Koza)。</div>
+                    </div>
+                </div>
+
+                <!-- Event -->
+                <div class="time-block">
+                    <div class="timeline-dot"></div>
+                    <span class="time-label">15:30 - 21:00</span>
+                    <div class="event-card highlight-card">
+                        <div class="event-title">🤝 Koza 參訪 & 交流晚宴</div>
+                        <div class="event-desc">
+                            地點：Koza Startup Arcade (KSA)<br>
+                            包含參訪交流與 Networking Party (19:00 開始)。
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Item 2 -->
-            <div class="time-block">
-                <div class="time-display">11:40</div>
-                <div class="event-details highlight-card">
-                    <div class="event-title">🍽️ 寶龍一城 (Powerlong One)</div>
-                    <div class="event-desc">全廈門最奢華商場。建議在此享用午餐。</div>
-                    <div class="event-desc" style="margin-top:6px;"><strong>必拍：</strong>頂樓空中水鏡廣場 (3F/4F)。</div>
-                    <div class="tag">宴遇福建菜</div>
-                    <div class="tag">M Stand</div>
+            <!-- Day 2 -->
+            <div class="day-header">
+                <span class="day-tag">DAY 2</span>
+                <span class="day-title">02/05 (四) DemoDay 主活動</span>
+            </div>
+
+            <div class="timeline">
+                <!-- Morning -->
+                <div class="time-block">
+                    <div class="timeline-dot"></div>
+                    <span class="time-label">08:45</span>
+                    <div class="event-card">
+                        <div class="event-title">🚶 飯店出發</div>
+                        <div class="event-desc">步行約 11 分鐘前往會場。</div>
+                    </div>
+                </div>
+
+                <!-- Main Event -->
+                <div class="time-block">
+                    <div class="timeline-dot"></div>
+                    <span class="time-label">09:30 - 11:30</span>
+                    <div class="event-card highlight-card">
+                        <div class="event-title" style="color:var(--golden-brown);">🎤 DemoDay Pitch</div>
+                        <div class="event-desc">
+                            地點：琉球新報 Hall (Ryukyu Shimpo Hall)<br>
+                            8 家企業登台 (7分簡報 + 5分 Q&A)。
+                        </div>
+                        <div class="tag-row">
+                            <span class="tag golden">重點行程</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Afternoon -->
+                <div class="time-block">
+                    <div class="timeline-dot"></div>
+                    <span class="time-label">11:20 - 18:30</span>
+                    <div class="event-card">
+                        <div class="event-title">📑 其他議程 (自由參加)</div>
+                        <div class="event-desc">
+                            包含 JETRO 報告、Ryukyu Launchpad、NextT DemoDay 等活動。
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Item 3 -->
-            <div class="time-block">
-                <div class="time-display">13:30</div>
-                <div class="event-details">
-                    <div class="event-title">☕ 觀音山海邊</div>
-                    <div class="event-desc">從寶龍打車過去只需 8 分鐘。</div>
-                    <div class="event-desc">選一家咖啡廳 (1/2 Coffee) 快速拍海景大片。</div>
-                    <div class="tag">🚕 車程約 10 分鐘</div>
+            <!-- Day 3 -->
+            <div class="day-header">
+                <span class="day-tag">DAY 3</span>
+                <span class="day-title">02/06 (五) 自由時間 & 返程</span>
+            </div>
+
+            <div class="timeline">
+                <!-- Morning -->
+                <div class="time-block">
+                    <div class="timeline-dot"></div>
+                    <span class="time-label">09:00 - 14:00</span>
+                    <div class="event-card">
+                        <div class="event-title">☕ 自由活動 / ANTB</div>
+                        <div class="event-desc">
+                            可參加 Asia New Travel Bootcamp (會場同上) 或在市區觀光、採買伴手禮。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Departure -->
+                <div class="time-block">
+                    <div class="timeline-dot"></div>
+                    <span class="time-label">14:50 (建議)</span>
+                    <div class="event-card">
+                        <div class="event-title">🚝 前往那霸機場</div>
+                        <div class="event-desc">建議提早 2 小時抵達機場辦理報到。</div>
+                    </div>
+                </div>
+
+                <!-- Flight In -->
+                <div class="time-block">
+                    <div class="timeline-dot"></div>
+                    <span class="time-label">16:50 - 17:35</span>
+                    <div class="event-card flight-card">
+                        <div class="event-title">✈️ 回程航班 (MM929)</div>
+                        <div class="event-desc">
+                            <strong>OKA 沖繩那霸 ➔ TPE 台北桃園</strong><br>
+                            平安賦歸。
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Item 4 -->
-            <div class="time-block">
-                <div class="time-display">14:50</div>
-                <div class="event-details highlight-card">
-                    <div class="event-title">🛍️ ONE PARK 灣悅城</div>
-                    <div class="event-desc">開始往回走，這裡離飯店很近。</div>
-                    <div class="event-desc">逛逛年輕品牌，去 <strong>Holiland 好利來</strong> 買演唱會前的麵包甜點。</div>
-                    <div class="tag">🚕 車程約 10 分鐘</div>
-                </div>
-            </div>
-
-            <!-- Item 5 -->
-            <div class="time-block">
-                <div class="time-display">16:00</div>
-                <div class="event-details">
-                    <div class="event-title">💄 返回朗豪酒店</div>
-                    <div class="event-desc">進房休息、補妝、換裝、充電。</div>
-                    <div class="event-desc" style="color:#B8860B; margin-top:4px;">* 17:50 準時搭地鐵出發去演唱會</div>
-                </div>
+            <div class="footer">
+                BUSINESS TRIP ITINERARY 2026
             </div>
 
         </div>
