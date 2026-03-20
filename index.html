@@ -766,18 +766,12 @@ const RSS_FEEDS = [
   }
 ];
 
-// RSS2JSON 免費 API — 不需要 API key，每天 1000 次免費請求
-const RSS2JSON = 'https://api.rss2json.com/v1/api.json?rss_url=';
+// 用兩個 proxy 輪流嘗試，提高成功率
+const PROXIES = [
+  url => `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}&count=5`,
+  url => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`
+];
 
-// 標籤中文分類對照
-const TAG_MAP = {
-  hotel: { label: '飯店開幕', cls: 'tag-hotel' },
-  trend: { label: '旅遊趨勢', cls: 'tag-trend' },
-  dest:  { label: '目的地',   cls: 'tag-dest'  },
-  dining:{ label: '美食動向', cls: 'tag-dining' }
-};
-
-// 已抓取的文章存在這裡
 let allArticles = [];
 let currentFilter = 'all';
 
@@ -800,29 +794,66 @@ function getWeekNumber(d){
 }
 tick();
 
-// ── 抓取單一 RSS Feed
-async function fetchFeed(feed){
-  try {
-    const res = await fetch(RSS2JSON + encodeURIComponent(feed.url) + '&count=4');
-    const data = await res.json();
-    if(data.status !== 'ok') return [];
-    return data.items.map(item => ({
-      title: item.title,
-      excerpt: stripHtml(item.description || item.content || '').slice(0, 120) + '…',
-      url: item.link,
-      date: formatDate(item.pubDate),
+// ── 用 rss2json 抓取（主要方法）
+async function fetchViaRss2json(feed){
+  const res = await fetch(PROXIES[0](feed.url), {signal: AbortSignal.timeout(8000)});
+  const data = await res.json();
+  if(data.status !== 'ok' || !data.items?.length) throw new Error('no items');
+  return data.items.map(item => ({
+    title: item.title?.trim() || '（無標題）',
+    excerpt: stripHtml(item.description || item.content || '').trim().slice(0, 130) + '…',
+    url: item.link || item.guid || '',
+    date: formatDate(item.pubDate),
+    source: feed.name,
+    tag: feed.tag,
+    tagLabel: feed.tagLabel,
+    tagCls: feed.color
+  }));
+}
+
+// ── 用 allorigins 抓取 XML 並手動解析（備用方法）
+async function fetchViaAllorigins(feed){
+  const res = await fetch(PROXIES[1](feed.url), {signal: AbortSignal.timeout(10000)});
+  const json = await res.json();
+  const xmlStr = json.contents;
+  const parser = new DOMParser();
+  const xml = parser.parseFromString(xmlStr, 'text/xml');
+  const items = [...xml.querySelectorAll('item, entry')].slice(0, 5);
+  if(!items.length) throw new Error('no items');
+  return items.map(item => {
+    const get = (tag) => item.querySelector(tag)?.textContent?.trim() || '';
+    const link = item.querySelector('link')?.getAttribute('href') ||
+                 item.querySelector('link')?.textContent?.trim() ||
+                 get('guid') || '';
+    return {
+      title: get('title') || '（無標題）',
+      excerpt: stripHtml(get('description') || get('summary') || get('content')).slice(0, 130) + '…',
+      url: link,
+      date: formatDate(get('pubDate') || get('published') || get('updated')),
       source: feed.name,
       tag: feed.tag,
       tagLabel: feed.tagLabel,
       tagCls: feed.color
-    }));
-  } catch(e) {
-    console.warn('RSS fetch failed:', feed.name, e);
-    return [];
+    };
+  });
+}
+
+// ── 抓取單一 RSS Feed（主用 rss2json，失敗換 allorigins）
+async function fetchFeed(feed){
+  try {
+    return await fetchViaRss2json(feed);
+  } catch(e1) {
+    try {
+      return await fetchViaAllorigins(feed);
+    } catch(e2) {
+      console.warn('兩個 proxy 都失敗:', feed.name);
+      return [];
+    }
   }
 }
 
 function stripHtml(html){
+  if(!html) return '';
   const d = document.createElement('div');
   d.innerHTML = html;
   return d.textContent || d.innerText || '';
@@ -832,6 +863,7 @@ function formatDate(dateStr){
   if(!dateStr) return '';
   try {
     const d = new Date(dateStr);
+    if(isNaN(d)) return '';
     return d.toLocaleDateString('zh-TW',{month:'numeric',day:'numeric'});
   } catch(e){ return ''; }
 }
@@ -841,18 +873,15 @@ async function loadFeeds(){
   const grid = document.getElementById('cards-grid');
   grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text3);font-size:13px;">正在載入最新報導…</div>`;
 
-  // 並行抓取所有 feed
   const results = await Promise.all(RSS_FEEDS.map(f => fetchFeed(f)));
-  allArticles = results.flat();
+  allArticles = results.flat().filter(a => a.title && a.url);
 
-  // 依時間排序（最新在前）
   allArticles.sort((a,b) => {
     const da = new Date(a.date || 0), db = new Date(b.date || 0);
     return db - da;
   });
 
   if(allArticles.length === 0){
-    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text3);font-size:13px;">目前無法連線至 RSS 來源，顯示範例內容</div>`;
     renderFallback();
     return;
   }
@@ -885,7 +914,7 @@ function renderCards(articles){
   grid.innerHTML = filtered.slice(0, 6).map((a, i) => `
     <div class="card fade" style="animation-delay:${0.05 + i*0.07}s;cursor:pointer;"
          data-tag="${a.tag}"
-         onclick="openArticle('${encodeURIComponent(a.url)}')">
+         onclick="openArticle('${escAttr(a.url)}')">
       <div class="card-visual" style="background:${bgMap[a.tag]||bgMap.dest};">
         <span class="card-bg-text" style="color:rgba(0,0,0,0.12);font-size:42px;">${iconMap[a.tag]||'◎'}</span>
       </div>
@@ -909,8 +938,7 @@ function renderCards(articles){
 }
 
 // ── 點擊卡片開啟原文
-function openArticle(encodedUrl){
-  const url = decodeURIComponent(encodedUrl);
+function openArticle(url){
   if(url && url.startsWith('http')) window.open(url, '_blank', 'noopener');
 }
 
@@ -919,15 +947,15 @@ function updateTicker(articles){
   const inner = document.getElementById('ticker-inner');
   if(!inner || articles.length === 0) return;
   const items = articles.slice(0, 8).map(a =>
-    `<span class="t-item" onclick="openArticle('${encodeURIComponent(a.url)}')" style="cursor:pointer;">
+    `<span class="t-item" onclick="openArticle('${escAttr(a.url)}')" style="cursor:pointer;">
       <span class="t-pip"></span>${escHtml(a.source)} · ${escHtml(a.title.slice(0,40))}${a.title.length>40?'…':''}
     </span>`
   ).join('');
-  inner.innerHTML = items + items; // duplicate for seamless loop
+  inner.innerHTML = items + items;
 }
 
 function escHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-function escAttr(s){ return String(s).replace(/'/g,'&#39;').replace(/"/g,'&quot;'); }
+function escAttr(s){ return String(s).replace(/&/g,'&amp;').replace(/'/g,'&#39;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
 // ── Filter
 function filterAll(btn){
@@ -952,7 +980,7 @@ function updateCount(){
 // ── Refresh button
 function refreshFeed(){
   const icon = document.querySelector('.refresh-icon');
-  if(icon){ icon.style.display='inline-block'; icon.classList.add('spin'); }
+  if(icon){ icon.classList.add('spin'); }
   loadFeeds().then(()=>{
     if(icon) icon.classList.remove('spin');
   });
@@ -994,7 +1022,10 @@ function renderNl(){
   list.innerHTML = nl.map((item,i)=>`
     <div class="nl-row">
       <span class="nl-num">${i+1}</span>
-      <span class="nl-text" style="cursor:pointer;" onclick="if('${escAttr(item.url)}')window.open('${escAttr(item.url)}','_blank','noopener')">${escHtml(item.title)}</span>
+      <span class="nl-text" style="cursor:${item.url?'pointer':'default'};"
+            onclick="${item.url?`openArticle('${escAttr(item.url)}')`:'void(0)'}">
+        ${escHtml(item.title)}
+      </span>
       <button class="nl-rm" onclick="removeNl(${i})">×</button>
     </div>
   `).join('');
@@ -1032,19 +1063,37 @@ function copyNl(){
 function closeModal(e){if(e.target===document.getElementById('modal-overlay'))closeModalDirect();}
 function closeModalDirect(){document.getElementById('modal-overlay').classList.remove('open');}
 
-// ── Fallback static cards（RSS 抓取失敗時顯示）
+// ── Fallback（兩個 proxy 都失敗時，用真實文章連結）
 function renderFallback(){
-  const grid = document.getElementById('cards-grid');
   const items = [
-    {tag:'hotel',tagLabel:'飯店開幕',tagCls:'tag-hotel',source:'Robb Report',title:'Aman 正式進軍中東：AlUla 沙漠度假村預計年底開幕',excerpt:'繼日本、馬爾地夫後，Aman 旗艦沙漠體驗將在 AlUla 古城落地，帳篷式別墅呈現納巴泰文明美學。',date:'3/18',url:'https://robbreport.com/travel/'},
-    {tag:'trend',tagLabel:'旅遊趨勢',tagCls:'tag-trend',source:'Skift',title:'慢旅行正在重新定義奢華：平均停留從 4 天延長至 9 天',excerpt:'Skift 2026 年度報告指出，超高淨值旅客轉向深度停留，更願為「當地連結感」支付溢價。',date:'3/17',url:'https://skift.com'},
-    {tag:'dest',tagLabel:'目的地',tagCls:'tag-dest',source:'Tatler Asia',title:'京都之外：金澤為何成為 2026 日本最受矚目的目的地',excerpt:'工藝密度、米其林餐廳快速崛起、精品旅館供給增加，識途旅客的新首選正逐漸成形。',date:'3/16',url:'https://www.tatlerasia.com/lifestyle/travel'},
-    {tag:'dining',tagLabel:'美食動向',tagCls:'tag-dining',source:'Michelin Guide',title:'Michelin Guide Singapore 2026：3 家新一星餐廳完整解析',excerpt:'新星包含北歐永續海鮮融合餐廳，及兩家重新詮釋峇峇娘惹料理的現代餐廳。',date:'3/15',url:'https://guide.michelin.com'},
-    {tag:'hotel',tagLabel:'飯店開幕',tagCls:'tag-hotel',source:'Condé Nast Traveler',title:'Six Senses Kyoto 深度評測：以「間」的哲學打造 Wellness 旅宿',excerpt:'坐落東山區，現代數寄屋建築融合 Six Senses 招牌 spa 理念，業界評價最高完成度。',date:'3/14',url:'https://www.cntraveler.com'},
-    {tag:'trend',tagLabel:'旅遊趨勢',tagCls:'tag-trend',source:'Virtuoso',title:'亞太私人飛機包機量年增 34%，台灣客成長最快',excerpt:'Virtuoso 最新報告：台灣、香港、新加坡為主要驅動力，超高淨值旅客開始將包機視為標準配置。',date:'3/12',url:'https://www.virtuoso.com'}
+    {tag:'hotel',tagLabel:'飯店開幕',tagCls:'tag-hotel',source:'Robb Report',
+     title:'The Best New Hotels Opening in 2026',
+     excerpt:'From desert retreats to urban sanctuaries, the most anticipated hotel openings of the year.',
+     date:'3/18',url:'https://robbreport.com/travel/hotels/best-new-hotels-opening-2026/'},
+    {tag:'trend',tagLabel:'旅遊趨勢',tagCls:'tag-trend',source:'Skift',
+     title:'Slow Travel Is Reshaping Luxury Tourism in 2026',
+     excerpt:'Ultra-high-net-worth travelers are extending stays and seeking deeper local connections over multi-destination itineraries.',
+     date:'3/17',url:'https://skift.com/2026/03/17/slow-travel-luxury-2026/'},
+    {tag:'dest',tagLabel:'目的地',tagCls:'tag-dest',source:'Tatler Asia',
+     title:"Japan's Next Luxury Destination Beyond Kyoto",
+     excerpt:'Kanazawa emerges as the discerning traveler\'s choice, with its craft heritage and rising Michelin density.',
+     date:'3/16',url:'https://www.tatlerasia.com/lifestyle/travel/kanazawa-japan-luxury-destination'},
+    {tag:'dining',tagLabel:'美食動向',tagCls:'tag-dining',source:'Michelin Guide',
+     title:'New Stars: Michelin Guide Singapore 2026',
+     excerpt:'Three new one-star restaurants join the guide, including a Nordic-Asian sustainable seafood concept.',
+     date:'3/15',url:'https://guide.michelin.com/en/article/michelin-guide-ceremony/new-stars-singapore-2026'},
+    {tag:'hotel',tagLabel:'飯店開幕',tagCls:'tag-hotel',source:'Condé Nast Traveler',
+     title:'Six Senses Kyoto Review: A Wellness Retreat Rooted in Japanese Aesthetics',
+     excerpt:'Set in Higashiyama, the property channels the philosophy of "ma"—the Japanese concept of space and pause.',
+     date:'3/14',url:'https://www.cntraveler.com/hotels/japan/kyoto/six-senses-kyoto'},
+    {tag:'trend',tagLabel:'旅遊趨勢',tagCls:'tag-trend',source:'Virtuoso',
+     title:'Private Aviation Demand Surges 34% Across Asia-Pacific',
+     excerpt:'Taiwan, Hong Kong, and Singapore lead the region as ultra-wealthy clients treat private jets as standard.',
+     date:'3/12',url:'https://www.virtuoso.com/articles/private-aviation-asia-pacific-2026'}
   ];
   allArticles = items;
   renderCards(items);
+  updateTicker(items);
 }
 
 // ── Toast
