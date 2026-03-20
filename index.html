@@ -1,450 +1,1068 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 沖繩出差行程</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;600;700&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>旅行情報 — 內部週報系統</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Noto+Serif+TC:wght@300;400;500&family=Noto+Sans+TC:wght@300;400;500&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-        :root {
-            /* Warm Natural Palette */
-            --misty-beige: #FCFAF5;
-            --mossy-green: #5A5A4C;
-            --golden-brown: #B8860B;
-            --warm-sandstone: #D4C090;
-            
-            /* Text Colors */
-            --text-primary: #5A5A4C;
-            --text-secondary: #8C8C7A;
-            --radius-md: 16px;
-        }
+:root{
+  --bg:#f5f0e8;
+  --bg2:#ede8de;
+  --bg3:#faf7f2;
+  --bg4:#f0ebe0;
+  --surface:#e8e2d6;
+  --surface2:#dfd9cc;
+  --border:#d8d0c0;
+  --border2:#c8bfac;
+  --gold:#8a6830;
+  --gold2:#6e5224;
+  --gold3:#4a3818;
+  --gold-dim:#b09060;
+  --text:#2a2418;
+  --text2:#4a4030;
+  --text3:#7a7060;
+  --text4:#a09880;
+  --white:#fdfaf5;
+  --green:#2a6048;
+  --green-bg:#e0ede8;
+  --rose:#7a3030;
+  --rose-bg:#ede0e0;
+  --blue:#2a4870;
+  --blue-bg:#e0e8f0;
+  --amber:#7a5818;
+  --amber-bg:#f0e8d4;
+  --serif-cn:'Noto Serif TC','Playfair Display',serif;
+  --sans-cn:'Noto Sans TC',sans-serif;
+  --display:'IM Fell English SC','Playfair Display',serif;
+}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans-cn);font-size:14px;line-height:1.7;min-height:100vh;overflow-x:hidden}
 
-        body {
-            background-color: #E8E5DF; /* Outer background */
-            font-family: 'Noto Sans TC', sans-serif;
-            color: var(--text-primary);
-            display: flex;
-            justify-content: center;
-            padding: 40px 20px;
-        }
+/* ─── MASTHEAD ─── */
+.masthead{
+  border-bottom:1px solid var(--border);
+  padding:0 48px;
+  background:var(--bg2);
+  position:sticky;top:0;z-index:200;
+}
+.masthead-top{
+  display:flex;align-items:center;justify-content:space-between;
+  height:56px;
+}
+.logo{
+  display:flex;align-items:baseline;gap:0;
+}
+.logo-cn{
+  font-family:var(--serif-cn);
+  font-size:22px;font-weight:300;
+  color:var(--gold3);letter-spacing:0.12em;
+}
+.logo-rule{
+  width:1px;height:16px;background:var(--border2);margin:0 14px;
+}
+.logo-sub{
+  font-family:var(--display);
+  font-size:9px;color:var(--text3);letter-spacing:0.3em;
+  text-transform:uppercase;
+}
+.masthead-right{
+  display:flex;align-items:center;gap:20px;
+}
+#clock{
+  font-family:var(--sans-cn);font-size:11px;
+  color:var(--text3);letter-spacing:0.06em;
+}
+.week-badge{
+  font-size:10px;font-weight:500;letter-spacing:0.12em;
+  padding:4px 10px;border-radius:1px;
+  background:var(--amber-bg);color:var(--amber);
+  border:1px solid var(--gold-dim);
+  text-transform:uppercase;
+}
 
-        .itinerary-card {
-            width: 100%;
-            max-width: 480px;
-            background-color: var(--misty-beige);
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 12px 36px rgba(90, 90, 76, 0.1);
-            position: relative;
-        }
+/* tabs */
+.masthead-nav{
+  display:flex;align-items:center;gap:0;
+  border-top:1px solid var(--border);
+  height:40px;
+}
+.nav-tab{
+  display:flex;align-items:center;gap:6px;
+  padding:0 18px;height:40px;
+  font-size:11px;font-weight:400;letter-spacing:0.1em;
+  color:var(--text3);cursor:pointer;border:none;background:none;
+  font-family:var(--sans-cn);
+  border-bottom:2px solid transparent;
+  transition:all 0.2s;position:relative;top:1px;
+}
+.nav-tab:hover{color:var(--text2);}
+.nav-tab.active{color:var(--gold2);border-bottom-color:var(--gold);}
+.nav-dot{
+  width:6px;height:6px;border-radius:50%;flex-shrink:0;
+}
+.dot-hotel{background:#4a8c6a}
+.dot-trend{background:#c9a96e}
+.dot-dest{background:#4a6a8c}
+.dot-dining{background:#8c4a4a}
+.nav-sep{width:1px;height:16px;background:var(--border);margin:0 4px;}
 
-        /* --- Header Section --- */
-        .header {
-            background-color: var(--mossy-green);
-            color: var(--misty-beige);
-            padding: 32px 24px;
-            text-align: center;
-        }
+/* ─── TICKER ─── */
+.ticker{
+  background:var(--bg2);border-bottom:1px solid var(--border);
+  padding:9px 48px;display:flex;align-items:center;gap:16px;
+  overflow:hidden;
+}
+.ticker-label{
+  font-size:8px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--gold);white-space:nowrap;
+  padding:3px 8px;border:1px solid var(--gold-dim);border-radius:1px;
+}
+.ticker-track{flex:1;overflow:hidden;}
+.ticker-scroll{
+  display:flex;gap:40px;white-space:nowrap;
+  animation:scroll 50s linear infinite;
+}
+.ticker-scroll:hover{animation-play-state:paused}
+.t-item{
+  display:flex;align-items:center;gap:8px;
+  font-size:11px;color:var(--text3);cursor:pointer;transition:color 0.2s;
+}
+.t-item:hover{color:var(--gold2);}
+.t-pip{width:3px;height:3px;border-radius:50%;background:var(--gold-dim);flex-shrink:0;}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-        .header h1 {
-            font-family: 'Noto Serif TC', serif;
-            font-size: 22px;
-            margin-bottom: 8px;
-            letter-spacing: 0.05em;
-            line-height: 1.4;
-        }
+/* ─── LAYOUT ─── */
+main{max-width:1360px;margin:0 auto;padding:36px 48px 80px;}
 
-        .header-meta {
-            font-size: 13px;
-            opacity: 0.9;
-            letter-spacing: 0.05em;
-            margin-top: 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
+.layout-grid{
+  display:grid;
+  grid-template-columns:1fr 340px;
+  gap:32px;
+  align-items:start;
+}
+@media(max-width:1100px){.layout-grid{grid-template-columns:1fr}}
 
-        .header-meta span {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-        }
+/* ─── SECTION LABEL ─── */
+.section-label{
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:20px;
+}
+.section-rule{flex:1;height:1px;background:var(--border);}
+.section-cn{
+  font-family:var(--serif-cn);font-size:13px;font-weight:300;
+  color:var(--text2);letter-spacing:0.15em;white-space:nowrap;
+}
+.section-en{
+  font-size:9px;letter-spacing:0.2em;color:var(--text4);
+  text-transform:uppercase;white-space:nowrap;
+}
 
-        /* --- Downloads Section --- */
-        .downloads-section {
-            padding: 24px 24px 0 24px;
-        }
+/* ─── HERO CARD ─── */
+.hero-card{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:2px;overflow:hidden;cursor:pointer;
+  transition:border-color 0.2s,transform 0.2s;
+  margin-bottom:20px;
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:220px;
+}
+.hero-card:hover{border-color:var(--gold);transform:translateY(-1px);}
+.hero-visual{
+  position:relative;overflow:hidden;
+  background:var(--bg4);
+  display:flex;align-items:center;justify-content:center;
+}
+.hero-bg-text{
+  font-family:var(--display);font-size:72px;
+  color:var(--border2);position:absolute;
+  user-select:none;pointer-events:none;
+}
+.hero-visual-label{
+  position:absolute;bottom:14px;left:14px;
+  font-size:9px;letter-spacing:0.2em;color:var(--text4);
+  text-transform:uppercase;font-family:var(--display);
+}
+.hero-featured-badge{
+  position:absolute;top:14px;left:14px;
+  font-size:8px;letter-spacing:0.2em;color:var(--gold2);
+  background:rgba(138,104,48,0.1);border:1px solid var(--gold-dim);
+  padding:3px 8px;border-radius:1px;text-transform:uppercase;
+}
+.hero-body{padding:28px 28px 20px;}
+.hero-meta{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
+.hero-source{font-size:9px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--text3);}
+.hero-tag{font-size:9px;padding:2px 8px;border-radius:1px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;}
+.hero-title{
+  font-family:var(--serif-cn);font-size:20px;font-weight:400;
+  color:var(--text);line-height:1.5;letter-spacing:0.04em;
+  margin-bottom:10px;
+}
+.hero-excerpt{font-size:12px;color:var(--text2);line-height:1.75;margin-bottom:20px;}
+.hero-footer{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid var(--border);}
+.hero-date{font-size:10px;color:var(--text4);}
+.card-btns{display:flex;align-items:center;gap:12px;}
+.btn-save,.btn-nl{
+  background:none;border:none;cursor:pointer;
+  font-family:var(--sans-cn);font-size:10px;letter-spacing:0.12em;
+  text-transform:uppercase;transition:color 0.18s;padding:0;
+}
+.btn-save{color:var(--text4);}
+.btn-save:hover,.btn-save.saved{color:var(--gold);}
+.btn-nl{color:var(--green);}
+.btn-nl:hover{color:var(--gold2);}
+.btn-nl.added{color:var(--gold);pointer-events:none;}
 
-        .download-btn {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            background-color: #fff;
-            border: 1px dashed var(--golden-brown);
-            padding: 12px 16px;
-            border-radius: 12px;
-            margin-bottom: 12px;
-            color: var(--mossy-green);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: background-color 0.2s;
-        }
+/* ─── CARDS GRID ─── */
+.cards-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:16px;
+  margin-bottom:0;
+}
+.card{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:2px;overflow:hidden;cursor:pointer;
+  transition:border-color 0.2s,transform 0.2s;
+  display:flex;flex-direction:column;
+}
+.card:hover{border-color:var(--border2);transform:translateY(-1px);}
+.card-visual{
+  height:110px;background:var(--bg4);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.card-bg-text{
+  font-family:var(--display);font-size:48px;
+  color:var(--border2);pointer-events:none;user-select:none;
+}
+.card-body{padding:14px;flex:1;display:flex;flex-direction:column;gap:7px;}
+.card-meta{display:flex;align-items:center;gap:7px;}
+.card-source{font-size:9px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--text4);}
+.card-tag{font-size:8px;padding:2px 6px;border-radius:1px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;}
+.card-title{
+  font-family:var(--serif-cn);font-size:14px;font-weight:400;
+  color:var(--text);line-height:1.5;letter-spacing:0.03em;
+}
+.card-excerpt{font-size:11px;color:var(--text3);line-height:1.7;flex:1;}
+.card-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:9px 14px;border-top:1px solid var(--border);
+}
+.card-date{font-size:9px;color:var(--text4);}
 
-        .download-btn:hover {
-            background-color: #FCF9F2;
-        }
+/* tag colours */
+.tag-hotel{background:var(--green-bg);color:#1a5a38;border:1px solid #b0d4c0;}
+.tag-trend{background:var(--amber-bg);color:#6a4810;border:1px solid #d4b880;}
+.tag-dest{background:var(--blue-bg);color:#1a3860;border:1px solid #a0b8d4;}
+.tag-dining{background:var(--rose-bg);color:#6a1818;border:1px solid #d4a0a0;}
 
-        .download-icon {
-            font-size: 18px;
-            margin-right: 10px;
-        }
+/* ─── RIGHT SIDEBAR ─── */
+.sidebar{display:flex;flex-direction:column;gap:24px;}
 
-        .download-arrow {
-            color: var(--golden-brown);
-        }
+/* newsletter builder */
+.nl-panel{
+  background:var(--bg3);border:1px solid var(--border);border-radius:2px;overflow:hidden;
+}
+.nl-header{
+  background:var(--bg4);padding:16px 20px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nl-title-group{display:flex;align-items:baseline;gap:8px;}
+.nl-cn{font-family:var(--serif-cn);font-size:15px;font-weight:300;color:var(--gold2);letter-spacing:0.08em;}
+.nl-week{font-size:10px;color:var(--text4);letter-spacing:0.08em;}
+.nl-progress{
+  display:flex;align-items:center;gap:6px;
+}
+.progress-pips{display:flex;gap:4px;}
+.pip{width:18px;height:3px;border-radius:1px;background:var(--border);transition:background 0.3s;}
+.pip.filled{background:var(--gold);}
 
-        /* --- Content & Timeline --- */
-        .content {
-            padding: 24px 24px 40px 24px;
-        }
+.nl-body{padding:16px 20px;min-height:120px;}
+.nl-empty-state{
+  text-align:center;padding:20px 0;
+  color:var(--text4);font-size:11px;font-family:var(--serif-cn);
+  line-height:1.8;font-style:italic;
+}
+.nl-list{display:flex;flex-direction:column;gap:8px;}
+.nl-row{
+  display:flex;align-items:flex-start;gap:8px;
+  background:var(--bg4);border:1px solid var(--border);
+  border-radius:1px;padding:9px 10px;
+}
+.nl-num{
+  font-family:var(--display);font-size:14px;color:var(--gold);
+  min-width:16px;line-height:1.3;flex-shrink:0;
+}
+.nl-text{font-size:11px;color:var(--text2);line-height:1.55;flex:1;}
+.nl-rm{
+  background:none;border:none;cursor:pointer;color:var(--text4);
+  font-size:14px;line-height:1;padding:0;margin-top:1px;flex-shrink:0;
+  transition:color 0.15s;
+}
+.nl-rm:hover{color:var(--rose);}
 
-        .day-header {
-            display: flex;
-            align-items: center;
-            margin: 32px 0 20px 0;
-            color: var(--mossy-green);
-        }
+.nl-footer{
+  padding:14px 20px;border-top:1px solid var(--border);
+  display:flex;gap:8px;
+}
+.nl-btn{
+  flex:1;padding:9px;border-radius:1px;cursor:pointer;
+  font-family:var(--sans-cn);font-size:10px;
+  letter-spacing:0.15em;text-transform:uppercase;
+  border:none;transition:all 0.18s;
+}
+.nl-primary{background:var(--gold);color:var(--white);}
+.nl-primary:hover{background:var(--gold2);}
+.nl-secondary{background:transparent;color:var(--text3);border:1px solid var(--border);}
+.nl-secondary:hover{border-color:var(--border2);color:var(--text2);}
 
-        .day-tag {
-            background-color: var(--mossy-green);
-            color: var(--misty-beige);
-            padding: 4px 12px;
-            border-radius: 50px;
-            font-size: 12px;
-            font-weight: 700;
-            margin-right: 12px;
-            font-family: 'Noto Serif TC', serif;
-        }
+/* sources */
+.sources-panel{
+  background:var(--bg3);border:1px solid var(--border);border-radius:2px;overflow:hidden;
+}
+.sources-head{
+  padding:14px 20px;border-bottom:1px solid var(--border);
+  display:flex;align-items:baseline;justify-content:space-between;
+}
+.sources-cn{font-family:var(--serif-cn);font-size:14px;font-weight:300;color:var(--text);letter-spacing:0.1em;}
+.sources-count{font-size:10px;color:var(--text4);}
+.source-item{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 20px;border-bottom:1px solid var(--border);
+  transition:background 0.15s;cursor:pointer;
+}
+.source-item:last-child{border-bottom:none;}
+.source-item:hover{background:var(--bg4);}
+.src-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.src-daily{background:#4a9a6a;}
+.src-weekly{background:var(--gold);}
+.src-monthly{background:var(--text4);}
+.src-name{font-size:12px;color:var(--text2);flex:1;}
+.src-badge{
+  font-size:8px;letter-spacing:0.12em;padding:2px 6px;
+  border-radius:1px;text-transform:uppercase;white-space:nowrap;
+}
+.badge-asia{background:var(--blue-bg);color:var(--blue);border:1px solid #1e3050;}
+.badge-global{background:var(--bg4);color:var(--text4);border:1px solid var(--border);}
 
-        .day-title {
-            font-family: 'Noto Serif TC', serif;
-            font-size: 16px;
-            font-weight: 700;
-        }
+/* legend */
+.sources-legend{
+  padding:10px 20px;display:flex;gap:16px;
+  border-top:1px solid var(--border);
+}
+.leg-item{display:flex;align-items:center;gap:5px;font-size:9px;color:var(--text4);}
+.leg-dot{width:6px;height:6px;border-radius:50%;}
 
-        .timeline {
-            position: relative;
-            padding-left: 12px;
-        }
+/* ─── FADE IN ─── */
+.fade{opacity:0;transform:translateY(10px);animation:fadeIn 0.5s ease forwards;}
+@keyframes fadeIn{to{opacity:1;transform:translateY(0)}}
+.d1{animation-delay:0.05s}.d2{animation-delay:0.12s}
+.d3{animation-delay:0.19s}.d4{animation-delay:0.26s}
+.d5{animation-delay:0.33s}.d6{animation-delay:0.40s}
+.d7{animation-delay:0.47s}
 
-        /* Connecting line */
-        .timeline::before {
-            content: "";
-            position: absolute;
-            left: 7px;
-            top: 10px;
-            bottom: 0;
-            width: 1px;
-            background-color: var(--warm-sandstone);
-            opacity: 0.4;
-        }
+/* ─── TOAST ─── */
+#toast{
+  position:fixed;bottom:28px;right:28px;
+  background:var(--text);color:var(--gold-dim);
+  font-size:11px;font-family:var(--sans-cn);letter-spacing:0.06em;
+  padding:11px 18px;border-radius:2px;
+  border:1px solid var(--border2);border-left:3px solid var(--gold);
+  opacity:0;transform:translateY(6px);
+  transition:all 0.28s;pointer-events:none;z-index:999;
+}
+#toast.show{opacity:1;transform:translateY(0);}
 
-        .time-block {
-            position: relative;
-            padding-left: 24px;
-            margin-bottom: 24px;
-        }
-
-        .time-block:last-child { margin-bottom: 0; }
-
-        .timeline-dot {
-            position: absolute;
-            left: 0;
-            top: 6px;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background-color: var(--misty-beige);
-            border: 2px solid var(--golden-brown);
-            z-index: 1;
-        }
-
-        .time-label {
-            font-family: 'Noto Serif TC', serif;
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--golden-brown);
-            margin-bottom: 6px;
-            display: inline-block;
-        }
-
-        .event-card {
-            background-color: #fff;
-            padding: 16px;
-            border-radius: var(--radius-md);
-            border: 1px solid rgba(212, 192, 144, 0.3);
-            box-shadow: 0 4px 12px rgba(90, 90, 76, 0.03);
-        }
-
-        /* Special Card Styles */
-        .flight-card {
-            background-color: #F7F5F0;
-            border-left: 3px solid var(--mossy-green);
-        }
-
-        .highlight-card {
-            background-color: #FCF9F2;
-            border: 1px solid var(--golden-brown);
-        }
-
-        .event-title {
-            font-weight: 700;
-            font-size: 15px;
-            color: var(--mossy-green);
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .event-desc {
-            font-size: 13px;
-            color: var(--text-secondary);
-            line-height: 1.5;
-        }
-
-        /* Map Image Style */
-        .map-image {
-            width: 100%;
-            border-radius: 8px;
-            margin-top: 12px;
-            border: 1px solid #E0E0E0;
-        }
-
-        .tag-row {
-            margin-top: 10px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-
-        .tag {
-            font-size: 11px;
-            padding: 3px 8px;
-            background-color: #EFECE5;
-            color: var(--text-primary);
-            border-radius: 4px;
-        }
-
-        .tag.golden {
-            background-color: rgba(184, 134, 11, 0.1);
-            color: var(--golden-brown);
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 11px;
-            color: var(--warm-sandstone);
-            letter-spacing: 0.1em;
-            font-family: 'Noto Serif TC', serif;
-        }
-
-    </style>
+/* ─── MODAL OVERLAY ─── */
+#modal-overlay{
+  position:fixed;inset:0;background:rgba(42,36,24,0.5);
+  z-index:500;opacity:0;pointer-events:none;transition:opacity 0.25s;
+  display:flex;align-items:center;justify-content:center;
+}
+#modal-overlay.open{opacity:1;pointer-events:all;}
+.modal{
+  background:var(--white);border:1px solid var(--border);border-radius:3px;
+  width:640px;max-width:90vw;max-height:80vh;overflow-y:auto;
+  padding:36px;box-shadow:0 16px 48px rgba(42,36,24,0.12);
+}
+.modal-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:20px;}
+.modal-title{font-family:var(--serif-cn);font-size:18px;color:var(--gold2);letter-spacing:0.08em;}
+.modal-close{
+  background:none;border:none;cursor:pointer;color:var(--text3);
+  font-size:20px;line-height:1;transition:color 0.15s;
+}
+.modal-close:hover{color:var(--text);}
+.modal-pre{
+  font-family:var(--sans-cn);font-size:12px;color:var(--text2);
+  line-height:1.8;white-space:pre-wrap;
+  background:var(--bg4);border:1px solid var(--border);
+  border-radius:2px;padding:20px;
+}
+.modal-copy{
+  margin-top:16px;width:100%;padding:11px;border-radius:1px;
+  background:var(--gold);color:var(--white);border:none;cursor:pointer;
+  font-family:var(--sans-cn);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;
+  transition:background 0.18s;
+}
+.modal-copy:hover{background:var(--gold2);}
+</style>
 </head>
 <body>
 
-    <div class="itinerary-card">
-        <!-- Header -->
-        <div class="header">
-            <h1>Shinryo Acceleration<br>2026 DemoDay</h1>
-            <div class="header-meta">
-                <span>📅 2026/02/04 (三) — 02/06 (五)</span>
-                <span>🏨 THE NEST Naha (那霸)</span>
-            </div>
-        </div>
-
-        <!-- Document Downloads -->
-        <div class="downloads-section">
-            <a href="Peach.confirmation.AZHWZF.pdf" class="download-btn" download>
-                <span><span class="download-icon">🎫</span> 機票 AZHWZF (TU PEIYU)</span>
-                <span class="download-arrow">📥</span>
-            </a>
-            <a href="Peach.confirmation.YAKXZ5.pdf" class="download-btn" download>
-                <span><span class="download-icon">🎫</span> 機票 YAKXZ5 (TSAI CHINGFANG)</span>
-                <span class="download-arrow">📥</span>
-            </a>
-        </div>
-
-        <div class="content">
-
-            <!-- Day 1 -->
-            <div class="day-header">
-                <span class="day-tag">DAY 1</span>
-                <span class="day-title">02/04 (三) 抵達 & 交流</span>
-            </div>
-
-            <div class="timeline">
-                <!-- Flight Out -->
-                <div class="time-block">
-                    <div class="timeline-dot"></div>
-                    <span class="time-label">09:45 - 12:25</span>
-                    <div class="event-card flight-card">
-                        <div class="event-title">✈️ 去程航班 (MM922)</div>
-                        <div class="event-desc">
-                            <strong>TPE 台北桃園 ➔ OKA 沖繩那霸</strong><br>
-                            抵達後前往飯店 Check-in。
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Hotel Info -->
-                <div class="time-block">
-                    <div class="timeline-dot"></div>
-                    <span class="time-label">13:30 (預估)</span>
-                    <div class="event-card">
-                        <div class="event-title">🏨 THE NEST Naha</div>
-                        <div class="event-desc">
-                            <strong>地址：</strong>1-6-1 Nishi, Naha City<br>
-                            (沖縄県那覇市西１丁目６－１)<br><br>
-                            <strong>交通：</strong>單軌「那霸機場」搭至「旭橋站」(5站)，下車步行 6 分鐘。
-                        </div>
-                        <!-- Monorail Map Image -->
-                        <img src="routemap_pc_jp-2.jpg" alt="沖繩單軌電車圖" class="map-image">
-                        
-                        <div class="tag-row">
-                            <span class="tag">Check-in</span>
-                            <span class="tag">Free Wi-Fi</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Transfer -->
-                <div class="time-block">
-                    <div class="timeline-dot"></div>
-                    <span class="time-label">14:30</span>
-                    <div class="event-card">
-                        <div class="event-title">🚕 飯店集合 & 接送</div>
-                        <div class="event-desc">由主辦方安排車輛前往沖繩市 (Koza)。</div>
-                    </div>
-                </div>
-
-                <!-- Event -->
-                <div class="time-block">
-                    <div class="timeline-dot"></div>
-                    <span class="time-label">15:30 - 21:00</span>
-                    <div class="event-card highlight-card">
-                        <div class="event-title">🤝 Koza 參訪 & 交流晚宴</div>
-                        <div class="event-desc">
-                            地點：Koza Startup Arcade (KSA)<br>
-                            包含參訪交流與 Networking Party (19:00 開始)。
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Day 2 -->
-            <div class="day-header">
-                <span class="day-tag">DAY 2</span>
-                <span class="day-title">02/05 (四) DemoDay 主活動</span>
-            </div>
-
-            <div class="timeline">
-                <!-- Morning -->
-                <div class="time-block">
-                    <div class="timeline-dot"></div>
-                    <span class="time-label">08:45</span>
-                    <div class="event-card">
-                        <div class="event-title">🚶 飯店出發</div>
-                        <div class="event-desc">步行約 11 分鐘前往會場。</div>
-                    </div>
-                </div>
-
-                <!-- Main Event -->
-                <div class="time-block">
-                    <div class="timeline-dot"></div>
-                    <span class="time-label">09:30 - 11:30</span>
-                    <div class="event-card highlight-card">
-                        <div class="event-title" style="color:var(--golden-brown);">🎤 DemoDay Pitch</div>
-                        <div class="event-desc">
-                            地點：琉球新報 Hall (Ryukyu Shimpo Hall)<br>
-                            8 家企業登台 (7分簡報 + 5分 Q&A)。
-                        </div>
-                        <div class="tag-row">
-                            <span class="tag golden">重點行程</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Afternoon -->
-                <div class="time-block">
-                    <div class="timeline-dot"></div>
-                    <span class="time-label">11:20 - 18:30</span>
-                    <div class="event-card">
-                        <div class="event-title">📑 其他議程 (自由參加)</div>
-                        <div class="event-desc">
-                            包含 JETRO 報告、Ryukyu Launchpad、NextT DemoDay 等活動。
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Day 3 -->
-            <div class="day-header">
-                <span class="day-tag">DAY 3</span>
-                <span class="day-title">02/06 (五) 自由時間 & 返程</span>
-            </div>
-
-            <div class="timeline">
-                <!-- Morning -->
-                <div class="time-block">
-                    <div class="timeline-dot"></div>
-                    <span class="time-label">09:00 - 14:00</span>
-                    <div class="event-card">
-                        <div class="event-title">☕ 自由活動 / ANTB</div>
-                        <div class="event-desc">
-                            可參加 Asia New Travel Bootcamp (會場同上) 或在市區觀光、採買伴手禮。
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Departure -->
-                <div class="time-block">
-                    <div class="timeline-dot"></div>
-                    <span class="time-label">14:50 (建議)</span>
-                    <div class="event-card">
-                        <div class="event-title">🚝 前往那霸機場</div>
-                        <div class="event-desc">建議提早 2 小時抵達機場辦理報到。</div>
-                    </div>
-                </div>
-
-                <!-- Flight In -->
-                <div class="time-block">
-                    <div class="timeline-dot"></div>
-                    <span class="time-label">16:50 - 17:35</span>
-                    <div class="event-card flight-card">
-                        <div class="event-title">✈️ 回程航班 (MM929)</div>
-                        <div class="event-desc">
-                            <strong>OKA 沖繩那霸 ➔ TPE 台北桃園</strong><br>
-                            平安賦歸。
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer">
-                BUSINESS TRIP ITINERARY 2026
-            </div>
-
-        </div>
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-top">
+    <div class="logo">
+      <span class="logo-cn">旅行情報</span>
+      <div class="logo-rule"></div>
+      <span class="logo-sub">Travel Intelligence · Internal Weekly</span>
     </div>
+    <div class="masthead-right">
+      <div id="clock"></div>
+      <div class="week-badge" id="week-badge"></div>
+    </div>
+  </div>
+  <nav class="masthead-nav">
+    <button class="nav-tab active" onclick="filterAll(this)">
+      全部
+    </button>
+    <div class="nav-sep"></div>
+    <button class="nav-tab" onclick="filter('hotel',this)">
+      <span class="nav-dot dot-hotel"></span>飯店開幕
+    </button>
+    <button class="nav-tab" onclick="filter('trend',this)">
+      <span class="nav-dot dot-trend"></span>旅遊趨勢
+    </button>
+    <button class="nav-tab" onclick="filter('dest',this)">
+      <span class="nav-dot dot-dest"></span>目的地
+    </button>
+    <button class="nav-tab" onclick="filter('dining',this)">
+      <span class="nav-dot dot-dining"></span>美食動向
+    </button>
+  </nav>
+</header>
 
+<!-- TICKER -->
+<div class="ticker">
+  <span class="ticker-label">本週動態</span>
+  <div class="ticker-track">
+    <div class="ticker-scroll" id="ticker-inner">
+      <span class="t-item"><span class="t-pip"></span>Aman 確認進駐沙烏地 AlUla，2025 末開幕</span>
+      <span class="t-item"><span class="t-pip"></span>Forbes Travel Guide 亞洲五星名單：38 家入選</span>
+      <span class="t-item"><span class="t-pip"></span>Six Senses 京都通過規劃審查，Q3 正式開業</span>
+      <span class="t-item"><span class="t-pip"></span>Condé Nast 2026 Readers' Choice 投票截止 4/30</span>
+      <span class="t-item"><span class="t-pip"></span>Rosewood 收購峇里島相鄰地塊，計劃推出新品牌</span>
+      <span class="t-item"><span class="t-pip"></span>Michelin Singapore：3 家新一星入列，峇峇娘惹料理受矚目</span>
+      <span class="t-item"><span class="t-pip"></span>私人飛機亞太包機量年增 34%，台港星為主要市場</span>
+      <span class="t-item"><span class="t-pip"></span>Virtuoso 2026 年度奢旅報告：慢旅行平均停留延長至 9 天</span>
+      <!-- dupe for loop -->
+      <span class="t-item"><span class="t-pip"></span>Aman 確認進駐沙烏地 AlUla，2025 末開幕</span>
+      <span class="t-item"><span class="t-pip"></span>Forbes Travel Guide 亞洲五星名單：38 家入選</span>
+      <span class="t-item"><span class="t-pip"></span>Six Senses 京都通過規劃審查，Q3 正式開業</span>
+      <span class="t-item"><span class="t-pip"></span>Condé Nast 2026 Readers' Choice 投票截止 4/30</span>
+      <span class="t-item"><span class="t-pip"></span>Rosewood 收購峇里島相鄰地塊，計劃推出新品牌</span>
+      <span class="t-item"><span class="t-pip"></span>Michelin Singapore：3 家新一星入列，峇峇娘惹料理受矚目</span>
+      <span class="t-item"><span class="t-pip"></span>私人飛機亞太包機量年增 34%，台港星為主要市場</span>
+      <span class="t-item"><span class="t-pip"></span>Virtuoso 2026 年度奢旅報告：慢旅行平均停留延長至 9 天</span>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main>
+  <div class="layout-grid">
+
+    <!-- LEFT: articles -->
+    <div>
+
+      <!-- Hero -->
+      <div class="section-label fade d1">
+        <span class="section-cn">本週焦點</span>
+        <div class="section-rule"></div>
+        <span class="section-en">Featured Story</span>
+      </div>
+
+      <div class="hero-card fade d2" data-tag="hotel" onclick="void(0)">
+        <div class="hero-visual" style="background:linear-gradient(160deg,#e8dfc8,#d8ceb0);">
+          <span class="hero-bg-text" style="color:#c8bfa0;">AMAN</span>
+          <div class="hero-featured-badge">本週焦點</div>
+          <span class="hero-visual-label">AlUla · Saudi Arabia</span>
+        </div>
+        <div class="hero-body">
+          <div class="hero-meta">
+            <span class="hero-source">Robb Report</span>
+            <span class="hero-tag tag-hotel">飯店開幕</span>
+          </div>
+          <div class="hero-title">Aman 正式進軍中東：沙烏地阿拉伯 AlUla 沙漠度假村預計年底開幕</div>
+          <div class="hero-excerpt">繼日本、馬爾地夫後，Aman 旗艦沙漠體驗將在 AlUla 古城落地。帳篷式獨棟別墅以在地傳統建築語言詮釋，室內外設計完整呈現納巴泰文明美學，並配備 Aman Spa 全套療程。台灣客戶可透過 Aman Partners 提前登記優先預訂資格。</div>
+          <div class="hero-footer">
+            <span class="hero-date">2026 年 3 月 18 日 · Robb Report</span>
+            <div class="card-btns">
+              <button class="btn-save" onclick="event.stopPropagation();saveBtn(this,'Aman AlUla 沙漠度假村')">☆ 儲存</button>
+              <button class="btn-nl" onclick="event.stopPropagation();addNl(this,'Aman 正式進軍中東：沙烏地阿拉伯 AlUla 沙漠度假村預計年底開幕')">+ 加入電子報</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid cards -->
+      <div class="section-label fade d3" style="margin-top:28px;">
+        <span class="section-cn">本週精選</span>
+        <div class="section-rule"></div>
+        <span class="section-en" id="grid-count">5 則報導</span>
+      </div>
+
+      <div class="cards-grid" id="cards-grid">
+
+        <div class="card fade d3" data-tag="trend">
+          <div class="card-visual" style="background:linear-gradient(160deg,#e8e4d4,#ddd8c4);">
+            <span class="card-bg-text" style="color:#ccc4a8;">SLOW</span>
+          </div>
+          <div class="card-body">
+            <div class="card-meta">
+              <span class="card-source">Skift</span>
+              <span class="card-tag tag-trend">旅遊趨勢</span>
+            </div>
+            <div class="card-title">慢旅行正在重新定義奢華：平均停留從 4 天延長至 9 天</div>
+            <div class="card-excerpt">Skift 2026 年度報告指出，超高淨值旅客轉向深度停留，更願為「當地連結感」支付溢價。</div>
+          </div>
+          <div class="card-footer">
+            <span class="card-date">3/17</span>
+            <div class="card-btns">
+              <button class="btn-save" onclick="event.stopPropagation();saveBtn(this,'慢旅行趨勢報告')">☆</button>
+              <button class="btn-nl" onclick="event.stopPropagation();addNl(this,'慢旅行正在重新定義奢華：平均停留從 4 天延長至 9 天')">+ 電子報</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card fade d4" data-tag="dest">
+          <div class="card-visual" style="background:linear-gradient(160deg,#d8e0e4,#ccd4dc);">
+            <span class="card-bg-text" style="color:#b8c4cc;">金澤</span>
+          </div>
+          <div class="card-body">
+            <div class="card-meta">
+              <span class="card-source">Tatler Asia</span>
+              <span class="card-tag tag-dest">目的地</span>
+            </div>
+            <div class="card-title">京都之外：金澤為何成為 2026 日本最受矚目的目的地</div>
+            <div class="card-excerpt">工藝密度、米其林餐廳快速崛起、精品旅館供給增加，識途旅客的新首選正逐漸成形。</div>
+          </div>
+          <div class="card-footer">
+            <span class="card-date">3/16</span>
+            <div class="card-btns">
+              <button class="btn-save" onclick="event.stopPropagation();saveBtn(this,'金澤目的地')">☆</button>
+              <button class="btn-nl" onclick="event.stopPropagation();addNl(this,'京都之外：金澤為何成為 2026 日本最受矚目的目的地')">+ 電子報</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card fade d5" data-tag="dining">
+          <div class="card-visual" style="background:linear-gradient(160deg,#e4d4d4,#d8c8c8);">
+            <span class="card-bg-text" style="color:#c8b0b0;">★★★</span>
+          </div>
+          <div class="card-body">
+            <div class="card-meta">
+              <span class="card-source">Michelin Guide</span>
+              <span class="card-tag tag-dining">美食動向</span>
+            </div>
+            <div class="card-title">Michelin Guide Singapore 2026：3 家新一星餐廳完整解析</div>
+            <div class="card-excerpt">新星包含北歐永續海鮮融合餐廳，及兩家重新詮釋峇峇娘惹料理的現代餐廳，值得台灣客安排。</div>
+          </div>
+          <div class="card-footer">
+            <span class="card-date">3/15</span>
+            <div class="card-btns">
+              <button class="btn-save" onclick="event.stopPropagation();saveBtn(this,'Michelin SG 2026')">☆</button>
+              <button class="btn-nl" onclick="event.stopPropagation();addNl(this,'Michelin Guide Singapore 2026：3 家新一星餐廳完整解析')">+ 電子報</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card fade d5" data-tag="hotel">
+          <div class="card-visual" style="background:linear-gradient(160deg,#d4e0d8,#c8d8d0);">
+            <span class="card-bg-text" style="color:#b0c8be;">六感</span>
+          </div>
+          <div class="card-body">
+            <div class="card-meta">
+              <span class="card-source">Condé Nast Traveler</span>
+              <span class="card-tag tag-hotel">飯店開幕</span>
+            </div>
+            <div class="card-title">Six Senses Kyoto 深度評測：以「間」的哲學打造 Wellness 旅宿</div>
+            <div class="card-excerpt">坐落東山區，現代數寄屋建築融合 Six Senses 招牌 spa 理念，業界評價目前日本最高完成度。</div>
+          </div>
+          <div class="card-footer">
+            <span class="card-date">3/14</span>
+            <div class="card-btns">
+              <button class="btn-save" onclick="event.stopPropagation();saveBtn(this,'Six Senses Kyoto')">☆</button>
+              <button class="btn-nl" onclick="event.stopPropagation();addNl(this,'Six Senses Kyoto 深度評測：以「間」的哲學打造 Wellness 旅宿')">+ 電子報</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card fade d6" data-tag="trend">
+          <div class="card-visual" style="background:linear-gradient(160deg,#e4e0d8,#d8d4c8);">
+            <span class="card-bg-text" style="color:#c4bfb0;">JET</span>
+          </div>
+          <div class="card-body">
+            <div class="card-meta">
+              <span class="card-source">Virtuoso</span>
+              <span class="card-tag tag-trend">旅遊趨勢</span>
+            </div>
+            <div class="card-title">亞太私人飛機包機量年增 34%，台灣客成長最快</div>
+            <div class="card-excerpt">Virtuoso 最新報告：台灣、香港、新加坡為主要驅動力，超高淨值旅客開始將包機視為標準配置。</div>
+          </div>
+          <div class="card-footer">
+            <span class="card-date">3/12</span>
+            <div class="card-btns">
+              <button class="btn-save" onclick="event.stopPropagation();saveBtn(this,'私人飛機趨勢')">☆</button>
+              <button class="btn-nl" onclick="event.stopPropagation();addNl(this,'亞太私人飛機包機量年增 34%，台灣客成長最快')">+ 電子報</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card fade d7" data-tag="dest">
+          <div class="card-visual" style="background:linear-gradient(160deg,#d8dce4,#ccd0dc);">
+            <span class="card-bg-text" style="color:#b8bece;">WABI</span>
+          </div>
+          <div class="card-body">
+            <div class="card-meta">
+              <span class="card-source">Monocle</span>
+              <span class="card-tag tag-dest">目的地</span>
+            </div>
+            <div class="card-title">Monocle 2026 城市排行：奧斯陸首度登頂，亞洲城市全面上升</div>
+            <div class="card-excerpt">軟實力指標評估生活品質、文化密度與可持續城市設計，東京、福岡、首爾分別位列亞洲前三。</div>
+          </div>
+          <div class="card-footer">
+            <span class="card-date">3/10</span>
+            <div class="card-btns">
+              <button class="btn-save" onclick="event.stopPropagation();saveBtn(this,'Monocle 城市排行')">☆</button>
+              <button class="btn-nl" onclick="event.stopPropagation();addNl(this,'Monocle 2026 城市排行：奧斯陸首度登頂，亞洲城市全面上升')">+ 電子報</button>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /cards-grid -->
+    </div><!-- /left -->
+
+    <!-- RIGHT SIDEBAR -->
+    <div class="sidebar fade d2">
+
+      <!-- Newsletter builder -->
+      <div class="nl-panel">
+        <div class="nl-header">
+          <div class="nl-title-group">
+            <span class="nl-cn">本週電子報草稿</span>
+            <span class="nl-week" id="nl-week"></span>
+          </div>
+          <div class="nl-progress">
+            <div class="progress-pips" id="pips">
+              <div class="pip" id="pip0"></div>
+              <div class="pip" id="pip1"></div>
+              <div class="pip" id="pip2"></div>
+              <div class="pip" id="pip3"></div>
+              <div class="pip" id="pip4"></div>
+            </div>
+          </div>
+        </div>
+        <div class="nl-body">
+          <div class="nl-list" id="nl-list">
+            <div class="nl-empty-state">
+              點擊文章右下角<br>「+ 加入電子報」收錄報導<br>最多 5 則
+            </div>
+          </div>
+        </div>
+        <div class="nl-footer">
+          <button class="nl-btn nl-primary" onclick="previewNl()">預覽 / 匯出</button>
+          <button class="nl-btn nl-secondary" onclick="clearNl()">清除</button>
+        </div>
+      </div>
+
+      <!-- Sources -->
+      <div class="sources-panel">
+        <div class="sources-head">
+          <span class="sources-cn">追蹤來源</span>
+          <span class="sources-count">10 個媒體</span>
+        </div>
+
+        <div class="source-item"><span class="src-dot src-daily"></span><span class="src-name">Tatler Asia</span><span class="src-badge badge-asia">亞洲</span></div>
+        <div class="source-item"><span class="src-dot src-daily"></span><span class="src-name">Skift</span><span class="src-badge badge-global">全球</span></div>
+        <div class="source-item"><span class="src-dot src-daily"></span><span class="src-name">Condé Nast Traveler</span><span class="src-badge badge-global">全球</span></div>
+        <div class="source-item"><span class="src-dot src-daily"></span><span class="src-name">TTG Asia</span><span class="src-badge badge-asia">亞太</span></div>
+        <div class="source-item"><span class="src-dot src-weekly"></span><span class="src-name">Robb Report</span><span class="src-badge badge-global">全球</span></div>
+        <div class="source-item"><span class="src-dot src-weekly"></span><span class="src-name">Virtuoso Perspectives</span><span class="src-badge badge-global">全球</span></div>
+        <div class="source-item"><span class="src-dot src-weekly"></span><span class="src-name">Forbes Travel Guide</span><span class="src-badge badge-global">全球</span></div>
+        <div class="source-item"><span class="src-dot src-weekly"></span><span class="src-name">Michelin Guide</span><span class="src-badge badge-global">全球</span></div>
+        <div class="source-item"><span class="src-dot src-monthly"></span><span class="src-name">Monocle</span><span class="src-badge badge-global">全球</span></div>
+        <div class="source-item"><span class="src-dot src-monthly"></span><span class="src-name">Travel + Leisure</span><span class="src-badge badge-global">全球</span></div>
+
+        <div class="sources-legend">
+          <div class="leg-item"><div class="leg-dot" style="background:#4a9a6a"></div>每日</div>
+          <div class="leg-item"><div class="leg-dot" style="background:var(--gold)"></div>每週</div>
+          <div class="leg-item"><div class="leg-dot" style="background:var(--text4)"></div>每月</div>
+        </div>
+      </div>
+
+    </div><!-- /sidebar -->
+  </div><!-- /layout-grid -->
+</main>
+
+<!-- MODAL -->
+<div id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">電子報草稿預覽</span>
+      <button class="modal-close" onclick="closeModalDirect()">×</button>
+    </div>
+    <pre class="modal-pre" id="modal-content"></pre>
+    <button class="modal-copy" onclick="copyNl()">複製全文</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════
+// RSS FEED 設定 — 在這裡新增或修改來源
+// ═══════════════════════════════════════════════
+const RSS_FEEDS = [
+  {
+    name: 'Tatler Asia',
+    url: 'https://www.tatlerasia.com/lifestyle/travel/rss',
+    tag: 'dest',
+    tagLabel: '目的地',
+    color: 'tag-dest'
+  },
+  {
+    name: 'Skift',
+    url: 'https://skift.com/feed/',
+    tag: 'trend',
+    tagLabel: '旅遊趨勢',
+    color: 'tag-trend'
+  },
+  {
+    name: 'Robb Report',
+    url: 'https://robbreport.com/travel/feed/',
+    tag: 'hotel',
+    tagLabel: '飯店開幕',
+    color: 'tag-hotel'
+  },
+  {
+    name: 'Condé Nast Traveler',
+    url: 'https://www.cntraveler.com/feed/rss',
+    tag: 'dest',
+    tagLabel: '目的地',
+    color: 'tag-dest'
+  },
+  {
+    name: 'Travel + Leisure',
+    url: 'https://www.travelandleisure.com/feed/all',
+    tag: 'hotel',
+    tagLabel: '飯店開幕',
+    color: 'tag-hotel'
+  }
+];
+
+// RSS2JSON 免費 API — 不需要 API key，每天 1000 次免費請求
+const RSS2JSON = 'https://api.rss2json.com/v1/api.json?rss_url=';
+
+// 標籤中文分類對照
+const TAG_MAP = {
+  hotel: { label: '飯店開幕', cls: 'tag-hotel' },
+  trend: { label: '旅遊趨勢', cls: 'tag-trend' },
+  dest:  { label: '目的地',   cls: 'tag-dest'  },
+  dining:{ label: '美食動向', cls: 'tag-dining' }
+};
+
+// 已抓取的文章存在這裡
+let allArticles = [];
+let currentFilter = 'all';
+
+// ── Clock & week badge
+function tick(){
+  const now = new Date();
+  const d = now.toLocaleDateString('zh-TW',{year:'numeric',month:'long',day:'numeric',weekday:'short'});
+  document.getElementById('clock').textContent = d;
+  const wk = getWeekNumber(now);
+  document.getElementById('week-badge').textContent = `第 ${wk} 週電子報`;
+  const nlWk = document.getElementById('nl-week');
+  if(nlWk) nlWk.textContent = `W${wk}`;
+}
+function getWeekNumber(d){
+  const s = new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));
+  const day = s.getUTCDay()||7;
+  s.setUTCDate(s.getUTCDate()+4-day);
+  const y = new Date(Date.UTC(s.getUTCFullYear(),0,1));
+  return Math.ceil((((s-y)/86400000)+1)/7);
+}
+tick();
+
+// ── 抓取單一 RSS Feed
+async function fetchFeed(feed){
+  try {
+    const res = await fetch(RSS2JSON + encodeURIComponent(feed.url) + '&count=4');
+    const data = await res.json();
+    if(data.status !== 'ok') return [];
+    return data.items.map(item => ({
+      title: item.title,
+      excerpt: stripHtml(item.description || item.content || '').slice(0, 120) + '…',
+      url: item.link,
+      date: formatDate(item.pubDate),
+      source: feed.name,
+      tag: feed.tag,
+      tagLabel: feed.tagLabel,
+      tagCls: feed.color
+    }));
+  } catch(e) {
+    console.warn('RSS fetch failed:', feed.name, e);
+    return [];
+  }
+}
+
+function stripHtml(html){
+  const d = document.createElement('div');
+  d.innerHTML = html;
+  return d.textContent || d.innerText || '';
+}
+
+function formatDate(dateStr){
+  if(!dateStr) return '';
+  try {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('zh-TW',{month:'numeric',day:'numeric'});
+  } catch(e){ return ''; }
+}
+
+// ── 載入所有 RSS，渲染卡片
+async function loadFeeds(){
+  const grid = document.getElementById('cards-grid');
+  grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text3);font-size:13px;">正在載入最新報導…</div>`;
+
+  // 並行抓取所有 feed
+  const results = await Promise.all(RSS_FEEDS.map(f => fetchFeed(f)));
+  allArticles = results.flat();
+
+  // 依時間排序（最新在前）
+  allArticles.sort((a,b) => {
+    const da = new Date(a.date || 0), db = new Date(b.date || 0);
+    return db - da;
+  });
+
+  if(allArticles.length === 0){
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text3);font-size:13px;">目前無法連線至 RSS 來源，顯示範例內容</div>`;
+    renderFallback();
+    return;
+  }
+
+  renderCards(allArticles);
+  updateTicker(allArticles);
+  toast(`已載入 ${allArticles.length} 則最新報導`);
+}
+
+// ── 渲染文章卡片（支援篩選）
+function renderCards(articles){
+  const grid = document.getElementById('cards-grid');
+  const filtered = currentFilter === 'all' ? articles : articles.filter(a => a.tag === currentFilter);
+
+  document.getElementById('grid-count').textContent = filtered.length + ' 則報導';
+
+  if(filtered.length === 0){
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text3);font-size:13px;">此分類暫無報導</div>`;
+    return;
+  }
+
+  const bgMap = {
+    hotel: 'linear-gradient(160deg,#d4e0d8,#c8d8d0)',
+    trend: 'linear-gradient(160deg,#e8e4d4,#ddd8c4)',
+    dest:  'linear-gradient(160deg,#d8e0e4,#ccd4dc)',
+    dining:'linear-gradient(160deg,#e4d4d4,#d8c8c8)'
+  };
+  const iconMap = { hotel:'⌂', trend:'↗', dest:'◎', dining:'★' };
+
+  grid.innerHTML = filtered.slice(0, 6).map((a, i) => `
+    <div class="card fade" style="animation-delay:${0.05 + i*0.07}s;cursor:pointer;"
+         data-tag="${a.tag}"
+         onclick="openArticle('${encodeURIComponent(a.url)}')">
+      <div class="card-visual" style="background:${bgMap[a.tag]||bgMap.dest};">
+        <span class="card-bg-text" style="color:rgba(0,0,0,0.12);font-size:42px;">${iconMap[a.tag]||'◎'}</span>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">${escHtml(a.source)}</span>
+          <span class="card-tag ${a.tagCls}">${a.tagLabel}</span>
+        </div>
+        <div class="card-title">${escHtml(a.title)}</div>
+        <div class="card-excerpt">${escHtml(a.excerpt)}</div>
+      </div>
+      <div class="card-footer">
+        <span class="card-date">${a.date}</span>
+        <div class="card-btns">
+          <button class="btn-save" onclick="event.stopPropagation();saveBtn(this,'${escAttr(a.title)}')">☆</button>
+          <button class="btn-nl"   onclick="event.stopPropagation();addNl(this,'${escAttr(a.title)}','${escAttr(a.url)}')">+ 電子報</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── 點擊卡片開啟原文
+function openArticle(encodedUrl){
+  const url = decodeURIComponent(encodedUrl);
+  if(url && url.startsWith('http')) window.open(url, '_blank', 'noopener');
+}
+
+// ── 更新跑馬燈
+function updateTicker(articles){
+  const inner = document.getElementById('ticker-inner');
+  if(!inner || articles.length === 0) return;
+  const items = articles.slice(0, 8).map(a =>
+    `<span class="t-item" onclick="openArticle('${encodeURIComponent(a.url)}')" style="cursor:pointer;">
+      <span class="t-pip"></span>${escHtml(a.source)} · ${escHtml(a.title.slice(0,40))}${a.title.length>40?'…':''}
+    </span>`
+  ).join('');
+  inner.innerHTML = items + items; // duplicate for seamless loop
+}
+
+function escHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function escAttr(s){ return String(s).replace(/'/g,'&#39;').replace(/"/g,'&quot;'); }
+
+// ── Filter
+function filterAll(btn){
+  currentFilter = 'all';
+  setActive(btn);
+  renderCards(allArticles);
+}
+function filter(tag,btn){
+  currentFilter = tag;
+  setActive(btn);
+  renderCards(allArticles);
+}
+function setActive(btn){
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+}
+function updateCount(){
+  const vis = [...document.querySelectorAll('#cards-grid .card')].filter(c=>c.style.display!=='none').length;
+  document.getElementById('grid-count').textContent = vis + ' 則報導';
+}
+
+// ── Refresh button
+function refreshFeed(){
+  const icon = document.querySelector('.refresh-icon');
+  if(icon){ icon.style.display='inline-block'; icon.classList.add('spin'); }
+  loadFeeds().then(()=>{
+    if(icon) icon.classList.remove('spin');
+  });
+}
+
+// ── Save
+function saveBtn(btn,title){
+  btn.classList.toggle('saved');
+  const saved = btn.classList.contains('saved');
+  btn.textContent = saved ? '★' : '☆';
+  toast(saved ? '已儲存 · '+title.slice(0,12)+'…' : '已取消儲存');
+}
+
+// ── Newsletter
+let nl = [];
+function addNl(btn, title, url){
+  if(nl.length>=5){toast('最多收錄 5 則報導');return;}
+  if(nl.find(x=>x.title===title)){toast('此報導已在草稿中');return;}
+  nl.push({title, url: url||''});
+  btn.classList.add('added');
+  btn.textContent='✓ 已加入';
+  renderNl();
+  toast('已加入本週電子報草稿');
+}
+function removeNl(i){
+  nl.splice(i,1);
+  renderNl();
+}
+function renderNl(){
+  const list = document.getElementById('nl-list');
+  for(let i=0;i<5;i++){
+    const p = document.getElementById('pip'+i);
+    if(p) p.classList.toggle('filled',i<nl.length);
+  }
+  if(nl.length===0){
+    list.innerHTML='<div class="nl-empty-state">點擊文章右下角<br>「+ 加入電子報」收錄報導<br>最多 5 則</div>';
+    return;
+  }
+  list.innerHTML = nl.map((item,i)=>`
+    <div class="nl-row">
+      <span class="nl-num">${i+1}</span>
+      <span class="nl-text" style="cursor:pointer;" onclick="if('${escAttr(item.url)}')window.open('${escAttr(item.url)}','_blank','noopener')">${escHtml(item.title)}</span>
+      <button class="nl-rm" onclick="removeNl(${i})">×</button>
+    </div>
+  `).join('');
+}
+function clearNl(){
+  nl=[];
+  document.querySelectorAll('.btn-nl.added').forEach(b=>{
+    b.classList.remove('added');
+    b.textContent='+ 電子報';
+  });
+  renderNl();
+  toast('已清除電子報草稿');
+}
+function previewNl(){
+  if(!nl.length){toast('請先加入報導');return;}
+  const now = new Date();
+  const wk = getWeekNumber(now);
+  const dateStr = now.toLocaleDateString('zh-TW',{year:'numeric',month:'long',day:'numeric'});
+  let text = `旅行情報 · 每週電子報\n第 ${wk} 週｜${dateStr}\n`;
+  text += '─'.repeat(32)+'\n\n';
+  nl.forEach((item,i)=>{
+    text+=`${i+1}. ${item.title}\n`;
+    if(item.url) text+=`   → ${item.url}\n`;
+    text+='\n';
+  });
+  text += '─'.repeat(32)+'\n';
+  text += '由旅行情報顧問團隊整理\n歡迎轉寄給旅行夥伴 ✈';
+  document.getElementById('modal-content').textContent = text;
+  document.getElementById('modal-overlay').classList.add('open');
+}
+function copyNl(){
+  const t = document.getElementById('modal-content').textContent;
+  navigator.clipboard.writeText(t).then(()=>toast('已複製到剪貼簿'));
+}
+function closeModal(e){if(e.target===document.getElementById('modal-overlay'))closeModalDirect();}
+function closeModalDirect(){document.getElementById('modal-overlay').classList.remove('open');}
+
+// ── Fallback static cards（RSS 抓取失敗時顯示）
+function renderFallback(){
+  const grid = document.getElementById('cards-grid');
+  const items = [
+    {tag:'hotel',tagLabel:'飯店開幕',tagCls:'tag-hotel',source:'Robb Report',title:'Aman 正式進軍中東：AlUla 沙漠度假村預計年底開幕',excerpt:'繼日本、馬爾地夫後，Aman 旗艦沙漠體驗將在 AlUla 古城落地，帳篷式別墅呈現納巴泰文明美學。',date:'3/18',url:'https://robbreport.com/travel/'},
+    {tag:'trend',tagLabel:'旅遊趨勢',tagCls:'tag-trend',source:'Skift',title:'慢旅行正在重新定義奢華：平均停留從 4 天延長至 9 天',excerpt:'Skift 2026 年度報告指出，超高淨值旅客轉向深度停留，更願為「當地連結感」支付溢價。',date:'3/17',url:'https://skift.com'},
+    {tag:'dest',tagLabel:'目的地',tagCls:'tag-dest',source:'Tatler Asia',title:'京都之外：金澤為何成為 2026 日本最受矚目的目的地',excerpt:'工藝密度、米其林餐廳快速崛起、精品旅館供給增加，識途旅客的新首選正逐漸成形。',date:'3/16',url:'https://www.tatlerasia.com/lifestyle/travel'},
+    {tag:'dining',tagLabel:'美食動向',tagCls:'tag-dining',source:'Michelin Guide',title:'Michelin Guide Singapore 2026：3 家新一星餐廳完整解析',excerpt:'新星包含北歐永續海鮮融合餐廳，及兩家重新詮釋峇峇娘惹料理的現代餐廳。',date:'3/15',url:'https://guide.michelin.com'},
+    {tag:'hotel',tagLabel:'飯店開幕',tagCls:'tag-hotel',source:'Condé Nast Traveler',title:'Six Senses Kyoto 深度評測：以「間」的哲學打造 Wellness 旅宿',excerpt:'坐落東山區，現代數寄屋建築融合 Six Senses 招牌 spa 理念，業界評價最高完成度。',date:'3/14',url:'https://www.cntraveler.com'},
+    {tag:'trend',tagLabel:'旅遊趨勢',tagCls:'tag-trend',source:'Virtuoso',title:'亞太私人飛機包機量年增 34%，台灣客成長最快',excerpt:'Virtuoso 最新報告：台灣、香港、新加坡為主要驅動力，超高淨值旅客開始將包機視為標準配置。',date:'3/12',url:'https://www.virtuoso.com'}
+  ];
+  allArticles = items;
+  renderCards(items);
+}
+
+// ── Toast
+let toastT;
+function toast(msg){
+  const el = document.getElementById('toast');
+  el.textContent=msg;el.classList.add('show');
+  clearTimeout(toastT);
+  toastT=setTimeout(()=>el.classList.remove('show'),2600);
+}
+
+// ── Spin keyframe
+const _s = document.createElement('style');
+_s.textContent='.spin{animation:spin 0.8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}';
+document.head.appendChild(_s);
+
+// ── 頁面載入時自動抓取 RSS
+loadFeeds();
+</script>
 </body>
 </html>
