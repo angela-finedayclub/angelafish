@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FineDayClub 服務流程</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #faf9f6;
+  --surface: #ffffff;
+  --text: #1c1c1a;
+  --text2: #6b6a65;
+  --text3: #9c9b95;
+  --border: rgba(0,0,0,0.09);
+  --border2: rgba(0,0,0,0.18);
+  --client-bg: #EEF3FB;
+  --client-accent: #2a5ca8;
+  --client-pill: #d8e7f7;
+  --client-pill-text: #1a4580;
+  --vendor-bg: #E8F5EE;
+  --vendor-accent: #1a7a4a;
+  --vendor-pill: #c4e8d4;
+  --vendor-pill-text: #115035;
+  --both-bg: #FDF6E8;
+  --both-accent: #8a6200;
+  --both-pill: #f2dfaa;
+  --both-pill-text: #6b4a00;
+  --internal-bg: #F2F0FB;
+  --internal-accent: #4a3fb0;
+  --internal-pill: #ddd8f5;
+  --internal-pill-text: #342d8a;
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif; background: var(--bg); min-height: 100vh; color: var(--text); }
+.page { max-width: 860px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+.brand { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text3); margin-bottom: 6px; }
+.page-title { font-size: 21px; font-weight: 500; margin-bottom: 6px; }
+.page-desc { font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 1.75rem; }
+.tabs { display: flex; gap: 6px; margin-bottom: 1.75rem; flex-wrap: wrap; }
+.tab { font-size: 13px; padding: 7px 18px; border-radius: 30px; border: 0.5px solid var(--border2); background: transparent; color: var(--text2); cursor: pointer; transition: all 0.15s; }
+.tab:hover { background: #f0efe9; color: var(--text); }
+.tab.active { color: var(--text); background: var(--surface); border-color: var(--text); font-weight: 500; }
+.legend { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 1.5rem; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text2); }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.flow { display: flex; flex-direction: column; }
+.flow-row { display: flex; align-items: flex-start; gap: 12px; }
+.flow-left { width: 40px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; }
+.step-num { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 500; flex-shrink: 0; }
+.connector { width: 1.5px; flex: 1; min-height: 14px; background: var(--border2); margin: 3px 0; }
+.flow-card { flex: 1; min-width: 0; background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 13px 15px; margin-bottom: 8px; }
+.flow-card:hover { border-color: var(--border2); }
+.card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 6px; }
+.card-title { font-size: 14px; font-weight: 500; line-height: 1.4; }
+.card-tags { display: flex; flex-wrap: wrap; gap: 4px; flex-shrink: 0; }
+.tag { font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 20px; white-space: nowrap; }
+.tag.client { background: var(--client-pill); color: var(--client-pill-text); }
+.tag.vendor { background: var(--vendor-pill); color: var(--vendor-pill-text); }
+.tag.both { background: var(--both-pill); color: var(--both-pill-text); }
+.tag.internal { background: var(--internal-pill); color: var(--internal-pill-text); }
+.card-desc { font-size: 12px; color: var(--text2); line-height: 1.6; margin-bottom: 2px; }
+.card-note { font-size: 11px; color: var(--text3); margin-top: 7px; padding-top: 7px; border-top: 0.5px solid var(--border); line-height: 1.55; }
+
+/* editable sections */
+.editable-block { margin-top: 8px; border-top: 0.5px solid var(--border); padding-top: 8px; }
+.editable-label { font-size: 10px; font-weight: 500; color: var(--text3); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 5px; display: flex; align-items: center; gap: 6px; }
+.editable-label .edit-hint { font-size: 9px; color: var(--text3); font-weight: 400; letter-spacing: 0; opacity: 0.7; }
+.editable-text {
+  width: 100%; font-size: 12px; color: var(--text2); font-family: inherit;
+  border: 0.5px solid transparent; border-radius: 6px; padding: 6px 8px;
+  background: var(--bg); resize: none; outline: none; line-height: 1.6;
+  transition: border-color 0.15s; min-height: 36px;
+}
+.editable-text:focus { border-color: var(--border2); background: #fff; color: var(--text); }
+.editable-text:hover { border-color: var(--border); }
+.editable-text::placeholder { color: var(--text3); font-style: italic; }
+
+.num-client { background: var(--client-bg); color: var(--client-accent); }
+.num-vendor { background: var(--vendor-bg); color: var(--vendor-accent); }
+.num-both { background: var(--both-bg); color: var(--both-accent); }
+.num-internal { background: var(--internal-bg); color: var(--internal-accent); }
+.num-neutral { background: #eeede8; color: #555; }
+.card-client { border-left: 2.5px solid var(--client-accent); }
+.card-vendor { border-left: 2.5px solid var(--vendor-accent); }
+.card-both { border-left: 2.5px solid var(--both-accent); }
+.card-internal { border-left: 2.5px solid var(--internal-accent); }
+.branch-row { display: flex; gap: 8px; margin-bottom: 8px; }
+.branch-card { flex: 1; background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 11px 13px; }
+.branch-label { font-size: 10px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text3); margin-bottom: 4px; }
+.branch-title { font-size: 13px; font-weight: 500; margin-bottom: 3px; }
+.branch-desc { font-size: 12px; color: var(--text2); line-height: 1.5; }
+.flow-panel { display: none; }
+.flow-panel.active { display: block; }
+.spacer { height: 8px; }
+
+/* ── client-facing simple flow ── */
+.simple-flow { max-width: 620px; margin: 0 auto; padding: 2rem 0 1rem; }
+.simple-intro { font-size: 13px; color: var(--text2); line-height: 1.7; margin-bottom: 2rem; }
+.simple-steps { display: flex; flex-direction: column; gap: 0; }
+.simple-step { display: flex; gap: 14px; align-items: flex-start; }
+.simple-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 36px; }
+.simple-dot { width: 36px; height: 36px; border-radius: 50%; background: var(--client-bg); color: var(--client-accent); font-size: 13px; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.simple-line { width: 1.5px; flex: 1; min-height: 18px; background: var(--border2); margin: 3px 0; }
+.simple-body { flex: 1; padding-bottom: 18px; }
+.simple-title { font-size: 14px; font-weight: 500; margin-bottom: 3px; margin-top: 6px; }
+.simple-desc { font-size: 12px; color: var(--text2); line-height: 1.6; }
+.simple-note-block { margin-top: 8px; }
+.simple-note-label { font-size: 10px; font-weight: 500; color: var(--text3); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 4px; display: flex; gap: 5px; align-items: center; }
+.simple-editable {
+  width: 100%; font-size: 12px; color: var(--text2); font-family: inherit;
+  border: 0.5px solid transparent; border-radius: 6px; padding: 6px 8px;
+  background: var(--bg); resize: none; outline: none; line-height: 1.6;
+  transition: border-color 0.15s; min-height: 32px;
+}
+.simple-editable:focus { border-color: var(--border2); background: #fff; color: var(--text); }
+.simple-editable:hover { border-color: var(--border); }
+.simple-editable::placeholder { color: var(--text3); font-style: italic; }
+.save-bar { margin-top: 2rem; display: flex; gap: 8px; justify-content: flex-end; }
+.save-btn { font-size: 12px; padding: 7px 16px; border: 0.5px solid var(--border2); border-radius: var(--radius-sm); background: transparent; color: var(--text2); cursor: pointer; }
+.save-btn:hover { background: #f0efe9; color: var(--text); }
+.save-btn.primary { background: var(--text); color: #fff; border-color: var(--text); }
+.save-btn.primary:hover { opacity: 0.85; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="brand">FineDayClub · 內部文件</div>
+  <h1 class="page-title">服務流程說明</h1>
+  <p class="page-desc">分別呈現對客戶、對供應商的溝通流程，供對外說明與內部對齊使用。</p>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('client',this)">對客戶流程</button>
+    <button class="tab" onclick="showTab('vendor',this)">對供應商流程</button>
+    <button class="tab" onclick="showTab('simple',this)">客人版簡易流程</button>
+    <button class="tab" onclick="showTab('full',this)">完整總覽</button>
+  </div>
+
+  <div class="flow-panel active" id="panel-client">
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--client-accent)"></div>對客戶</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--both-accent)"></div>客戶 ＋ 供應商同步</div>
+    </div>
+    <div class="flow" id="client-flow"></div>
+  </div>
+
+  <div class="flow-panel" id="panel-vendor">
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--vendor-accent)"></div>對供應商</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--both-accent)"></div>客戶 ＋ 供應商同步</div>
+    </div>
+    <div class="flow" id="vendor-flow"></div>
+  </div>
+
+  <div class="flow-panel" id="panel-simple">
+    <div class="simple-flow">
+      <p class="simple-intro">這是提供給客人閱讀的簡易流程說明，說明從訂製諮詢到出發的完整步驟。</p>
+      <div class="simple-steps" id="simple-flow"></div>
+      <div class="save-bar">
+        <button class="save-btn" onclick="downloadPage()">下載此頁（保留編輯）</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="flow-panel" id="panel-full">
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--client-accent)"></div>對客戶</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--vendor-accent)"></div>對供應商</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--both-accent)"></div>雙向</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--internal-accent)"></div>對內</div>
+    </div>
+    <div class="flow" id="full-flow"></div>
+  </div>
+</div>
+
+<script>
+const steps = [
+  {
+    num:1, title:'客人進線', tags:['client'],
+    desc:'看到社群 / 廣告 / EDM，透過 LINE 主動詢問',
+    note:'客服於 30 分鐘內首次回覆',
+    clientMsg:'您好！感謝您的聯繫，請問如何稱呼您呢？我們的顧問會在 30 分鐘內為您服務。',
+    inClient:true, inVendor:false,
+  },
+  {
+    num:2, title:'需求判斷，分兩條路徑', tags:['client'],
+    desc:'', inClient:true, inVendor:false,
+    isBranch:true,
+    branches:[
+      {label:'路徑 A', title:'有明確需求，已填寫需求單', desc:'著重需求訪談：顧問深入了解旅行偏好、預算、特殊需求，直接進入規劃流程'},
+      {label:'路徑 B', title:'無明確需求', desc:'引導需求描述：協助釐清旅行方向，傳送 Platinum 訂製會員與服務介紹，待了解後跟進'},
+    ],
+  },
+  {
+    num:3, title:'顧問確認需求', tags:['client'],
+    desc:'一個工作日內完成：確認需求、日期、人數、預算（不含機票）；必要時引導升級 Platinum 會員',
+    clientMsg:'感謝您填寫諮詢表單！我們確認以下資訊是否正確：\n・出發日期：＿＿\n・目的地：＿＿\n・人數：＿＿\n・每人預算（不含機票）：＿＿\n\n請確認後我們將為您安排下一步。',
+    inClient:true, inVendor:false,
+  },
+  {
+    num:4, title:'概念報價', tags:['client'],
+    desc:'根據客人需求，三個工作日內提供初版行程方向與概念報價',
+    note:'此為估算，非正式報價；向供應商確認後會有調整',
+    clientMsg:'您好，我們已為您準備了初版行程方向與概念報價，請查看附件。\n\n目前費用為估算數字，正式報價將在我們向合作夥伴確認細節後提供。如對行程方向有任何想法，歡迎告知，我們可以調整。',
+    inClient:true, inVendor:false,
+  },
+  {
+    num:5, title:'收取 Platinum 訂製會員費', tags:['client'],
+    desc:'正式啟動訂製服務前收取年費；收費後開始詳細規劃',
+    clientMsg:'感謝您成為 Platinum 會員！我們將在 1–2 個工作日內安排需求確認通話，正式展開您的專屬行程規劃。',
+    inClient:true, inVendor:false,
+  },
+  {
+    num:6, title:'需求確認通話（可選）', tags:['client'],
+    desc:'收費後 1–2 個工作日內安排；15 分鐘深度訪談，確認住宿偏好、體力限制、隱性需求',
+    clientMsg:'我們想安排一個約 15 分鐘的通話，進一步了解您對這趟旅行的期待——住宿風格、行程節奏、是否有特殊安排等。請提供方便通話的時段，謝謝。',
+    inClient:true, inVendor:false,
+  },
+  {
+    num:7, title:'正式詢價與規劃', tags:['both'],
+    desc:'根據概念行程與通話內容，3–5 個工作日細化行程並向供應商詢價；確認房況、包車、餐廳、體驗等',
+    note:'此階段同步對客說明進度，並對供應商發出詢價',
+    clientMsg:'您好，我們目前正在為您向各合作夥伴進行詢價與確認，預計 3–5 個工作日內提供正式報價。有任何進展會即時通知您，請稍待。',
+    vendorTitle:'初次詢價',
+    vendorDesc:'根據行程方向，向住宿 / 包車 / 體驗供應商發送標準詢價信；48 小時內若無回覆則跟進',
+    vendorMsg:'主旨：【FineDayClub】房價詢問｜[入住日期]–[退房日期]＿[飯店名稱]\n\n您好，\n\n我們正為 VIP 客人規劃 [目的地] 行程，請提供以下報價：\n\n入住：[日期]\n退房：[日期]\n房型：[房型名稱]，共 [X] 間\n人數：[X] 大人 [X] 小孩\n特殊需求：[若有，否則填「無」]\n\n請提供含稅含早的每晚費用，以及保留截止日期，謝謝。\n\n[姓名]\nFineDayClub',
+    inClient:true, inVendor:true,
+  },
+  {
+    num:8, title:'正式報價提交', tags:['client'],
+    desc:'向供應商確認後提供精確報價；說明各項費用組成，服務費 15–25%（依複雜度調整）',
+    clientMsg:'您好，這是根據實際確認後的正式報價，包含住宿、包車、體驗費用，以及服務費說明。\n\n如需調整任何項目，歡迎告知，我們可以協助微調。',
+    inClient:true, inVendor:false,
+  },
+  {
+    num:9, title:'收費 → 開始預訂', tags:['both'],
+    desc:'客人確認行程後收費；兩個工作日內完成住宿、搶手門票等必要預訂',
+    note:'收費方式：全額一次收取 / 分批收取（先收需優先保留的項目，如特定飯店訂金）',
+    clientMsg:'收到款項，謝謝您！我們將在 2 個工作日內完成住宿與重要行程的正式預訂，確認單會即時提供給您。',
+    vendorTitle:'正式預訂',
+    vendorDesc:'取得客人授權與付款後，向供應商發出正式訂單；取得確認代號後記錄至 Notion 飯店資料庫',
+    vendorMsg:'您好，請確認以下預訂：\n\n飯店：[飯店名稱]\n日期：[入住] – [退房]\n房型：[房型]，共 [X] 間\n人數：[X] 人\n\n請提供確認代號與付款方式，謝謝。',
+    inClient:true, inVendor:true,
+  },
+  {
+    num:10, title:'與合作夥伴確認行程內容', tags:['vendor'],
+    desc:'確認包車行程安排、導覽語言、超時費率；確認體驗活動注意事項與集合方式',
+    vendorTitle:'行程細節確認',
+    vendorDesc:'針對包車、體驗、特殊安排，逐項確認集合時間、語言、緊急聯絡方式',
+    vendorMsg:'您好，想再次確認以下行程細節：\n\n日期：[日期]\n行程內容：[內容]\n集合地點與時間：[地點 / 時間]\n導覽語言：[語言]\n超時費率：[費率]\n\n如有任何異動請提前告知，謝謝合作。',
+    inClient:false, inVendor:true,
+  },
+  {
+    num:11, title:'行前文件製作＆交付', tags:['client'],
+    desc:'製作完整行前說明文件，出發前交付給客人',
+    note:'包含：逐日行程細流、住宿資訊（地址 / 確認號）、預約資訊、入境提醒、緊急聯絡資訊、保險提醒、注意事項',
+    clientMsg:'您好，您的行前完整說明文件已備妥，請查收！\n\n如有任何疑問，出發前或旅途中隨時可聯繫我們的顧問，祝您旅途愉快！',
+    inClient:true, inVendor:false,
+  },
+  {
+    num:12, title:'出發 / 服務執行', tags:['both'],
+    desc:'行程期間提供即時支援；遇緊急狀況啟動 Plan B',
+    clientMsg:'出發提醒：我們的顧問全程待命，如遇任何狀況請第一時間聯繫 [顧問聯絡方式]，我們會立即協助。',
+    vendorTitle:'行程中即時協調',
+    vendorDesc:'遇航班延誤、飯店異常或行程取消時，第一時間聯繫供應商確認並啟動備案',
+    vendorMsg:'提醒：我們的客人 [日期] 將按計劃抵達，如有任何異動請第一時間通知 [顧問聯絡方式]，謝謝合作。',
+    inClient:true, inVendor:true,
+  },
+  {
+    num:13, title:'售後追蹤＆案例建立', tags:['internal'],
+    desc:'客人資訊建檔；收集客人反饋；按格式建立案例庫，更新追蹤看板',
+    inClient:false, inVendor:false,
+  },
+];
+
+const simpleSteps = [
+  { title:'與顧問聯繫', desc:'透過 LINE 與我們的顧問說明您的旅行想法，顧問將在 30 分鐘內回覆您。' },
+  { title:'顧問提供概念行程方向與報價', desc:'顧問根據您的需求，於三個工作日內提供初版行程方向與概念報價，作為後續規劃的參考基礎。' },
+  { title:'升級成為 Platinum 會員', desc:'確認合作意願後，升級為 Platinum 訂製會員，正式啟動專屬行程規劃服務。' },
+  { title:'行程細節調整', desc:'顧問安排 15 分鐘通話，深入了解您的住宿偏好、行程節奏與特殊需求，並進一步調整行程內容。' },
+  { title:'正式報價', desc:'顧問向合作夥伴確認各項資源後，提供包含住宿、交通、體驗的完整正式報價。' },
+  { title:'確認行程並收款', desc:'您確認行程細節後完成付款，我們即開始進行各項資源的正式預訂。' },
+  { title:'各項資源安排與預訂', desc:'顧問在兩個工作日內完成住宿、包車、體驗活動等所有必要預訂，並向您確認各項細節。' },
+  { title:'行前說明文件交付', desc:'出發前提供完整行前說明文件，包含逐日行程、住宿資訊、預約確認、入境提醒與緊急聯絡方式。' },
+  { title:'出發，享受旅程', desc:'旅程期間顧問全程待命，隨時為您提供即時支援與協助。' },
+];
+
+function tagLabel(t) {
+  return {client:'對客戶', vendor:'對供應商', both:'雙向', internal:'對內'}[t] || t;
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = el.scrollHeight + 'px';
+}
+
+function renderFlow(containerId, mode) {
+  const el = document.getElementById(containerId);
+  el.innerHTML = '';
+  const filtered = steps.filter(s => {
+    if (mode === 'all') return true;
+    if (mode === 'client') return s.inClient;
+    if (mode === 'vendor') return s.inVendor || s.tags[0] === 'vendor';
+    return false;
+  });
+
+  filtered.forEach((s, i) => {
+    const isLast = i === filtered.length - 1;
+    const numCls = {client:'num-client',vendor:'num-vendor',both:'num-both',internal:'num-internal'}[s.tags[0]]||'num-neutral';
+    const cardCls = {client:'card-client',vendor:'card-vendor',both:'card-both',internal:'card-internal'}[s.tags[0]]||'';
+    const tagsHtml = s.tags.map(t=>`<span class="tag ${t}">${tagLabel(t)}</span>`).join('');
+
+    const msgKey = mode === 'vendor' ? 'vendorMsg' : 'clientMsg';
+    const msgLabel = mode === 'vendor' ? '供應商溝通範例' : '客戶溝通範例';
+    const msgPlaceholder = mode === 'vendor' ? '輸入供應商溝通話術…' : '輸入客戶溝通話術…';
+    const title = (mode === 'vendor' && s.vendorTitle) ? s.vendorTitle : s.title;
+    const desc = (mode === 'vendor' && s.vendorDesc) ? s.vendorDesc : s.desc;
+    const msgVal = s[msgKey] || '';
+
+    let inner = '';
+    if (s.isBranch) {
+      inner = `<div class="flow-card ${cardCls}" style="margin-bottom:6px">
+        <div class="card-head"><div class="card-title">${s.title}</div><div class="card-tags">${tagsHtml}</div></div>
+        <div class="editable-block">
+          <div class="editable-label">補充說明 <span class="edit-hint">可編輯</span></div>
+          <textarea class="editable-text" rows="2" placeholder="輸入補充說明…" oninput="autoResize(this)"></textarea>
+        </div>
+      </div>
+      <div class="branch-row">
+        ${s.branches.map(b=>`<div class="branch-card"><div class="branch-label">${b.label}</div><div class="branch-title">${b.title}</div><div class="branch-desc">${b.desc}</div></div>`).join('')}
+      </div>`;
+    } else {
+      const showMsg = mode !== 'all';
+      inner = `<div class="flow-card ${cardCls}">
+        <div class="card-head"><div class="card-title">${title}</div><div class="card-tags">${tagsHtml}</div></div>
+        ${desc ? `<div class="card-desc">${desc}</div>` : ''}
+        ${s.note ? `<div class="card-note">📌 ${s.note}</div>` : ''}
+        ${showMsg ? `
+        <div class="editable-block">
+          <div class="editable-label">${msgLabel} <span class="edit-hint">可編輯</span></div>
+          <textarea class="editable-text" rows="${msgVal ? Math.min(10, msgVal.split('\n').length + 1) : 2}" placeholder="${msgPlaceholder}" oninput="autoResize(this)">${msgVal}</textarea>
+        </div>` : ''}
+        <div class="editable-block">
+          <div class="editable-label">補充說明 <span class="edit-hint">可編輯</span></div>
+          <textarea class="editable-text" rows="2" placeholder="輸入補充說明、待確認事項、內部備註…" oninput="autoResize(this)"></textarea>
+        </div>
+      </div>`;
+    }
+
+    el.insertAdjacentHTML('beforeend', `
+      <div class="flow-row">
+        <div class="flow-left">
+          <div class="step-num ${numCls}">${i+1}</div>
+          ${!isLast ? '<div class="connector"></div>' : ''}
+        </div>
+        <div style="flex:1;min-width:0">${inner}${!isLast?'<div class="spacer"></div>':''}</div>
+      </div>`);
+  });
+
+  el.querySelectorAll('.editable-text').forEach(t => autoResize(t));
+}
+
+function renderSimple() {
+  const el = document.getElementById('simple-flow');
+  el.innerHTML = '';
+  simpleSteps.forEach((s, i) => {
+    const isLast = i === simpleSteps.length - 1;
+    el.insertAdjacentHTML('beforeend', `
+      <div class="simple-step">
+        <div class="simple-left">
+          <div class="simple-dot">${i+1}</div>
+          ${!isLast ? '<div class="simple-line"></div>' : ''}
+        </div>
+        <div class="simple-body">
+          <div class="simple-title">${s.title}</div>
+          <div class="simple-desc">${s.desc}</div>
+          <div class="simple-note-block">
+            <div class="simple-note-label">補充說明 <span style="font-size:9px;opacity:0.6;font-weight:400">可編輯</span></div>
+            <textarea class="simple-editable" rows="2" placeholder="輸入補充說明…" oninput="autoResize(this)"></textarea>
+          </div>
+        </div>
+      </div>`);
+  });
+  el.querySelectorAll('.simple-editable').forEach(t => autoResize(t));
+}
+
+function showTab(name, btn) {
+  document.querySelectorAll('.flow-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+  btn.classList.add('active');
+}
+
+function downloadPage() {
+  const textareas = document.querySelectorAll('textarea');
+  let src = document.documentElement.outerHTML;
+  textareas.forEach((ta, i) => {
+    src = src.replace(/(<textarea[^>]*>)([\s\S]*?)(<\/textarea>)/, (m, open, content, close) => open + ta.value + close);
+  });
+  const blob = new Blob([src], {type:'text/html'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'FDC_flow.html'; a.click();
+}
+
+renderFlow('client-flow','client');
+renderFlow('vendor-flow','vendor');
+renderFlow('full-flow','all');
+renderSimple();
+</script>
+</body>
+</html>
