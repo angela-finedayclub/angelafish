@@ -174,4 +174,29 @@ function dgConfirmSubmit(){
   });
 }
 </script>
+<style>
+.fbar{display:none !important}
+.dg-check{display:none !important}
+#dgBar,#dgToast,#dgModalMask,#dgSpacer{display:none !important}
+</style>
+<script>
+(function(){
+  var TARGET_DAY = '【Day1】7/27 下午茶';
+  document.querySelectorAll('[data-type]').forEach(function(card){
+    if (card.getAttribute('data-day') !== TARGET_DAY){
+      card.style.display = 'none';
+    }
+  });
+  document.querySelectorAll('main > div').forEach(function(wrapper){
+    var btn = wrapper.querySelector(':scope > button');
+    var group = wrapper.querySelector(':scope > div[id^="g"]');
+    if (!btn || !group) return;
+    var titleDiv = btn.querySelector('div > div');
+    var title = titleDiv ? titleDiv.textContent.trim() : '';
+    if (title !== TARGET_DAY){
+      wrapper.style.display = 'none';
+    }
+  });
+})();
+</script>
 </body></html>
