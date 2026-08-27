@@ -366,6 +366,10 @@
   var SHEET_NAME = "客戶回覆";
   var CASE_ID = "中秋問候";
 
+  // ---- 編輯模式用的色卡選單文字（要放在最前面：下面 renderEditor() 在頁面載入時就會被呼叫，
+  // 如果這個變數宣告寫在後面，執行到 renderEditor() 當下會抓到 undefined 而整段壞掉） ----
+  var SWATCH_LABELS = { c1: '紅（東北）', c2: '綠（Amanemu）', c3: '金（歐洲市集）', c4: '酒紅（酒莊）', c5: '藍（其他／郵輪河輪）' };
+
   // ---- 旅程靈感卡片資料（唯一資料來源，客人版與編輯版都從這裡渲染） ----
   var CARDS = [
     { swatch: 'c1', eyebrow: '東北紅葉溫泉小旅行', title: '仙台・山形・藏王 3 日', desc: '用溫泉、山寺與紅葉串起一段安靜的秋日行程，節奏比東京近郊更從容。', img: '' },
@@ -591,8 +595,6 @@
   }
 
   // ---- 編輯模式：卡片增刪改、圖片上傳、匯出 ----
-  var SWATCH_LABELS = { c1: '紅（東北）', c2: '綠（Amanemu）', c3: '金（歐洲市集）', c4: '酒紅（酒莊）', c5: '藍（其他／郵輪河輪）' };
-
   function renderEditor() {
     var wrap = document.getElementById('editor-cards');
     wrap.innerHTML = CARDS.map(function (c, i) {
