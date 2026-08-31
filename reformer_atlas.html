@@ -1,0 +1,1935 @@
+<title>皮拉提斯全器械圖鑑</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&family=Fraunces:ital,wght@0,500;1,400;1,500&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+<style>
+  /* ---------- tokens ---------- */
+  :root{
+    --bg:#eef1ea;
+    --surface:#ffffff;
+    --surface-alt:#e3e8db;
+    --border:#cdd4c1;
+    --ink:#1e241d;
+    --ink-soft:#57624f;
+    --ink-faint:#8a927e;
+    --accent:#3c6e5e;
+    --accent-contrast:#ffffff;
+    --accent-soft:#dbe6de;
+    --essential:#3c6e5e;
+    --essential-soft:#dbe6de;
+    --intermediate:#a3541f;
+    --intermediate-soft:#f2ded0;
+    --advanced:#8c3a4a;
+    --advanced-soft:#f0dbdf;
+    --shadow: 0 1px 2px rgba(30,36,29,0.06), 0 8px 24px -12px rgba(30,36,29,0.18);
+    --font-serif:'Noto Serif TC','Fraunces',serif;
+    --font-sans:'Noto Sans TC','IBM Plex Mono',-apple-system,sans-serif;
+    --font-latin:'Fraunces',serif;
+    --font-mono:'IBM Plex Mono',ui-monospace,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#11150e;
+      --surface:#1a2015;
+      --surface-alt:#212a1a;
+      --border:#313c26;
+      --ink:#e8ecdf;
+      --ink-soft:#a9b39c;
+      --ink-faint:#6d7862;
+      --accent:#84cdb2;
+      --accent-contrast:#0e1712;
+      --accent-soft:#243830;
+      --essential:#84cdb2;
+      --essential-soft:#20362c;
+      --intermediate:#e6a967;
+      --intermediate-soft:#3a2a18;
+      --advanced:#e0919e;
+      --advanced-soft:#3a2126;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 28px -14px rgba(0,0,0,0.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#11150e;
+    --surface:#1a2015;
+    --surface-alt:#212a1a;
+    --border:#313c26;
+    --ink:#e8ecdf;
+    --ink-soft:#a9b39c;
+    --ink-faint:#6d7862;
+    --accent:#84cdb2;
+    --accent-contrast:#0e1712;
+    --accent-soft:#243830;
+    --essential:#84cdb2;
+    --essential-soft:#20362c;
+    --intermediate:#e6a967;
+    --intermediate-soft:#3a2a18;
+    --advanced:#e0919e;
+    --advanced-soft:#3a2126;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 28px -14px rgba(0,0,0,0.6);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  .page{max-width:1180px;margin:0 auto;padding:2.75rem 1.5rem 5rem;}
+
+  /* ---------- header ---------- */
+  .hero{padding-bottom:2.25rem;border-bottom:1px solid var(--border);margin-bottom:1.75rem;}
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 0.9rem;
+    font-weight:600;
+  }
+  h1{
+    font-family:var(--font-serif);
+    font-weight:700;
+    font-size:clamp(1.9rem,4vw,2.7rem);
+    margin:0 0 0.7rem;
+    text-wrap:balance;
+    letter-spacing:-0.01em;
+  }
+  .lede{
+    max-width:60ch;
+    color:var(--ink-soft);
+    font-size:1.02rem;
+    margin:0 0 1.6rem;
+  }
+  .stats{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0.6rem 1.8rem;
+    font-family:var(--font-mono);
+  }
+  .stats .stat{display:flex;flex-direction:column;gap:0.15rem;}
+  .stats .stat .n{font-size:1.35rem;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;}
+  .stats .stat .l{font-size:0.7rem;color:var(--ink-faint);letter-spacing:0.06em;}
+
+  /* ---------- controls ---------- */
+  .controls{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:var(--bg);
+    padding:1.1rem 0 1.2rem;
+    display:flex;
+    flex-direction:column;
+    gap:0.9rem;
+    border-bottom:1px solid var(--border);
+    margin-bottom:2rem;
+  }
+  .search-field{
+    position:relative;
+    max-width:420px;
+  }
+  .search-field svg{
+    position:absolute;left:0.85rem;top:50%;transform:translateY(-50%);
+    width:16px;height:16px;color:var(--ink-faint);pointer-events:none;
+  }
+  .search-field input{
+    width:100%;
+    font-family:var(--font-sans);
+    font-size:0.95rem;
+    padding:0.65rem 0.9rem 0.65rem 2.4rem;
+    border-radius:10px;
+    border:1px solid var(--border);
+    background:var(--surface);
+    color:var(--ink);
+    outline:none;
+    transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  .search-field input::placeholder{color:var(--ink-faint);}
+  .search-field input:focus-visible{
+    border-color:var(--accent);
+    box-shadow:0 0 0 3px var(--accent-soft);
+  }
+
+  .filter-row{display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center;}
+  .filter-row .row-label{
+    font-family:var(--font-mono);
+    font-size:0.68rem;
+    letter-spacing:0.08em;
+    color:var(--ink-faint);
+    text-transform:uppercase;
+    margin-right:0.35rem;
+  }
+  .chip{
+    font-family:var(--font-sans);
+    font-size:0.85rem;
+    padding:0.4rem 0.85rem;
+    border-radius:999px;
+    border:1px solid var(--border);
+    background:var(--surface);
+    color:var(--ink-soft);
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:0.4rem;
+    transition:background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .chip:hover{border-color:var(--accent);}
+  .chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+  .chip svg{width:14px;height:14px;flex:none;}
+  .chip .cnt{
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    color:var(--ink-faint);
+  }
+  .chip.active{
+    background:var(--accent);
+    border-color:var(--accent);
+    color:var(--accent-contrast);
+  }
+  .chip.active .cnt{color:var(--accent-contrast);opacity:0.75;}
+  .chip.level-essential.active{background:var(--essential);border-color:var(--essential);color:var(--accent-contrast);}
+  .chip.level-intermediate.active{background:var(--intermediate);border-color:var(--intermediate);color:var(--accent-contrast);}
+  .chip.level-advanced.active{background:var(--advanced);border-color:var(--advanced);color:var(--accent-contrast);}
+
+  .view-toggle .chip{border-style:dashed;}
+  .view-toggle .chip.active{
+    background:var(--surface-alt);
+    border-style:solid;
+    border-color:var(--ink);
+    color:var(--ink);
+    font-weight:600;
+  }
+
+  /* ---------- modality sections ---------- */
+  .modality-section{margin-bottom:3.2rem;}
+  .modality-section.is-hidden{display:none;}
+  .modality-head{
+    display:flex;
+    align-items:center;
+    gap:0.65rem;
+    margin-bottom:1.5rem;
+    padding-bottom:0.65rem;
+    border-bottom:2px solid var(--border);
+  }
+  .modality-head .icon{width:22px;height:22px;color:var(--accent);flex:none;}
+  .modality-head h2{
+    font-family:var(--font-serif);
+    font-size:1.5rem;
+    font-weight:700;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .modality-head .en{
+    font-family:var(--font-latin);
+    font-style:italic;
+    color:var(--ink-faint);
+    font-size:0.95rem;
+  }
+  .modality-head .count{
+    margin-left:auto;
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    color:var(--ink-faint);
+  }
+
+  .category-block{margin-bottom:2rem;}
+  .category-block:last-child{margin-bottom:0;}
+  .category-block.is-hidden{display:none;}
+  .category-sub-head{
+    display:flex;
+    align-items:baseline;
+    gap:0.6rem;
+    margin-bottom:0.9rem;
+    padding-bottom:0.4rem;
+    border-bottom:1px dashed var(--border);
+  }
+  .category-sub-head h3{
+    font-family:var(--font-serif);
+    font-size:1.05rem;
+    font-weight:600;
+    margin:0;
+  }
+  .category-sub-head .count{
+    margin-left:auto;
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    color:var(--ink-faint);
+  }
+
+  .card-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+    gap:1rem;
+  }
+
+  .card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:1.15rem 1.25rem 1.1rem;
+    box-shadow:var(--shadow);
+    display:flex;
+    flex-direction:column;
+    gap:0.75rem;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .card.is-hidden{display:none;}
+  .card:hover{transform:translateY(-2px);}
+
+  .card-head{display:flex;justify-content:space-between;gap:0.75rem;align-items:flex-start;}
+  .card-name-tw{
+    font-family:var(--font-serif);
+    font-weight:600;
+    font-size:1.08rem;
+    line-height:1.35;
+    margin:0;
+  }
+  .card-name-en{
+    font-family:var(--font-latin);
+    font-style:italic;
+    color:var(--ink-soft);
+    font-size:0.88rem;
+    margin:0.15rem 0 0;
+  }
+
+  .level-pill{
+    flex:none;
+    font-family:var(--font-mono);
+    font-size:0.68rem;
+    font-weight:600;
+    letter-spacing:0.03em;
+    padding:0.28rem 0.6rem;
+    border-radius:999px;
+    white-space:nowrap;
+  }
+  .level-pill.essential{background:var(--essential-soft);color:var(--essential);}
+  .level-pill.intermediate{background:var(--intermediate-soft);color:var(--intermediate);}
+  .level-pill.advanced{background:var(--advanced-soft);color:var(--advanced);}
+  .level-pill.both{
+    background:linear-gradient(90deg, var(--essential-soft) 0 50%, var(--intermediate-soft) 50% 100%);
+    color:var(--ink);
+    border:1px solid var(--border);
+  }
+  .level-pill.unspecified{
+    background:var(--panel-2, transparent);
+    color:var(--ink-soft, var(--ink));
+    border:1px dashed var(--border);
+  }
+
+  .meta-row{
+    display:flex;
+    align-items:center;
+    gap:0.4rem;
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    color:var(--ink-soft);
+  }
+  .meta-row svg{width:14px;height:14px;color:var(--accent);flex:none;}
+
+  .goal{
+    font-size:0.92rem;
+    color:var(--ink);
+    line-height:1.55;
+  }
+  .goal b{
+    font-family:var(--font-mono);
+    font-weight:600;
+    font-size:0.68rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    display:block;
+    margin-bottom:0.2rem;
+  }
+
+  .keypoints{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:0.3rem;}
+  .keypoints .label{
+    font-family:var(--font-mono);
+    font-weight:600;
+    font-size:0.68rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin-bottom:0.15rem;
+    display:block;
+  }
+  .keypoints li{
+    position:relative;
+    padding-left:1.05rem;
+    font-size:0.88rem;
+    line-height:1.5;
+    color:var(--ink);
+  }
+  .keypoints li::before{
+    content:"";
+    position:absolute;left:0;top:0.55em;
+    width:6px;height:6px;border-radius:2px;
+    background:var(--accent);
+    transform:rotate(45deg);
+  }
+
+  .muscles{
+    font-size:0.85rem;
+    color:var(--ink-soft);
+    line-height:1.6;
+    padding-top:0.6rem;
+    border-top:1px solid var(--border);
+  }
+  .muscles b{
+    font-family:var(--font-mono);
+    font-weight:600;
+    font-size:0.68rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    display:block;
+    margin-bottom:0.25rem;
+  }
+
+  .seq-toggle{
+    align-self:flex-start;
+    font-family:var(--font-sans);
+    font-size:0.82rem;
+    font-weight:500;
+    color:var(--accent);
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:0.15rem 0;
+    display:inline-flex;
+    align-items:center;
+    gap:0.3rem;
+  }
+  .seq-toggle svg{width:12px;height:12px;transition:transform .15s ease;}
+  .seq-toggle[aria-expanded="true"] svg{transform:rotate(180deg);}
+  .seq-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+
+  .seq-body{
+    display:none;
+    background:var(--surface-alt);
+    border-radius:10px;
+    padding:0.8rem 0.9rem;
+    font-size:0.85rem;
+    line-height:1.65;
+  }
+  .seq-body.open{display:block;}
+  .seq-body .step{display:flex;gap:0.5rem;margin-bottom:0.35rem;}
+  .seq-body .step:last-child{margin-bottom:0;}
+  .seq-body .breath{
+    flex:none;
+    font-family:var(--font-mono);
+    font-size:0.68rem;
+    font-weight:600;
+    letter-spacing:0.03em;
+    padding:0.1rem 0.4rem;
+    border-radius:5px;
+    height:fit-content;
+    margin-top:0.15rem;
+  }
+  .seq-body .breath.inhale{background:var(--essential-soft);color:var(--essential);}
+  .seq-body .breath.exhale{background:var(--intermediate-soft);color:var(--intermediate);}
+  .seq-body .breath.loop{background:var(--accent-soft);color:var(--accent);}
+  .seq-body .text{color:var(--ink);}
+
+  .empty-state{
+    text-align:center;
+    padding:3.5rem 1rem;
+    color:var(--ink-faint);
+    font-size:0.95rem;
+  }
+
+  /* ---------- exam tips ---------- */
+  .tips{
+    margin-top:3rem;
+    padding-top:2.2rem;
+    border-top:1px solid var(--border);
+  }
+  .tips h2{
+    font-family:var(--font-serif);
+    font-size:1.35rem;
+    margin:0 0 0.3rem;
+  }
+  .tips .sub{color:var(--ink-faint);font-size:0.85rem;margin:0 0 1.3rem;font-family:var(--font-mono);}
+  .view-hint{
+    font-size:0.8rem;
+    color:var(--ink-faint);
+    font-family:var(--font-mono);
+    margin:-0.4rem 0 0.9rem;
+    display:none;
+  }
+  .view-hint.active{display:block;}
+  .tip-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;}
+  .tip-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:1.1rem 1.25rem;
+    box-shadow:var(--shadow);
+  }
+  .tip-card .num{
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    color:var(--accent);
+    font-weight:600;
+    letter-spacing:0.06em;
+  }
+  .tip-card h3{
+    font-family:var(--font-serif);
+    font-size:1rem;
+    margin:0.4rem 0 0.55rem;
+  }
+  .tip-card p{
+    font-size:0.86rem;
+    color:var(--ink-soft);
+    line-height:1.6;
+    margin:0;
+  }
+
+  footer.credit{
+    margin-top:3rem;
+    padding-top:1.4rem;
+    border-top:1px solid var(--border);
+    font-size:0.78rem;
+    color:var(--ink-faint);
+    font-family:var(--font-mono);
+  }
+
+  ::selection{background:var(--accent-soft);color:var(--ink);}
+</style>
+
+<div class="page">
+
+  <header class="hero">
+    <p class="eyebrow">STOTT PILATES® · Reformer · Matwork · Cadillac · Chair · Barrels</p>
+    <h1>皮拉提斯全器械圖鑑</h1>
+    <p class="lede">彙整核心床、墊上、凱迪拉克、萬能穩定椅與木桶五大器械的初、中、高級動作，含重點、目標與主要動作肌群，依器械與系列分類，可搜尋、可篩選，方便教學與複習時隨時查找。</p>
+    <div class="stats" id="stats"></div>
+  </header>
+
+  <div class="controls">
+    <div class="search-field">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="searchInput" type="text" placeholder="搜尋動作名稱、肌肉、關鍵字…" autocomplete="off">
+    </div>
+    <div class="filter-row view-toggle" id="viewToggle">
+      <span class="row-label">瀏覽模式</span>
+    </div>
+    <div class="filter-row" id="modalityFilters">
+      <span class="row-label">器械</span>
+    </div>
+    <div class="filter-row" id="levelFilters">
+      <span class="row-label">級別</span>
+    </div>
+    <p class="view-hint" id="viewHint">依肌群瀏覽時，同一動作若訓練到多個肌群或同一肌群下的多個細部肌肉，會分別出現在對應的分類中，方便依訓練目標查找。</p>
+  </div>
+
+  <main id="results"></main>
+
+  <section class="tips">
+    <h2>教練檢定 &amp; 考試要點提示</h2>
+    <p class="sub">STOTT PILATES® 生物力學核心原則</p>
+    <div class="tip-grid" id="tipGrid"></div>
+  </section>
+
+  <footer class="credit">資料整理自 STOTT PILATES® 官方指導手冊與支援材料 · 全器械初中高級動作資料庫 v9</footer>
+
+</div>
+
+<script>
+(function(){
+
+  var DATA = [
+    /* ---------------- Reformer 核心床 ---------------- */
+    {modality:"Reformer (核心床)", category:"下肢與對線系列", categoryEn:"Footwork & Leg Work", name_tw:"單腿動作 1-3", name_en:"Single Leg 1-3", level:"essential", springs:"2–3 顆彈簧",
+      goal:"訓練單側下肢力量，並挑戰骨盆對抗單邊旋轉、側移力矩的穩定度。",
+      keypoints:["對側骨盆不可下沉或旋轉","懸空腿維持桌面位穩定","避免軀幹代償性扭轉","離心收回滑車時速度放慢"],
+      muscles:"單側股四頭肌、臀部肌群、腿後肌。穩定肌：腹橫肌（對抗單側旋轉/側移力矩）。",
+      sequence:"1. Inhale: 單腳推開滑車，維持另一腳在桌面位 (Tabletop) 或單腿伸直。\n2. Exhale: 骨盆保持水平中立，離心收回滑車。"},
+
+    {modality:"Reformer (核心床)", category:"下肢與對線系列", categoryEn:"Footwork & Leg Work", name_tw:"第二位置 1-3", name_en:"Second Position 1-3", level:"essential", springs:"3–4 顆彈簧",
+      goal:"強化髖外旋控制力，並訓練內收與外展肌群的力量平衡。",
+      keypoints:["腳跟對齊、腳尖朝外約45度","膝蓋方向不超過腳尖連線","髖部維持水平，避免上下晃動"],
+      muscles:"髖外旋肌群、臀中肌、股四頭肌、內收肌群。穩定肌：腹橫肌。",
+      sequence:"1. Inhale: 推開滑車（雙腳踩在外側寬位置，髖外旋）。\n2. Exhale: 離心受控收回滑車，膝蓋與腳尖保持對線。"},
+
+    {modality:"Reformer (核心床)", category:"下肢與對線系列", categoryEn:"Footwork & Leg Work", name_tw:"腳部動作 1-5", name_en:"Footwork 1-5", level:"essential", springs:"3–4 顆彈簧",
+      goal:"建立下肢正確對線與骨盆穩定基礎，作為核心床課程的熱身與評估動作。",
+      keypoints:["膝尖對齊第二、三腳趾方向","骨盆維持中立、全程不晃動","推出時延展但勿鎖死膝關節","離心回收控制車台，不甩動"],
+      muscles:"股四頭肌、臀大肌、腿後肌、內收肌群、腓腸肌、比目魚肌。穩定肌：腹橫肌、深層盆底肌。",
+      sequence:"1. Inhale: 準備姿勢，骨盆與脊椎中立位。\n2. Exhale: 核心收緊，伸展髖與膝關節推開滑車。\n3. Inhale: 保持控制，緩緩彎曲關節，讓滑車回收（離心收縮控速）。"},
+
+    {modality:"Reformer (核心床)", category:"全身整合與力量系列", categoryEn:"Full Body Integration & Strength", name_tw:"上伸展", name_en:"Up Stretch", level:"intermediate", springs:"1–2 顆彈簧",
+      goal:"融合大象式與長伸展的進階流動，訓練核心在動態平板姿勢下的持續發力。",
+      keypoints:["倒 V 字與平板轉換間脊椎對線不變","骨盆下放時避免腰椎塌陷","頂起還原由下腹主導，非借力甩動","肩胛骨全程穩定不聳肩"],
+      muscles:"腹肌、肩帶穩定肌、腿後腱。融合了 Elephant 與 Long Stretch 的進階流動。",
+      sequence:"1. Inhale: 臀部高抬呈倒 V 字。吸氣時推開滑車，將骨盆下放，身體過渡到平板 Plank 對線。\n2. Exhale: 核心內縮，利用腹肌將骨盆拉回並高高頂起，帶回倒 V 字起始位。"},
+
+    {modality:"Reformer (核心床)", category:"全身整合與力量系列", categoryEn:"Full Body Integration & Strength", name_tw:"下伸展", name_en:"Down Stretch", level:"intermediate", springs:"1–2 顆彈簧",
+      goal:"訓練髖屈肌伸展幅度與胸骨抬升的控制力，強化跪姿下的核心承重。",
+      keypoints:["推開時胸骨持續向上延伸，勿垂頭","肩胛骨下壓穩定，手臂僅輔助不主導","拉回動作由腹肌與手臂協同控制","膝蓋跪地位置全程穩定不移動"],
+      muscles:"豎脊肌、臀大肌、腹肌。訓練髖屈肌伸展與胸骨抬升、肩胛骨下壓穩定。",
+      sequence:"1. Inhale: 跪姿，雙腳抵住肩托，手撐腳棒。吸氣時推開車台，身體向前延伸呈弓形弧度。\n2. Exhale: 保持胸骨向上抬升，利用腹肌與手臂力量受控地將滑車拉回。"},
+
+    {modality:"Reformer (核心床)", category:"全身整合與力量系列", categoryEn:"Full Body Integration & Strength", name_tw:"半圓式", name_en:"Semicircle", level:"intermediate", springs:"2 顆彈簧",
+      goal:"訓練脊椎於橋式姿勢下的雙向逐節活動度，挑戰骨盆懸空時的核心控制。",
+      keypoints:["下降時脊椎由上至下逐節接觸車台","雙腿外展寬度左右對稱","捲起時由尾椎啟動，一節節向上堆疊","全程避免使用甩動或慣性"],
+      muscles:"股四頭肌、臀大肌、腿後肌、脊椎伸展肌、腹肌。挑戰脊椎雙向逐節動員。",
+      sequence:"1. Inhale: 雙腳踩在腳棒，骨盆與下背部懸空呈橋式。推開滑車。\n2. Exhale: 保持滑車推開，將脊椎從胸椎、腰椎、骶骨由上至下逐節降至滑車軌道上。\n3. Inhale: 彎曲膝蓋，將滑車拉回擋板方向。\n4. Exhale: 從尾椎開始向上捲起骨盆，回到高位橋式起始位。"},
+
+    {modality:"Reformer (核心床)", category:"全身整合與力量系列", categoryEn:"Full Body Integration & Strength", name_tw:"長伸展", name_en:"Long Stretch", level:"intermediate", springs:"1–2 顆彈簧",
+      goal:"在平板支撐下訓練肩帶與核心的高強度整合力量，考驗抗重力穩定。",
+      keypoints:["軀幹全程呈一直線，避免塌腰或翹臀","推離與拉回皆由肩帶穩定肌主導","核心持續收緊、勿讓髖部下沉","呼吸節奏平穩，不憋氣"],
+      muscles:"前鋸肌、胸大肌、腹橫肌、腹直肌、臀大肌（維持標準 Plank 對線）。對抗重力的高強度核心動作。",
+      sequence:"1. Inhale: 雙腳抵住肩托，手壓腳棒，呈平板支撐。吸氣時將肩膀向後推離腳棒方向。\n2. Exhale: 維持核心與軀幹完全平直，利用肩帶力量將滑車拉回至起始位。"},
+
+    {modality:"Reformer (核心床)", category:"全身整合與力量系列", categoryEn:"Full Body Integration & Strength", name_tw:"大象式", name_en:"Elephant", level:"essential", springs:"1–2 顆彈簧",
+      goal:"訓練腹肌向心收縮拉回滑車的力量，同時伸展腿後肌群。",
+      keypoints:["拉回滑車時避免車台撞擊擋板","下腹啟動帶動骨盆微收，非單靠手臂","脊椎維持圓背但不過度塌陷","腿後肌拉伸時保持呼吸順暢"],
+      muscles:"腹直肌、腹內外斜肌（將滑車拉回）、前鋸肌與下斜方肌（穩定肩膀）。腿後肌拉伸。",
+      sequence:"1. Inhale: 站在車台上，手推腳棒，脊椎呈圓背。吸氣用腳跟將滑車微向後推（髖屈肌拉長）。\n2. Exhale: 啟動深層下腹肌，將滑車往回拉至髖部正下方，車台碰觸擋板不發出撞擊聲。"},
+
+    {modality:"Reformer (核心床)", category:"劈腿與拉伸系列", categoryEn:"Splits, Stretches & Ending", name_tw:"側劈腿", name_en:"Side Splits", level:"both", springs:"1/2–1 顆彈簧",
+      goal:"訓練站姿側向平衡與大腿內收肌群向心收縮的力量。",
+      keypoints:["雙腿打開時軀幹維持垂直、不晃動","內收肌主導拉回動作","骨盆保持水平穩定"],
+      muscles:"大腿內收肌群（向心收縮將滑車拉回）、臀中肌、腹斜肌（維持站姿直立平衡）。",
+      sequence:"1. Inhale: 側站，一腳踩站立平台，一腳踩滑車。吸氣時受控地讓雙腿打開，滑車滑出。\n2. Exhale: 啟動大腿內側肌群（內收肌），用力將滑車受控地拉回，雙腿併攏立直。"},
+
+    {modality:"Reformer (核心床)", category:"劈腿與拉伸系列", categoryEn:"Splits, Stretches & Ending", name_tw:"跑步", name_en:"Running", level:"essential", springs:"2–3 顆彈簧",
+      goal:"訓練踝關節交替向心與離心控制，並強化核心對抗下肢動態的穩定度。",
+      keypoints:["腳跟下壓時骨盆高度維持不變","交替節奏均勻，呼吸與動作同步","核心持續收緊避免骨盆晃動"],
+      muscles:"腓腸肌、比目魚肌（交替向心與離心控制）。穩定肌：腹橫肌、盆底肌。",
+      sequence:"1. Inhale: 推開滑車雙腿伸直。吸氣時一膝彎曲，另一側腳跟向下壓入腳棒下方拉伸。\n2. Exhale: 交換腿，下壓另一側腳跟，維持骨盆高度，呼吸保持均勻交替節奏。"},
+
+    {modality:"Reformer (核心床)", category:"核心與協調系列", categoryEn:"Core & Coordination", name_tw:"協調動作", name_en:"Coordination", level:"intermediate", springs:"2 顆彈簧",
+      goal:"整合上下肢多平面動作，訓練協調性與核心的動態抗力穩定。",
+      keypoints:["雙腿伸直與手肘下壓需同步到位","骨盆維持印記位，全程不晃動","動作節奏一致，勿求快"],
+      muscles:"腹直肌、腹斜肌、肱三頭肌、大胸肌、內收肌群。穩定肌：腹橫肌、前鋸肌。",
+      sequence:"1. Inhale: 雙手肘彎曲，雙膝桌面位預備。\n2. Exhale: 手肘伸直下壓拉繩，同時雙腿向對角線伸直（進入 Imprint）。\n3. Inhale: 雙腿外展再內收合攏（Beats/拍擊）。\n4. Exhale: 彎曲膝蓋收回，手肘彎曲回到起始位。"},
+
+    {modality:"Reformer (核心床)", category:"核心與協調系列", categoryEn:"Core & Coordination", name_tw:"百次呼吸", name_en:"Hundred", level:"essential", springs:"2–3 顆彈簧",
+      goal:"建立核心屈曲耐力與呼吸節奏控制，是核心床課程的經典熱身動作。",
+      keypoints:["頸椎屈曲需頭頂延伸，避免聳肩","肩胛骨全程下壓穩定","手臂幅度小而有力，帶動深層腹橫肌收縮"],
+      muscles:"腹直肌、腹內外斜肌（維持胸椎屈曲）。穩定肌：腹橫肌（維持 Imprint）、肩帶穩定肌、背闊肌。",
+      sequence:"1. Exhale: 頭頸椎屈曲起，雙手拉繩帶往下壓至臀部兩側。\n2. Loop: 保持屈曲，手臂上下點水，吸氣5拍，吐氣5拍，共重複10次（100次呼吸）。\n3. Exhale: 身體受控躺回。"},
+
+    {modality:"Reformer (核心床)", category:"短方盒系列", categoryEn:"Short Box Series", name_tw:"大樹式", name_en:"Tree", level:"intermediate", springs:"2 顆彈簧 (Short Box)",
+      goal:"考驗單腿平衡與脊椎極限後捲控制力，訓練深層核心與腿後肌協調。",
+      keypoints:["後捲過程脊椎需逐節、不可整段傾倒","下方懸空伸展時感受腿後肌拉長","爬回坐姿由腹肌主導，勿用手臂硬拉","全程保持單腿平衡不搖晃"],
+      muscles:"深層核心肌群、股四頭肌、腿後肌伸展。考驗單腿平衡與極限後捲控制。",
+      sequence:"1. Inhale: 抱單膝，將該腳伸直、彎曲三次以熱身腿後腱。\n2. Exhale: 雙手爬著小腿，脊椎一節節往後捲下，直至上半身完全懸空伸展。\n3. Inhale: 在下方增加脊椎伸展。\n4. Exhale: 雙手再次抓住腳，利用腹肌力量逐節爬回直立平衡坐姿。"},
+
+    {modality:"Reformer (核心床)", category:"短方盒系列", categoryEn:"Short Box Series", name_tw:"圓背", name_en:"Round Back", level:"both", springs:"2 顆彈簧 (Short Box)",
+      goal:"訓練脊椎屈曲方向的分節活動度，強化腹肌向心與離心收縮控制。",
+      keypoints:["後捲時脊椎逐節接觸車台，避免一次倒下","C 曲線需維持均勻弧度","收回時由下腹啟動，一節節堆疊回坐直","雙腳於安全帶內穩定不滑動"],
+      muscles:"腹直肌、腹內外斜肌（維持 C 曲線）、腹橫肌（支撐腰椎）。",
+      sequence:"1. Inhale: 坐於短盒，雙腳固定在腳套（Safety Strap）下，脊椎呈中立坐直。\n2. Exhale: 收縮腹肌，骨盆後傾，將脊椎後捲呈「C」曲線。\n3. Inhale: 在後捲最低點停留（或進行胸椎微伸展）。\n4. Exhale: 保持「C」曲線，利用下腹力量收回上半身至骨盆上方，再吸氣還原坐直。"},
+
+    {modality:"Reformer (核心床)", category:"短方盒系列", categoryEn:"Short Box Series", name_tw:"平背", name_en:"Straight Back", level:"both", springs:"2 顆彈簧 (Short Box)",
+      goal:"訓練脊椎在後傾角度下維持完全直立對線的等長控制力。",
+      keypoints:["後傾全程脊椎維持一直線，避免彎折","雙腳固定於安全帶提供穩定支點","拉回動作由髖屈肌與核心共同發力","舉桿手臂維持穩定高度"],
+      muscles:"髂腰肌、股四頭肌、腹橫肌、多裂肌、豎脊肌（等長收縮維持中立）。",
+      sequence:"1. Inhale: 雙手舉極桿（Pole）過頭，拉長脊椎預備。\n2. Exhale: 保持脊椎完全直立中立，從髖關節處向後傾斜 (Lean Back)。\n3. Inhale: 保持身體一直線，利用核心與髖屈肌力量回到垂直坐姿。"},
+
+    {modality:"Reformer (核心床)", category:"脊椎流動系列", categoryEn:"Spinal Mobility", name_tw:"長脊椎", name_en:"Long Spine", level:"intermediate", springs:"2 顆彈簧",
+      goal:"挑戰比短脊椎更高階的髖伸展幅度與脊椎雙向控制能力。",
+      keypoints:["捲起時腹肌主導、勿甩動雙腿","頂端外展寬度左右對稱","下降時脊椎逐節接觸車台","合攏雙腿回對角線時速度放緩"],
+      muscles:"腹肌、臀肌、腿後肌、豎脊肌。要求比 Short Spine 更高之髖部伸展與脊椎控制力。",
+      sequence:"1. Inhale: 雙腿伸直朝對角線推開預備。\n2. Exhale: 雙腿垂直向上，利用腹肌收縮將骨盆與脊椎捲離床面。\n3. Inhale: 雙腿在頂端向側邊分開（外展）。\n4. Exhale: 保持雙腿外展，緩緩將脊椎逐節躺回車台，最後合攏雙腿回對角線。"},
+
+    {modality:"Reformer (核心床)", category:"長盒與進階系列", categoryEn:"Advanced Long Box Series", name_tw:"天鵝潛水", name_en:"Swan Dive (Advanced Reformer)", level:"advanced", springs:"2 顆紅彈簧 (Long Box 俯臥)",
+      goal:"進階俯臥伸展動作，訓練豎脊肌群力量與肩帶穩定同時維持脊椎弧度。",
+      keypoints:["Y 字打開時肩胛骨下沉，避免聳肩","身體弓形弧度全程一致，不忽大忽小","雙腿高抬與雙臂動作需協調同步","回復中立時速度放緩，不可墜落"],
+      muscles:"豎脊肌、臀大肌、腿後肌、背闊肌。穩定肌：腹橫肌、前鋸肌、肩胛骨下壓肌。",
+      sequence:"1. Inhale: 俯臥在長盒上，雙手直臂握拉繩前側，胸椎伸展起。\n2. Exhale: 釋放拉繩，雙臂向側前方打開呈 Y 字，同時雙腿向上高抬（天鵝潛水弧線）。\n3. Inhale: 保持身體的弓形弧度，雙手向後收回拉繩，胸部再次抬起。\n4. Exhale: 緩緩回放雙手雙腳，回復俯臥中立。"},
+
+    {modality:"Reformer (核心床)", category:"長盒與進階系列", categoryEn:"Advanced Long Box Series", name_tw:"蚱蜢姿", name_en:"Grasshopper (Advanced Reformer)", level:"advanced", springs:"2 顆紅彈簧 (Long Box 俯臥)",
+      goal:"高難度俯臥伸展動作，考驗後側鏈耐力與脊椎伸展下的動態穩定。",
+      keypoints:["雙腿推開時大腿確實離開盒面","腳跟互壓三次時髖部維持穩定不晃","胸椎伸展全程保持，勿隨動作塌陷","核心穩定支撐避免下背代償"],
+      muscles:"臀大肌、腿後腱、大腿外旋肌群、脊椎伸展肌、下斜方肌。穩定肌：腹肌、前鋸肌。",
+      sequence:"1. Inhale: 俯臥長盒，雙手往後握拉繩，雙膝彎曲，腳跟互壓（外旋）。\n2. Exhale: 雙腿往上、往後伸展並推開滑車，大腿離開長盒面，同時胸椎伸展。\n3. Inhale: 保持大腿高度，雙膝彎曲，腳跟互壓三次，挑戰後側鏈耐力。\n4. Exhale: 雙腿受控放平，身體降回滑車。"},
+
+    {modality:"Reformer (核心床)", category:"長盒與進階系列", categoryEn:"Advanced Long Box Series", name_tw:"長盒搖擺", name_en:"Rocking (Advanced Reformer)", level:"advanced", springs:"1–2 顆彈簧 (Long Box 俯臥)",
+      goal:"考驗俯臥伸展姿勢下的動態平衡，訓練後側鏈力量與滑車控制精準度。",
+      keypoints:["前後滾動時脊椎弓形弧度維持不變","雙手抓握腳踝穩定，避免鬆脫","動作節奏平穩，不可用力甩動","結束時受控停止，不可突然放開"],
+      muscles:"脊椎伸展肌（豎脊肌）、臀大肌、腿後肌、股四頭肌（等長伸展）。稳定肌：腹肌、肩帶穩定肌。",
+      sequence:"1. Inhale: 俯臥長盒，雙手往後抓住雙腳踝，脊椎微伸展預備。\n2. Exhale: 臀大肌與腿後肌收縮，雙腳往後、往上踢，帶動胸椎與腰椎更深層伸展。\n3. Inhale: 保持身體弓形，前後滾動車台（重心在前胸與骨盆間移動）。\n4. Exhale: 受控停止滾動，釋放雙腳，還原俯臥。"},
+
+    {modality:"Reformer (核心床)", category:"進階全身整合系列", categoryEn:"Advanced Full Body Integration", name_tw:"控制平衡", name_en:"Control Balance (Advanced Reformer)", level:"advanced", springs:"2 顆彈簧 (背對腳棒，手握套環)",
+      goal:"高階倒立平衡動作，訓練核心屈曲控制力與單腿懸空的抗力穩定。",
+      keypoints:["倒立位時骨盆與肩胛全程穩定不晃","單腿下放速度需全程受控","雙腿併攏時不可甩動借力","脊椎逐節貼回床面，勿一次躺平"],
+      muscles:"腹直肌、腹內外斜肌（維持屈曲與平衡）、臀大肌、腿後肌（單腿伸展）。穩定肌：前鋸肌、肩帶穩定肌。",
+      sequence:"1. Inhale: 仰臥，雙腳套在套環中，向上推開車台。\n2. Exhale: 從尾骨開始逐節捲脊，雙腳過頭呈倒立平衡位（類似 Overhead 頂端）。\n3. Inhale: 保持軀幹與一腿在空中穩定，另一腿緩緩下放，腳尖輕觸滑車面。\n4. Exhale: 啟動臀肌與核心，將下放的腿拉回與另一腿併攏，交換側進行。\n5. Inhale: 雙腿併攏，在倒立位維持穩定。\n6. Exhale: 雙腳緩緩滑回，脊椎由上至下逐節貼回床面。"},
+
+    {modality:"Reformer (核心床)", category:"進階全身整合系列", categoryEn:"Advanced Full Body Integration", name_tw:"空中螺旋", name_en:"Corkscrew (Advanced Reformer)", level:"advanced", springs:"2 顆彈簧",
+      goal:"高強度旋轉控制動作，訓練腹肌向心收縮帶動下肢多方向移動。",
+      keypoints:["捲離床面時避免頸部承重或聳肩","側向旋轉時重心穩定轉移，不甩動","脊椎滾動貼回時逐節進行","左右方向次數對等，維持平衡"],
+      muscles:"腹直肌、腹內外斜肌（強力向心旋轉與控制）、髂腰肌。穩定肌：肩胛穩定肌群、前鋸肌。",
+      sequence:"1. Inhale: 仰臥，雙腳套在套環中，雙腿斜對角線伸直。\n2. Exhale: 利用腹肌力量將雙腿與骨盆逐節捲離床面（過頭斜向），不壓迫頸部。\n3. Inhale: 將雙腿在頂端緩緩向右側旋轉畫弧，重心轉移至右側肩胛骨。\n4. Exhale: 保持控制，將脊椎與骨盆一節節滾動貼回床面，雙腿繞過中立斜角線，再向左旋轉捲起。\n5. Inhale/Exhale: 交替方向進行，維持滑車不劇烈撞擊。"},
+
+    {modality:"Reformer (核心床)", category:"進階全身整合系列", categoryEn:"Advanced Full Body Integration", name_tw:"星式", name_en:"Star (Advanced Reformer)", level:"advanced", springs:"1–2 顆彈簧 (側站/側板挑戰)",
+      goal:"極限側鏈控制動作，訓練腰方肌與臀中肌在側板姿勢下的力量。",
+      keypoints:["側板姿勢全程保持一直線，勿塌腰","上腿高抬時髖部不可旋轉代償","支撐側肩胛骨穩定下壓","動作节奏放緩，避免借力甩腿"],
+      muscles:"臀中肌、腰方肌、腹斜肌、前鋸肌、斜方肌。考驗側鏈極限控制力。",
+      sequence:"1. Inhale: 一手撐在腳棒，一腳踩在滑車，另一手高舉呈側板 Plank 姿勢預備。\n2. Exhale: 支撐側側腰與臀中肌發力，推開滑車，同時將外側上腿向上高抬（呈大字星形）。\n3. Inhale: 保持上腿高度與側鏈對線，受控地拉回滑車。\n4. Exhale: 緩緩將上腿放下，還原側板撐起始位。"},
+
+    {modality:"Reformer (核心床)", category:"進階全身整合系列", categoryEn:"Advanced Full Body Integration", name_tw:"蛇式", name_en:"Snake (Advanced Reformer)", level:"advanced", springs:"1–2 顆彈簧",
+      goal:"高難度蛇形流動動作，整合胸椎伸展與核心力量的連續轉換。",
+      keypoints:["穿梭過程肩胛骨保持穩定不聳肩","胸骨抬升幅度與核心收縮需協調","倒 V 字回復時由下腹啟動","全程動作流暢，避免卡頓或甩動"],
+      muscles:"腹斜肌、腹直肌、前鋸肌、大胸肌、肱三頭肌、脊椎伸展肌、臀大肌。高難度蛇形流動。",
+      sequence:"1. Inhale: 雙手撐在腳棒，一腳交叉踩在滑車，呈倒 V 曲線預備。\n2. Exhale: 前鋸肌與腹肌主導，推開車台，身體向前向下穿梭，脊椎逐節伸展（胸骨抬升呈後仰 Plank 弧線）。\n3. Inhale: 保持脊椎伸展對線，肩膀微往後推，拉長身體前側。\n4. Exhale: 啟動深層下腹部力量，向上頂起骨盆，脊椎逐節回復到倒 V 曲線起始位。"},
+
+    {modality:"Reformer (核心床)", category:"進階全身整合系列", categoryEn:"Advanced Full Body Integration", name_tw:"扭轉式", name_en:"Twist (Advanced Reformer)", level:"advanced", springs:"1–2 顆彈簧",
+      goal:"進階旋轉與單臂支撐動作，考驗肩帶穩定與軀幹旋轉控制力。",
+      keypoints:["單手支撐全程穩定，勿聳肩或塌肩","旋轉軀幹時骨盆盡量維持穩定","穿針動作由核心帶動，非手臂甩動","回正頂起時核心確實收緊"],
+      muscles:"腹內外斜肌、腰方肌、前鋸肌、肩帶穩定肌、臀中肌。挑戰旋轉與單臂支撐。",
+      sequence:"1. Inhale: 單手撐腳棒，側坐，雙腳重疊於滑車，呈倒 V 側旋預備。\n2. Exhale: 手臂與體側核心發力，推開車台，身體轉向一側呈側板支撐，上臂向上高舉延伸。\n3. Inhale: 保持滑車穩定，旋轉軀幹將上臂往下往內穿過體側（Thread the needle 穿針引線）。\n4. Exhale: 身體旋轉回正，腹肌內縮，頂起骨盆將滑車拉回起始倒 V 位。"},
+
+    {modality:"Reformer (核心床)", category:"進階全身整合系列", categoryEn:"Advanced Full Body Integration", name_tw:"高橋式", name_en:"High Bridge (Advanced Reformer)", level:"advanced", springs:"2 顆彈簧 (高位腳棒)",
+      goal:"極限後側鏈與反伸展挑戰動作，訓練臀肌、腿後腱與豎脊肌的協同力量。",
+      keypoints:["身體呈直線懸空，避免骨盆下墜","臀肌與腿後肌需持續強力收縮","拉回滑車時速度全程受控","肩胛下壓穩定支撐頭頸部"],
+      muscles:"臀大肌、腿後腱、豎脊肌、股四頭肌、肩胛下壓肌群。極限後側鏈與極度反伸展挑戰。",
+      sequence:"1. Inhale: 仰臥，雙手握住頭枕側肩托，雙腳踩在腳棒高位，骨盆與脊椎捲起呈高位橋式預備。\n2. Exhale: 臀肌與腿後肌強力收縮，伸展雙膝推開滑車，身體呈一條懸空的直線懸浮於車台上。\n3. Inhale: 保持身體高度不墜，控制滑車緩緩拉回擋板方向。\n4. Exhale: 脊椎一節節落回車台面，回到中立起始位。"},
+
+    {modality:"Reformer (核心床)", category:"進階全身整合系列", categoryEn:"Advanced Full Body Integration", name_tw:"肌腱伸展", name_en:"Tendon Stretch (Advanced Reformer)", level:"advanced", springs:"2 顆紅彈簧 (面對繩箱，手撐腳棒)",
+      goal:"高階核心屈曲耐力動作，考驗肩帶承重與軀幹持續收緊的控制力。",
+      keypoints:["C 曲線全程維持緊湊、不可鬆散","手臂與肩帶穩定支撐體重","推回滑車時下腹極限收縮發力","臀部起伏幅度需受控、不可甩動"],
+      muscles:"前鋸肌、下斜方肌（強力支撐不塌肩）、腹直肌、腹內外斜肌（高度向心屈曲）。",
+      sequence:"1. Inhale: 站在滑車上，雙腳併攏踩在最前端，雙手掌緊撐腳棒，臀部高抬呈緊湊 C 曲線預備。\n2. Exhale: 手臂發力保持肩帶穩定，雙腿與骨盆等長收縮，推動滑車往後，維持 C 曲線不變。\n3. Inhale: 保持肩膀在腳棒正上方，臀部微下放（增加髖屈肌拉伸）。\n4. Exhale: 啟動極限下腹肌，將滑車完全拉回，車台碰觸擋板，臀部再次高高頂起。"},
+
+    /* ---------------- Matwork 墊上 ---------------- */
+    {modality:"Matwork (墊上)", category:"暖身系列", categoryEn:"Warm-up & Principles", name_tw:"肋骨架擺位", name_en:"Rib Cage Placement", level:"essential", springs:"無",
+      goal:"建立肋骨與胸廓中立擺位的感知，避免核心動作時肋骨外翻代償。",
+      keypoints:["吐氣時感受下位肋骨向內、向下收攏","避免用力憋氣或聳肩","肋骨擺位貫穿所有墊上核心動作的基礎"],
+      muscles:"腹直肌、腹內外斜肌",
+      sequence:"1. Inhale: 保持中立脊椎擺位。\n2. Exhale: 腹肌往內向下連結，穩定肋骨防止外翻。"},
+
+    {modality:"Matwork (墊上)", category:"暖身系列", categoryEn:"Warm-up & Principles", name_tw:"肩胛骨擺位", name_en:"Scapular Movement & Stabilization", level:"essential", springs:"無",
+      goal:"建立肩胛骨在胸廓上前引、後縮、上提、下壓四個方向的動態控制感。",
+      keypoints:["前引後縮須維持肩膀放鬆、不聳肩","下壓時感受下斜方肌啟動","動作幅度清楚但不過度用力"],
+      muscles:"前鋸肌、中下斜方肌、菱形肌",
+      sequence:"1. Inhale: 肩胛骨前引 (Protraction) 或上提 (Elevation)。\n2. Exhale: 肩胛骨後縮 (Retraction) 或下壓 (Depression)。"},
+
+    {modality:"Matwork (墊上)", category:"暖身系列", categoryEn:"Warm-up & Principles", name_tw:"頭頸擺位", name_en:"Head & Cervical Placement", level:"essential", springs:"無",
+      goal:"建立頸椎深層屈肌的正確徵召模式，作為所有墊上動作頭頸對線的基礎。",
+      keypoints:["點頭幅度小而精準，避免頸部後仰","視線微向下移，不擠壓喉嚨","全程頭部貼地、頸椎中立"],
+      muscles:"頸部深層屈肌",
+      sequence:"1. Inhale: 執行頭部微點頭動作 (Head nod)。\n2. Exhale: 保持頸椎長度回復中立位。"},
+
+    {modality:"Matwork (墊上)", category:"暖身系列", categoryEn:"Warm-up & Principles", name_tw:"骨盆擺位", name_en:"Pelvic Placement", level:"essential", springs:"無",
+      goal:"訓練骨盆在中立與印記（Imprint）位之間的主動轉換控制力。",
+      keypoints:["後傾時腹肌向內收縮帶動骨盆，非用力夾臀","中立與印記轉換需平順不生硬","腰椎貼地程度依動作需求調整，不過度用力"],
+      muscles:"腹斜肌、腹直肌、腹橫肌",
+      sequence:"1. Inhale: 保持中立骨盆。\n2. Exhale: 腹肌收縮將骨盆微後傾至 Imprint (印記位)。"},
+
+    {modality:"Matwork (墊上)", category:"後側鏈與旋轉系列", categoryEn:"Posterior Chain & Rotation", name_tw:"天鵝戲水預備", name_en:"Swan Dive Prep", level:"intermediate", springs:"無",
+      goal:"建立俯臥胸椎伸展的初階感知，為後續天鵝式動作預作準備。",
+      keypoints:["雙手撐地時肩胛骨下沉、避免聳肩","伸展幅度以舒適胸椎伸展為主，勿硬壓腰椎","前後擺動節奏平穩、不甩動"],
+      muscles:"豎脊肌、臀大肌、腿後肌",
+      sequence:"1. Inhale: 俯臥，雙手撐地，推起身體呈胸椎與腰椎大範圍伸展位。\n2. Exhale: 雙手放開前搖，腳部抬起，再吸氣推回。"},
+
+    {modality:"Matwork (墊上)", category:"後側鏈與旋轉系列", categoryEn:"Posterior Chain & Rotation", name_tw:"脊椎伸展預備", name_en:"Breast Stroke Preps", level:"essential", springs:"無",
+      goal:"訓練豎脊肌群基礎力量，建立俯臥脊椎伸展的控制感。",
+      keypoints:["抬起時頭頂向遠方延伸，避免頸椎後仰","恥骨全程貼地，避免腰椎過度伸展代償","下降回位時速度放緩，不可放鬆墜落"],
+      muscles:"豎脊肌、中下斜方肌、菱形肌",
+      sequence:"1. Inhale: 俯臥準備，恥骨貼地，吸氣時將頭頂向遠延伸，胸椎向上伸展離地。\n2. Exhale: 受控降回。"},
+
+    {modality:"Matwork (墊上)", category:"核心主系列", categoryEn:"Core Series", name_tw:"傑克刀式", name_en:"Jack Knife", level:"intermediate", springs:"無彈簧 (墊上)",
+      goal:"極限核心動作，訓練脊椎反向捲離地面後迅速轉換至垂直頂起的空中控制力。",
+      keypoints:["Roll Over 過程避免頸椎承重","頂起瞬間腳尖需保持高聳延伸","下降時脊椎逐節、有控制地貼回墊面","全程核心收緊避免下背代償"],
+      muscles:"腹肌、臀肌、腿後腱、豎脊肌。要求極強的脊椎反向分節捲離與空中支撐力。",
+      sequence:"1. Inhale: 仰臥伸直，吸氣時將雙腿帶至垂直天花板。\\n2. Exhale: 腹肌向心收縮，將雙腿與骨盆捲離地面，送至後方與地面平行（Roll Over 位），隨即迅速將雙腿垂直往天花板頂起（Up to Jackknife）。\\n3. Inhale: 在頂端維持高位平衡，身體呈一條斜直線。\\n4. Exhale: 保持腳尖高聳，將脊椎由胸、腰、骶骨逐節受控地放回墊面，最後將腿放回 45 度預備。"},
+
+    {modality:"Matwork (墊上)", category:"核心主系列", categoryEn:"Core Series", name_tw:"單腿前拉", name_en:"Leg Pull Front", level:"intermediate", springs:"無彈簧 (墊上)",
+      goal:"在俯撐板式下訓練單腿懸空的核心抗旋轉穩定與肩帶承重力量。",
+      keypoints:["抬腿時骨盆不可旋轉或塌腰","支撐手掌穩定推地，肩胛骨下沉","脊椎全程維持一直線，勿拱背或塌腰"],
+      muscles:"前鋸肌、下斜方肌（手掌撐地穩定肩帶）、臀大肌（腿往後高抬）、腹橫肌（維持板式 Plank 直立對線）。",
+      sequence:"1. Inhale: 呈俯撐板式（Plank）對線，脊椎維持中立。\\n2. Exhale: 單腿向後、向上抬起懸空，骨盆不旋轉、不塌腰。\\n3. Inhale: 支撐腳腳踝向後推動拉伸，再推回，隨後將抬起的腳放回原位。\\n4. Exhale: 交換側，抬高另一側腿。"},
+
+    {modality:"Matwork (墊上)", category:"核心主系列", categoryEn:"Core Series", name_tw:"天鵝潛水", name_en:"Swan Dive", level:"intermediate", springs:"無彈簧 (墊上)",
+      goal:"訓練後側鏈力量與胸椎伸展下的動態前後滾動控制。",
+      keypoints:["伸展時後側鏈確實發力帶動抬升","滾動節奏均勻，不可甩動借力","核心持續收緊支撐保護腰椎","前後擺動 3-5 次後受控停止"],
+      muscles:"豎脊肌、多裂肌、臀大肌、腿後肌。等長腹肌連結支撐腰椎。",
+      sequence:"1. Inhale: 俯臥，吸氣時收緊後側鏈，將上背與大腿同時向上伸展抬起，呈漂亮的弧形飛高姿。\\n2. Exhale: 釋放雙手前伸，讓身體向前滾動（潛水），胸部著地時雙腿在後方高高揚起。\\n3. Inhale: 後側肌群再次發力將身體向後滾回抬起，重回天鵝伸展位。如此前後搖擺 3-5 次。"},
+
+    {modality:"Matwork (墊上)", category:"核心主系列", categoryEn:"Core Series", name_tw:"神仙起 1", name_en:"Teaser 1", level:"intermediate", springs:"無彈簧 (墊上)",
+      goal:"極限核心穩定動作，訓練腹肌向心收縮同時抬起上下肢維持 V 字平衡。",
+      keypoints:["捲起時脊椎逐節堆疊，非一次彈起","V 字頂端維持雙腿與軀幹穩定不晃","下降回位時保持相同控制速度","雙腿全程伸直不彎曲"],
+      muscles:"腹直肌、腹斜肌、腹橫肌、髂腰肌、股四頭肌。極限核心穩定動作。",
+      sequence:"1. Inhale: 仰臥，雙腿呈對角線伸直（維持 Imprint），雙手過頭。\\n2. Exhale: 雙手劃弧經天花板，頭頸椎逐節上捲，帶領上半身與脊椎抬起至斜直（呈 V 字形），雙手與雙腿平行延伸。\\n3. Inhale: 在頂端平衡，挺拔脊椎，雙腿維持不動。\\n4. Exhale: 腹肌控制，將上半身逐節向後平鋪回墊，還原仰臥位。"},
+
+    {modality:"Matwork (墊上)", category:"核心主系列", categoryEn:"Core Series", name_tw:"肩橋", name_en:"Shoulder Bridge", level:"intermediate", springs:"無彈簧 (墊上)",
+      goal:"訓練單腿懸空下的伸髖力量與骨盆水平穩定控制。",
+      keypoints:["骨盆全程維持水平，勿隨踢腿晃動","踢腿速度需受控，不可甩動","支撐腿臀肌持續收縮撐住橋式高度","每側完成後平順切換不塌落"],
+      muscles:"臀大肌、腿後肌（伸髖與抬臀）、豎脊肌、腹肌。單腿懸空時考驗單側穩定性。",
+      sequence:"1. Inhale: 仰臥，雙膝彎曲踩地，將骨盆提至橋式高度，一腿伸直指向天花板。\\n2. Exhale: 腳尖繃直，伸直的腿向下放低至與另一大腿平行。\\n3. Inhale: 腳踝勾起 (Flex)，將腿快速踢回指向天花板的起始位。骨盆保持水平高度不動。\\n*每側腿完成 5 次後交換。"},
+
+    {modality:"Matwork (墊上)", category:"核心主系列", categoryEn:"Core Series", name_tw:"開腿搖擺", name_en:"Open Leg Rocker", level:"intermediate", springs:"無彈簧 (墊上)",
+      goal:"訓練深層核心力量與脊椎滾動後的精準平衡控制。",
+      keypoints:["滾動時雙腿伸直維持 V 字角度不變","滾回時精準停在坐骨平衡、不可甩起","脊椎全程拉長，避免圓背塌陷","雙手扶踝僅作引導，非拉扯借力"],
+      muscles:"腹直肌、斜肌、深層核心、股四頭肌（維持腿伸直）、肩胛穩定肌。",
+      sequence:"1. Inhale: 坐姿，雙腿伸直外展呈 V 字，手握踝關節，骨盆後傾懸空平衡。吸氣向後滾動至肩胛骨。\\n2. Exhale: 核心內收用力，將身體滾回並精確平衡於坐骨，拉長脊椎、雙腿挺直不著地。"},
+
+    {modality:"Matwork (墊上)", category:"核心主系列", categoryEn:"Core Series", name_tw:"像球一樣滾動", name_en:"Rolling Like a Ball", level:"both", springs:"無彈簧 (墊上)",
+      goal:"訓練脊椎在圓背姿勢下的滾動控制力與深層核心穩定。",
+      keypoints:["滾動時保持身形圓球狀不變","避免壓迫頸椎，重心落在肩胛骨","滾回時腹肌主導、非慣性甩動","雙腳全程懸空不觸地"],
+      muscles:"腹直肌、腹內外斜肌（維持脊椎圓背 C 曲線與深層向心屈曲）、深層多裂肌。",
+      sequence:"1. Inhale: 屈膝抱腿，雙腳懸空平衡於坐骨，脊椎呈圓背。吸氣向後滾動至肩胛骨處（不壓頸部）。\\n2. Exhale: 保持核心內縮與身形不變，利用腹肌力量向心收回至平衡坐姿，雙腳保持懸空不著地。"},
+
+    {modality:"Matwork (墊上)", category:"核心主系列", categoryEn:"Core Series", name_tw:"捲脊起", name_en:"Roll Up", level:"both", springs:"無彈簧 (墊上)",
+      goal:"訓練腹肌對抗重力逐節捲起脊椎的向心與離心控制力。",
+      keypoints:["捲起需逐節、避免整段軀幹一次抬起","前方停留時延伸脊椎與腿後側","下降時骨盆先啟動後傾，再逐節鋪回","雙腿全程伸直、腳跟不離地"],
+      muscles:"腹直肌、斜肌（向心收縮克服重力捲起）、腿後肌群（拉伸）、髂腰肌。",
+      sequence:"1. Inhale: 仰臥伸直，雙臂舉向天花板，點頭預備。\\n2. Exhale: 腹肌強烈收縮，由頭、胸椎、腰椎、骨盆逐節捲起，雙臂向前延伸平行，上半身呈完美 C 曲線越過雙腿。\\n3. Inhale: 在最前方停留，延伸脊椎與後側腱。\\n4. Exhale: 骨盆向後傾斜，腹肌離心控制，將脊椎由骶骨、腰椎、胸椎、頭部一節節滾動鋪回墊面。\\n5. Inhale: 雙臂回放至頭後或天花板預備。"},
+
+    {modality:"Matwork (墊上)", category:"核心主系列", categoryEn:"Core Series", name_tw:"海豹式", name_en:"Seal", level:"both", springs:"無彈簧 (墊上)",
+      goal:"在核心圓背懸空姿勢下訓練協調性與深層核心穩定。",
+      keypoints:["滾動幅度前後一致，重心落在肩胛骨","拍腳跟動作俐落，不影響身形穩定","前後平衡點停留精準、不觸地","呼吸與動作節奏保持一致"],
+      muscles:"腹直肌、斜肌、深層核心穩定肌。髖外展與內收肌群。",
+      sequence:"1. Inhale: 屈膝，雙手從雙腿內側繞過握住腳踝，雙腳懸空。吸氣向後滾動至肩胛骨，並在上方拍擊雙腳跟三次（Clap-Clap-Clap）。\\n2. Exhale: 利用腹肌向心收回至前側坐骨平衡位，並在前方再次拍腳跟三次（Clap-Clap-Clap），腳不碰地。"},
+
+    {modality:"Matwork (墊上)", category:"核心主系列", categoryEn:"Core Series", name_tw:"雙腿伸展", name_en:"Double Leg Stretch", level:"both", springs:"無彈簧 (墊上)",
+      goal:"挑戰核心在肢體大幅延展下維持胸椎屈曲高度的等長控制力。",
+      keypoints:["雙腿與雙手伸展時，胸椎屈曲高度需維持不變","下背不可離地拱起，骨盆維持 Imprint","雙手劃圓與雙腿伸展節奏一致","收回時速度與伸展時相同"],
+      muscles:"腹直肌、腹內外斜肌（高強度等長收縮維持屈曲高度）、髂腰肌、股四頭肌。",
+      sequence:"1. Inhale: 仰臥，脊椎屈曲，雙手置於膝蓋外側預備。\\n2. Exhale: 雙臂往頭頂斜上方延伸，同時雙腿朝斜對角線伸直（維持 Imprint，肋骨不外翻）。\\n3. Inhale: 雙手往側邊畫大圈繞回，同時收回雙膝回到起始屈曲位。"},
+
+    {modality:"Matwork (墊上)", category:"核心主系列", categoryEn:"Core Series", name_tw:"剪刀腳", name_en:"Scissors", level:"essential", springs:"無彈簧 (墊上)",
+      goal:"訓練髖屈肌動態控制與腿後肌群的離心拉伸能力。",
+      keypoints:["下放腿盡量貼近地面但不觸地","拉伸時輕拉兩次而非用力硬扯","骨盆全程穩定不隨腿部擺動晃動"],
+      muscles:"腹肌（維持屈曲）、股直肌、髂腰肌（動態控腿）、腿後肌群（離心控制拉伸）。",
+      sequence:"1. Inhale: 雙腿直立指向天花板，上半身屈曲起預備。\\n2. Exhale: 單腿向下放低至接近地面，另一腿拉向胸前並輕拉兩次（Pulse-Pulse）。\\n3. Inhale: 雙腿在天花板方向交會過渡。\\n4. Exhale: 交換腿下放並輕拉兩次。"},
+
+    {modality:"Matwork (墊上)", category:"核心主系列", categoryEn:"Core Series", name_tw:"半捲脊後下", name_en:"Half Roll Back", level:"essential", springs:"無彈簧 (墊上)",
+      goal:"訓練脊椎在部分活動範圍內的分節控制，為捲脊系列動作做準備。",
+      keypoints:["後捲時脊椎需逐節、不可一次倒下","最低點維持圓背 C 曲線不鬆散","起身時由下腹啟動，非借力甩起","雙臂全程向前延伸穩定不晃動"],
+      muscles:"腹直肌、腹內外斜肌（向心收縮後捲）、髂腰肌（等長支撐）、豎脊肌。",
+      sequence:"1. Inhale: 坐直，脊椎中立，雙膝彎曲，雙臂向前伸直平行。\\n2. Exhale: 收縮腹肌使骨盆後傾，脊椎呈圓背「C」曲線向後傾斜捲下，直至下背微觸墊子。\\n3. Inhale: 在後捲最低點停留維持「C」字曲線。\\n4. Exhale: 保持圓背曲線，腹肌用力將上半身帶回骨盆上方。\\n5. Inhale: 逐節坐直脊椎，還原至起始中立坐姿。"},
+
+    {modality:"Matwork (墊上)", category:"核心主系列", categoryEn:"Core Series", name_tw:"單腿伸展", name_en:"Single Leg Stretch", level:"essential", springs:"無彈簧 (墊上)",
+      goal:"訓練核心穩定下的下肢交替控制，強化胸椎屈曲耐力。",
+      keypoints:["胸椎屈曲高度全程維持不變","雙手交換位置需俐落不拖延","伸直腿與彎曲腿角度維持一致","骨盆全程穩定不隨動作晃動"],
+      muscles:"腹直肌、斜肌（維持胸椎屈曲位）、髂腰肌（動態下肢持重）。穩定肌：腹橫肌維持 Imprint。",
+      sequence:"1. Inhale: 仰臥，雙腿桌面位，上半身屈曲抬起，雙手輕扶一膝。\\n2. Exhale: 單腿向斜對角線伸直延伸，另一膝收向胸口，雙手交換位置。\\n3. Inhale: 雙膝過渡交替。\\n4. Exhale: 換側伸直另一腿。呼吸保持【Exhale 伸展，Inhale 交換】規律。"},
+
+    {modality:"Matwork (墊上)", category:"核心主系列", categoryEn:"Core Series", name_tw:"單腿畫圈", name_en:"One Leg Circle", level:"essential", springs:"無彈簧 (墊上)",
+      goal:"訓練單腿懸空畫圈時骨盆抗旋轉與抗位移的核心穩定力。",
+      keypoints:["畫圈全程骨盆水平不晃動","圈幅適中、避免過大導致骨盆代償","支撐腿保持中立不緊繃","雙方向次數對等維持平衡"],
+      muscles:"髂腰肌、股直肌（單腿懸空）、髂脛束、臀中肌。穩定肌：腹橫肌、多裂肌（骨盆抗旋轉與抗位移）。",
+      sequence:"1. Inhale: 仰臥中立位，單腿指向天花板，吸氣時腿跨過身體中線向內側畫半圓。\\n2. Exhale: 腿向下向外側畫半圓，受控拉回頂端。在整個畫圈過程中骨盆水平不晃動。\\n*完成 5 次後，Inhale/Exhale 執行反向（Reverse）畫圈。"},
+
+    {modality:"Matwork (墊上)", category:"核心主系列", categoryEn:"Core Series", name_tw:"斜肌練習", name_en:"Obliques", level:"essential", springs:"無彈簧 (墊上)",
+      goal:"訓練腹斜肌主導的胸椎旋轉控制力，同時維持骨盆穩定不歪斜。",
+      keypoints:["旋轉由胸椎啟動，非用手臂拉扯頭部","骨盆全程正對前方不歪斜","雙腿伸直角度左右對稱","換側時速度平穩不甩動"],
+      muscles:"腹內外斜肌（負責胸椎旋轉與屈曲）、腹直肌。穩定肌：腹橫肌維持骨盆穩定。",
+      sequence:"1. Inhale: 仰臥雙手托頭，上半身屈曲，雙腿桌面位。\\n2. Exhale: 上半身向右旋轉（對側腋下朝髖骨方向延伸），同時左腿向斜對角線伸直。\\n3. Inhale: 上半身回到中心，雙腳過渡。\\n4. Exhale: 上半身向左旋轉，右腿伸直。確保骨盆不歪斜。"},
+
+    {modality:"Matwork (墊上)", category:"核心主系列", categoryEn:"Core Series", name_tw:"百次呼吸", name_en:"Hundred", level:"essential", springs:"無彈簧 (墊上)",
+      goal:"建立核心屈曲耐力與呼吸節奏控制，是墊上課程的經典熱身動作。",
+      keypoints:["頸椎屈曲需頭頂延伸，避免聳肩","手臂幅度小而有力，帶動深層腹橫肌收縮","雙腿高度依核心能力調整，不可塌腰","吸氣吐氣五拍需與拍擊動作同步"],
+      muscles:"腹直肌、斜肌、腹橫肌（等長收縮維持屈曲與 Imprint）、肩部穩定肌。",
+      sequence:"1. Inhale: 點頭預備。\\n2. Exhale: 抬頭頸椎屈曲起，雙腿抬至桌面位 (Tabletop) 或斜對角線伸直（維持 Imprint）。\\n3. Loop: 手臂上下在體側快速點水拍擊，搭配【吸氣 5 拍，吐氣 5 拍】循環，共重複 10 組（合計 100 次呼吸）。\\n4. Exhale: 結束後，雙膝彎曲，身體受控躺回墊面。"},
+
+    {modality:"Matwork (墊上)", category:"核心主系列", categoryEn:"Core Series", name_tw:"腹部準備動作", name_en:"Ab Prep", level:"essential", springs:"無彈簧 (墊上)",
+      goal:"訓練腹直肌向心收縮的基礎屈曲控制力，作為捲腹系列的入門動作。",
+      keypoints:["抬起僅到胸椎上段，頸椎勿過度施力","骨盆全程維持中立不後傾","下降時脊椎逐節鋪回，不可放鬆墜落"],
+      muscles:"腹直肌、腹內外斜肌（向心屈曲胸椎）、腹橫肌（維持骨盆中立）。",
+      sequence:"1. Inhale: 仰臥中立位，雙手交疊放於頭後，吸氣時做頭頸點頭預備。\\n2. Exhale: 腹肌收縮，將頭部、頸部與胸椎上部逐節屈曲抬起離地，骨盆維持中立不後傾。\\n3. Inhale: 在頂端維持屈曲高度，呼吸送入胸椎後側。\\n4. Exhale: 腹肌離心控制，將脊椎受控地逐節平鋪放回墊子。"},
+
+    {modality:"Matwork (墊上)", category:"核心主系列", categoryEn:"Core Series", name_tw:"鋸子式", name_en:"Saw", level:"essential", springs:"無彈簧 (墊上)",
+      goal:"訓練脊椎旋轉搭配前屈的複合活動度，並拉伸腿後腱與背部側鏈。",
+      keypoints:["旋轉需從胸椎啟動，骨盆維持穩定朝前","坐骨全程平均承重、不可隨旋轉抬離","鋸腳動作為呼氣延伸，勿聳肩代償","坐直還原時逐節堆疊脊椎"],
+      muscles:"腹內外斜肌（主導旋轉）、脊椎屈曲肌群、背闊肌、腿後腱拉伸。",
+      sequence:"1. Inhale: 坐直，雙腳打開寬於肩膀，雙臂向兩側平舉。\\n2. Exhale: 上半身向右旋轉，隨後向前屈曲，左手小指去鋸右腳小趾外側；後側右手内旋延伸，視線看後手。\\n3. Inhale: 保持旋轉姿勢坐直，再旋轉回正面起始坐姿。\\n4. Exhale: 交換側，向左旋轉並前屈鋸腳。"},
+
+    {modality:"Matwork (墊上)", category:"暖身系列", categoryEn:"Warm-up & Principles", name_tw:"印記與釋放", name_en:"Imprint & Release", level:"essential", springs:"無彈簧 (墊上)",
+      goal:"訓練骨盆在印記位與中立位之間的主動轉換，建立腰椎保護意識。",
+      keypoints:["印記時由腹斜肌啟動，非硬壓腰椎","中立與印記轉換需平順","停留時維持穩定呼吸，不憋氣"],
+      muscles:"腹斜肌（向心收縮使骨盆後傾）、腹橫肌（維持腰椎安全）。",
+      sequence:"1. Inhale: 仰臥，骨盆中立位預備。\\n2. Exhale: 啟動腹斜肌將骨盆略微後傾，使下背部/腰椎弧度溫和貼平墊子（Imprint）。\\n3. Inhale: 在印記位停留維持。\\n4. Exhale: 釋放腹肌力量，受控地將骨盆帶回中立位 (Neutral)。"},
+
+    {modality:"Matwork (墊上)", category:"暖身系列", categoryEn:"Warm-up & Principles", name_tw:"呼吸", name_en:"Breathing", level:"essential", springs:"無彈簧 (墊上)",
+      goal:"建立三度空間呼吸模式，訓練核心與骨盆穩定同步呼吸節奏。",
+      keypoints:["吸氣感受肋骨向側後方擴張","吐氣時核心向內向上收縮","肋骨全程不過度外翻"],
+      muscles:"腹橫肌、肋間外肌、深層盆底肌。穩定骨盆與胸廓。",
+      sequence:"1. Inhale: 三度空間吸氣，感受肋骨向側邊與後側拓寬，腹部微隆起。\\n2. Exhale: 吐氣時核心收縮，腹肌向內、向上收縮，肋骨向下滑動收攏。"},
+
+    {modality:"Matwork (墊上)", category:"暖身系列", categoryEn:"Warm-up & Principles", name_tw:"肩胛骨隔離練習", name_en:"Scapular Isolations", level:"essential", springs:"無彈簧 (墊上)",
+      goal:"分離訓練肩胛骨前引後縮與上提下壓四個方向的獨立控制力。",
+      keypoints:["前引後縮全程肩膀放鬆不聳肩","上提下壓幅度清楚、避免代償聳肩","動作分離練習，避免軀幹跟著晃動"],
+      muscles:"前鋸肌、斜方肌、菱形肌、胸小肌。",
+      sequence:"【前引/後縮】\\n• Inhale: 雙手指向天花板，吸氣時手臂上伸，肩胛骨前引離開墊子。\\n• Exhale: 肩胛骨有控制地貼回墊子後縮，肩膀放鬆不聳肩。\\n【上提/下壓】\\n• Inhale: 肩膀向上滑向耳垂聳肩。\\n• Exhale: 啟動下斜方肌，將肩胛骨向下滑動往臀部方向延伸。"},
+
+    {modality:"Matwork (墊上)", category:"暖身系列", categoryEn:"Warm-up & Principles", name_tw:"脊椎旋轉", name_en:"Spinal Rotation", level:"essential", springs:"無彈簧 (墊上)",
+      goal:"訓練胸椎在側臥姿勢下的旋轉活動度，同時維持骨盆穩定不動。",
+      keypoints:["旋轉時骨盆與下肢維持固定不動","視線隨手臂移動增加胸椎旋轉幅度","最大旋轉位停留延伸呼吸","回正時由斜肌主導帶回"],
+      muscles:"腹內外斜肌、豎脊肌、多裂肌。穩定肌：肩帶穩定肌群。",
+      sequence:"1. Inhale: 側躺，雙膝彎曲，雙臂向前伸直疊放。\\n2. Exhale: 保持骨盆與下肢不動，上方手臂與胸椎向後旋轉打開，視線隨手移動。\\n3. Inhale: 在最大旋轉位停留拉伸，吸氣入胸廓。\\n4. Exhale: 利用斜肌收縮帶領手臂與胸椎回到側躺起始位。"},
+
+    {modality:"Matwork (墊上)", category:"暖身系列", categoryEn:"Warm-up & Principles", name_tw:"貓背伸展", name_en:"Cat Stretch", level:"essential", springs:"無彈簧 (墊上)",
+      goal:"訓練脊椎屈曲與伸展的分節活動度，建立四足跪姿下的核心控制。",
+      keypoints:["拱背需由尾椎至頸椎逐節進行","拱背最高點停留延伸背部","釋放回中立時同樣逐節進行","肩胛骨全程穩定不聳肩"],
+      muscles:"腹直肌、斜肌（屈曲脊椎）；豎脊肌、多裂肌（伸展脊椎）；前鋸肌與下斜方肌（穩定肩胛）。",
+      sequence:"1. Inhale: 四足跪姿，脊椎與骨盆維持中立位。\\n2. Exhale: 收縮腹肌使骨盆後傾，脊椎呈C曲線由尾椎至胸頸椎向上拱起。\\n3. Inhale: 在拱背最高點停留，拉長背部。\\n4. Exhale: 由尾椎開始逐節釋放回到中立位，並可微幅抬頭伸展胸椎。"},
+
+    {modality:"Matwork (墊上)", category:"暖身系列", categoryEn:"Warm-up & Principles", name_tw:"頭頸點頭", name_en:"Head Nods", level:"essential", springs:"無彈簧 (墊上)",
+      goal:"建立頸椎深層屈肌的正確徵召模式，作為所有墊上動作頭頸對線的基礎練習。",
+      keypoints:["點頭幅度小而精準，避免用力壓下巴","頭頂延伸，避免頸部後仰或聳肩","全程頭部貼地、頸椎中立"],
+      muscles:"頭前直肌、頸長肌。穩定肌：肩胛與胸椎穩定肌群。",
+      sequence:"1. Inhale: 仰臥中立位，吸氣時輕柔點頭，拉長頸椎後側，視線微向下移。\\n2. Exhale: 吐氣還原至頸椎中立對線，避免下巴過度抬高或過度擠壓喉嚨。"},
+
+    {modality:"Matwork (墊上)", category:"暖身系列", categoryEn:"Warm-up & Principles", name_tw:"髖部釋放", name_en:"Hip Release", level:"essential", springs:"無彈簧 (墊上)",
+      goal:"訓練髖關節外旋活動度，同時維持骨盆水平穩定不代償。",
+      keypoints:["外旋腿伸展時骨盆保持中立不晃動","收回時內旋動作平順不甩動","全程感受深層髖外旋肌群發力"],
+      muscles:"髂腰肌、深層髖外旋肌、臀中肌。穩定肌：腹橫肌以維持骨盆水平。",
+      sequence:"1. Inhale: 仰臥，單膝彎曲，另一腿向外旋轉並沿地面伸直。\\n2. Exhale: 內旋大腿並將膝蓋彎曲收回起始位。骨盆保持中立不晃動。"},
+
+    {modality:"Matwork (墊上)", category:"進階墊上核心", categoryEn:"Advanced Matwork Core", name_tw:"迴力鏢", name_en:"Boomerang (Advanced Matwork)", level:"advanced", springs:"無 (墊上動作)",
+      goal:"高階核心整合動作，串連後滾、神仙起與側屈於一連貫流動之中。",
+      keypoints:["雙腿交叉換腳需在空中俐落完成","Teaser 平衡位需維持軀幹穩定","雙手背後相扣時胸廓持續拉長","側屈與繞手動作流暢銜接不中斷"],
+      muscles:"腹直肌、腹斜肌、髂腰肌、內收肌群。穩定肌：肩胛穩定肌群、多裂肌。",
+      sequence:"1. Inhale: 坐姿直立，雙腳交叉，雙手置於體側。身體後滾（Roll Over）至雙腿平行地面，在上方交叉換腳。\n2. Exhale: 保持雙腿交叉，受控向前滾起，過渡到 Teaser (神仙起) 坐骨平衡位，雙臂向兩側及後方伸展。\n3. Inhale: 在 Teaser 位置，雙手在背後相扣，拉長胸廓，雙腿維持懸空。\n4. Exhale: 雙腿緩緩降下貼地，上半身向前順勢側屈（Spine Stretch），雙臂從後方解開繞回前方。"},
+
+    {modality:"Matwork (墊上)", category:"進階墊上核心", categoryEn:"Advanced Matwork Core", name_tw:"墊上搖擺", name_en:"Rocking (Advanced Matwork)", level:"advanced", springs:"無 (墊上動作)",
+      goal:"對抗重力的全身後側伸展動作，訓練後側鏈力量與動態平衡控制。",
+      keypoints:["弓形姿勢全程保持不塌陷","前後滾動由呼吸節奏帶動，非甩動","雙手緊握腳踝維持穩定連結","結束時受控停止不可放鬆墜落"],
+      muscles:"豎脊肌、臀大肌、腿後腱、股四頭肌。對抗重力的全身後側伸展。",
+      sequence:"1. Inhale: 俯臥，雙膝彎曲，雙手向後握住腳踝，胸椎微伸展預備。\n2. Exhale: 雙腳向後往上踢，胸骨抬起，帶動身體呈完整的弓形（Bow Shape）。\n3. Inhale: 利用呼吸起伏，將身體向前滾動（重心移至胸骨）。\n4. Exhale: 順勢向後滾動（重心移至大腿/恥骨），維持身體不塌陷。\n5. Inhale/Exhale: 持續滾動 5 次，最後吸氣停在正中，吐氣受控釋放回原位。"},
+
+    {modality:"Matwork (墊上)", category:"進階墊上核心", categoryEn:"Advanced Matwork Core", name_tw:"控制平衡", name_en:"Control Balance (Advanced Matwork)", level:"advanced", springs:"無 (墊上動作)",
+      goal:"高階核心與柔軟度整合動作，訓練單腿倒立姿勢下的穩定控制。",
+      keypoints:["重心穩定落在肩膀與上背，勿壓迫頸椎","垂直腿下放速度全程受控","雙手握踝提供穩定支點","交替換腿時骨盆維持穩定不晃"],
+      muscles:"腹肌（屈曲穩定）、臀大肌、腿後肌（伸展與抬高）。穩定肌：頸部與上背部、肱三頭肌。",
+      sequence:"1. Inhale: 仰臥，雙腿向上向後捲起（Roll Over）至雙腳尖碰地，雙手向後握住一側腳踝。\n2. Exhale: 保持一腳尖在地面，利用臀肌發力將另一腿垂直朝天花板延伸（單腿倒立）。\n3. Inhale: 在頂端拉長雙腿，維持重心在肩膀與上背（絕不壓迫頸椎）。\n4. Exhale: 垂直的腿緩步放下輕觸地面，雙手握住其腳踝，將另一腿垂直高舉，交替進行。"},
+
+    {modality:"Matwork (墊上)", category:"進階墊上核心", categoryEn:"Advanced Matwork Core", name_tw:"雙腿踢", name_en:"Double Leg Kick (Advanced Matwork)", level:"advanced", springs:"無 (墊上動作)",
+      goal:"訓練俯臥姿勢下的後側鏈力量與胸椎伸展的動態整合。",
+      keypoints:["踢腿動作快而俐落，髖部不上抬代償","伸展時雙手後拉帶動胸椎確實伸展","頭部左右交替需與動作節奏配合","下背避免過度伸展造成擠壓"],
+      muscles:"豎脊肌、臀大肌、腿後肌、背闊肌、菱形肌（雙手後拉）。",
+      sequence:"1. Inhale: 俯臥，頭偏向一側，雙手十指交扣疊在後背，雙腿併攏。\n2. Exhale: 雙膝彎曲，腳跟向臀部快速連續彈動點擊三次（Kicks），啟動後腿肌。\n3. Inhale: 雙腿向後伸直，雙手手掌朝大腿方向往後拉，帶動整個胸椎、腰椎高度伸展（Arch），視線看前方。\n4. Exhale: 上半身放平，頭偏向另一側，雙手放回後背，重復點擊動作。"},
+
+    {modality:"Matwork (墊上)", category:"進階墊上核心", categoryEn:"Advanced Matwork Core", name_tw:"海游式", name_en:"Swimming (Advanced Matwork)", level:"advanced", springs:"無 (墊上動作)",
+      goal:"訓練對角線鏈的耐力與協調性，強化脊椎伸展下的動態穩定。",
+      keypoints:["對角手腳需同時抬起、高度一致","交替節奏流暢如游泳，不可卡頓","核心持續收緊保護腰椎","呼吸節奏需與動作同步"],
+      muscles:"豎脊肌、多裂肌、臀大肌、後三角肌、背闊肌。訓練對角線鏈對位與耐力。",
+      sequence:"1. Inhale: 俯臥，雙手與雙腳朝前後對角線拉長呈中立位預備。\n2. Exhale: 啟動腹肌支撐，將右手與左腿同時高高抬起，胸椎微伸展離地。\n3. Inhale: 快速交替換側（左手與右腿抬起），呼吸維持**吸氣 5 拍，吐氣 5 拍**，動作流暢如水中游泳不間斷。\n4. Exhale: 雙手雙腳合攏放平，還原貼地。"},
+
+    /* ---------------- Cadillac 凱迪拉克 ---------------- */
+    {modality:"Cadillac (凱迪拉克)", category:"下卷木桿系列", categoryEn:"Roll-Down Bar Series", name_tw:"後卷加背部伸展準備", name_en:"Roll-Down with Back Extension Prep", level:"intermediate", springs:"2 藍/黃彈簧 (Roll-down Bar)",
+      goal:"在後捲脊椎的基礎上加入背部伸展，訓練腹肌控制與豎脊肌群力量的銜接轉換。",
+      keypoints:["後捲需逐節、避免整段脊椎一次躺平","伸展階段肋骨貼地、視線朝斜前方","伸展幅度以舒適胸椎伸展為主，勿硬壓腰椎","起坐時腹肌主導、逐節捲起"],
+      muscles:"腹肌（後捲控制）；豎脊肌、多裂肌（上背伸展）。",
+      sequence:"1. Inhale: 坐直預備。\\n2. Exhale: 逐節後捲躺下，直至背部完全貼平床面。\\n3. Inhale: 雙臂微屈，帶動胸椎與上背部向上抬起伸展，視線朝向斜前方（肋骨貼地）。\\n4. Exhale: 釋放伸展回復平躺，隨後逐節捲起坐直。"},
+
+    {modality:"Cadillac (凱迪拉克)", category:"下卷木桿系列", categoryEn:"Roll-Down Bar Series", name_tw:"後卷脊椎", name_en:"Roll-Down", level:"essential", springs:"2 藍/黃彈簧 (掛高位/Roll-down Bar)",
+      goal:"訓練腹肌對抗彈簧阻力，逐節控制脊椎捲下與捲起的分節能力。",
+      keypoints:["下躺過程脊椎逐節、避免快速倒下","躺平時肩胛骨放鬆貼床","起坐由頭頸椎啟動，腹肌強力收縮帶動"],
+      muscles:"腹直肌、腹內外斜肌（向心屈曲與離心控制）、脊椎分節。穩定肌：深層骨盆底肌。",
+      sequence:"1. Inhale: 面對 Roll-down Bar 坐直，雙腳抵住立柱，雙手握桿預備。\\n2. Exhale: 腹肌收縮，骨盆後傾，由尾椎至胸椎、頸椎一節節平平地鋪回床面。\\n3. Inhale: 躺平在床面上，肩胛保持平貼放鬆。\\n4. Exhale: 點頭，雙手抓握木桿，利用腹肌強力收縮，由頭、胸椎至骨盆逐節捲脊起坐還原。"},
+
+    {modality:"Cadillac (凱迪拉克)", category:"下卷木桿系列", categoryEn:"Roll-Down Bar Series", name_tw:"側彎", name_en:"Side Bend", level:"intermediate", springs:"雙黃彈簧 (高位掛鉤)",
+      goal:"訓練體側肌群的側屈拉伸力量，強化腰方肌與腹斜肌的控制。",
+      keypoints:["下壓與側屈同時進行，感受體側延展","停留時維持呼吸順暢，不憋氣","回放時速度受控，不可鬆脫彈回"],
+      muscles:"腰方肌、腹斜肌、體側鏈肌群",
+      sequence:"1. Inhale: 側臥於凱迪拉克面，單手拉木桿延伸預備。\n2. Exhale: 側邊下壓，同時體側向上拱起（側屈），拉長體側肌肉。\n3. Inhale: 停留拉長。\n4. Exhale: 受控回放還原。"},
+
+    {modality:"Cadillac (凱迪拉克)", category:"下卷木桿系列", categoryEn:"Roll-Down Bar Series", name_tw:"引頸前伸", name_en:"Neck Pull", level:"intermediate", springs:"雙黃彈簧 (高位掛鉤)",
+      goal:"訓練腹肌抵抗阻力進行脊椎前屈拉伸，強化極限脊椎分節控制。",
+      keypoints:["前屈時頭朝膝蓋方向延伸，避免聳肩","脊椎拉長挺直後才回到坐姿","下躺時全程受控，勿被彈簧拉扯甩回"],
+      muscles:"腹肌、頸部深層屈肌。極限脊椎分節拉伸",
+      sequence:"1. Inhale: 仰臥，手握木桿，微點頭準備。\n2. Exhale: 腹肌收縮，抵抗木桿阻力一節節捲起，前屈拉長脊椎（頭朝膝蓋方向）。\n3. Inhale: 脊椎拉長挺直回到直立坐姿。\n4. Exhale: 受控逐節捲下躺回。"},
+
+    {modality:"Cadillac (凱迪拉克)", category:"下卷木桿系列", categoryEn:"Roll-Down Bar Series", name_tw:"有節奏的扭轉", name_en:"Twist with Pulses", level:"intermediate", springs:"雙黃彈簧 (高位掛鉤)",
+      goal:"訓練脊椎旋轉搭配節奏性下壓的動態穩定控制力。",
+      keypoints:["旋轉需由胸椎啟動，骨盆盡量穩定","下壓震動幅度小而穩定，非大幅甩動","回正速度平順，不可猛然轉回"],
+      muscles:"腹斜肌、多裂肌、脊椎旋轉穩定肌",
+      sequence:"1. Inhale: 坐直面對木桿。吸氣一側扭轉脊椎。\n2. Exhale: 雙手下拉木桿，在旋轉位下壓做三次輕微震動（Pulse）。\n3. Inhale: 回正還原坐直。"},
+
+    {modality:"Cadillac (凱迪拉克)", category:"下卷木桿系列", categoryEn:"Roll-Down Bar Series", name_tw:"飛翔動作準備", name_en:"Airplane Prep", level:"intermediate", springs:"雙黃彈簧 (高位掛鉤)",
+      goal:"訓練肩帶穩定肌群與後側鏈力量，在橋式姿勢下強化背部伸展控制。",
+      keypoints:["橋式抬升時脊椎維持一條斜線","下壓木桿時肩胛骨穩定不聳肩","降下臀部時速度全程受控"],
+      muscles:"肩帶穩定肌、後三角肌、肱三頭肌、臀肌、腿後腱",
+      sequence:"1. Inhale: 仰臥準備，雙腳踩立柱。\n2. Exhale: 雙手拉木桿下壓至大腿側，骨盆同時抬升呈橋式，脊椎維持一條斜線。\n3. Inhale: 在上方停留維持。\n4. Exhale: 受控降下臀部回起始位。"},
+
+    {modality:"Cadillac (凱迪拉克)", category:"下卷木桿系列", categoryEn:"Roll-Down Bar Series", name_tw:"站姿肱三頭肌下壓", name_en:"Triceps Press Standing", level:"both", springs:"雙黃彈簧 (高位掛鉤)",
+      goal:"站姿孤立訓練肱三頭肌力量，強化手肘伸展的控制能力。",
+      keypoints:["手肘全程貼緊肋骨，不外開","下壓與回彎速度一致、不可甩動","肩胛骨保持穩定不隨手臂晃動"],
+      muscles:"肱三頭肌、肘伸肌群、肩胛穩定肌",
+      sequence:"1. Inhale: 站姿握桿，手肘彎曲 90 度呈夾肘姿勢預備。\n2. Exhale: 保持手肘貼緊肋骨，向下壓直木桿（三頭肌收縮）。\n3. Inhale: 手肘緩緩彎曲，受控還原至 90 度。"},
+
+    {modality:"Cadillac (凱迪拉克)", category:"下卷木桿系列", categoryEn:"Roll-Down Bar Series", name_tw:"站姿肩背肌下壓", name_en:"Lat Press Standing", level:"essential", springs:"雙黃彈簧 (高位掛鉤)",
+      goal:"站姿孤立訓練背闊肌與肩胛下壓肌群，改善上肢推拉的力量基礎。",
+      keypoints:["下壓全程手臂維持直臂","肩胛骨主動下沉，避免聳肩代償","回放時離心控制，不可讓木桿彈起"],
+      muscles:"背闊肌、大圓肌、下斜方肌、肩胛下壓穩定肌",
+      sequence:"1. Inhale: 站姿面對木桿，直臂握桿預備。\n2. Exhale: 保持肩帶穩定，雙手直臂向下壓至大腿前側，不聳肩。\n3. Inhale: 離心受控回放木桿至前方高度。"},
+
+    {modality:"Cadillac (凱迪拉克)", category:"推下桿系列", categoryEn:"Push-Thru Bar Series", name_tw:"天鵝潛水", name_en:"Swan Dive", level:"intermediate", springs:"單紅或單黃彈簧 (加安全鏈)",
+      goal:"訓練俯臥胸椎伸展力量，強化豎脊肌群與後側鏈的控制能力。",
+      keypoints:["伸展時頭頂向遠方延伸，避免頸椎過度後仰","核心持續收緊，避免腰椎過度代償","下降回位時全程受控，不可放鬆墜落"],
+      muscles:"脊椎伸展肌、臀肌、腿後腱、肩胛下壓肌群",
+      sequence:"1. Inhale: 俯臥趴在床面，手撐推下桿。吸氣時將胸骨朝前朝上抬起，胸椎與腰椎大範圍伸展。\n2. Exhale: 核心收緊維持穩定，雙手肘受控微屈降回俯臥位。"},
+
+    {modality:"Cadillac (凱迪拉克)", category:"推下桿系列", categoryEn:"Push-Thru Bar Series", name_tw:"起坐複合練習", name_en:"Teaser Series", level:"intermediate", springs:"單紅彈簧 (加安全鏈)",
+      goal:"極限核心穩定與平衡動作，訓練腹肌與髖屈肌協調控制 V 字姿勢。",
+      keypoints:["捲起時脊椎逐節堆疊，非一次彈起","V 字頂端維持雙腿與軀幹穩定","手臂屈伸幅度小而穩定，不影響平衡","下降回位速度與捲起時一致"],
+      muscles:"腹肌、髂腰肌、股四頭肌。極限核心穩定與平衡",
+      sequence:"1. Inhale: 雙手握推下桿，雙腳呈斜對角線 Tabletop 準備。\n2. Exhale: 一節節捲脊向上，雙腿同時向上伸直呈 \"V\" 字，手將推下桿向上推直。\n3. Inhale: 保持 V 字平衡，雙手臂輕微上下屈伸。\n4. Exhale: 受控將脊椎與腿部逐節放回床面。"},
+
+    {modality:"Cadillac (凱迪拉克)", category:"推下桿系列", categoryEn:"Push-Thru Bar Series", name_tw:"仰臥推拉加卷曲上提", name_en:"Push-Thru on Back with Roll Up", level:"essential", springs:"單紅彈簧 (加安全鏈)",
+      goal:"訓練腹肌向心收縮帶動脊椎捲離床面的分節控制力。",
+      keypoints:["捲起僅到能維持控制的高度，勿勉強","停留時腹肌持續向內收緊","下降時脊椎逐節鋪回，不可放鬆墜落"],
+      muscles:"腹直肌、腹斜肌、脊椎分節控制",
+      sequence:"1. Inhale: 微點頭準備。\n2. Exhale: 雙手壓推下桿，腹肌收縮，帶動頭、頸、胸椎一節節捲離床面，將推下桿向前推開。\n3. Inhale: 在最遠處停留，腹肌往內連結。\n4. Exhale: 保持控制，逐節躺回平躺位。"},
+
+    {modality:"Cadillac (凱迪拉克)", category:"推下桿系列", categoryEn:"Push-Thru Bar Series", name_tw:"仰臥推拉", name_en:"Push-Thru on Back", level:"essential", springs:"1 藍/黃彈簧 (由上方掛 Push-thru Bar)",
+      goal:"訓練肩帶穩定肌群在推拉動作下的協調控制，強化胸椎伸展能力。",
+      keypoints:["拉回時肩胛骨全程貼床，不可聳起","推直時延伸脊椎後側，勿鎖死手肘","動作節奏平穩，勿甩動彈簧"],
+      muscles:"前鋸肌、大胸肌、下斜方肌（肩胛穩定與推拉控制）、腹肌（抗伸展）。",
+      sequence:"1. Inhale: 仰臥，雙臂在胸前伸直推住 Push-thru Bar 預備。\\n2. Exhale: 雙手彎曲手肘，將推下桿向下拉至胸前，維持肩胛骨平貼床面。\\n3. Inhale: 將推下桿再次向前上方推直伸展，拉長脊椎後側。"},
+
+    {modality:"Cadillac (凱迪拉克)", category:"推下桿系列", categoryEn:"Push-Thru Bar Series", name_tw:"旋轉美人魚姿", name_en:"Mermaid with Rotation", level:"essential", springs:"單紅或單黃彈簧 (加安全鏈)",
+      goal:"側向旋轉伸展動作，訓練腰方肌與胸背部旋轉拉伸的協調控制。",
+      keypoints:["旋轉時骨盆盡量維持穩定不跟著轉","下壓推開時感受中上背部拉伸","回正起身時由核心帶動，非手臂硬拉"],
+      muscles:"腰方肌、腹斜肌、多裂肌、體側肌群與旋轉肌",
+      sequence:"1. Inhale: 美人魚坐姿，一手推推下桿側屈延伸。\n2. Exhale: 將軀幹向床面旋轉 90 度，雙手按在推下桿上，下壓推開，拉伸中上背部。\n3. Inhale: 在旋轉拉伸位吸氣充氣。\n4. Exhale: 扭轉回正，起脊還原直立座姿。"},
+
+    {modality:"Cadillac (凱迪拉克)", category:"推下桿系列", categoryEn:"Push-Thru Bar Series", name_tw:"斷頭台", name_en:"Guillotine", level:"intermediate", springs:"雙黃彈簧 (下方掛鉤)",
+      goal:"訓練下肢伸展力量，同時考驗骨盆與髖關節在推蹬動作下的中立穩定。",
+      keypoints:["蹬起時骨盆全程維持中立不晃動","髖膝伸直方向一致，避免膝內夾","回收時速度放慢，感受離心控制"],
+      muscles:"大腿後側、臀肌、腹橫肌。要求極佳之骨盆與髖關節中立穩定",
+      sequence:"1. Inhale: 仰臥在推桿下方，雙腳掌踩在推下桿上預備。\n2. Exhale: 將推下桿筆直往上方蹬起（髖關節與膝關節伸直），維持骨盆中立不晃動。\n3. Inhale: 控制阻力緩緩彎曲膝蓋回收。"},
+
+    {modality:"Cadillac (凱迪拉克)", category:"推下桿系列", categoryEn:"Push-Thru Bar Series", name_tw:"猴姿", name_en:"Monkey", level:"intermediate", springs:"單藍或單紅彈簧 (下方掛鉤)",
+      goal:"訓練腿後肌群的極限拉伸能力，同時整合核心屈曲控制。",
+      keypoints:["頂起時感受大腿後側深度拉長","脊椎屈曲離床需由腹肌主導","回收時膝蓋彎曲速度受控，不可鬆脫"],
+      muscles:"腿後肌群（極度拉伸）、腹肌、手腳對角對線力學",
+      sequence:"1. Inhale: 仰臥，雙腳掌抵住推下桿（手握推下桿兩側）。\n2. Exhale: 伸展膝關節，將推下桿朝天花板垂直頂起，大腿後側極限拉長，脊椎屈曲離床。\n3. Inhale: 頂端停留伸展。\n4. Exhale: 彎曲膝蓋，受控將滑車/推桿降回床面。"},
+
+    {modality:"Cadillac (凱迪拉克)", category:"推下桿系列", categoryEn:"Push-Thru Bar Series", name_tw:"貓背準備動作", name_en:"Cat Prep", level:"essential", springs:"1 藍/黃彈簧 (由上方掛)",
+      goal:"跪姿脊椎屈曲練習，訓練分節活動度並強化肩胛動態穩定。",
+      keypoints:["拱背由尾椎至頸椎逐節進行","拱背最高點停留延伸背部","還原時脊椎逐節回到中立平直位","前鋸肌全程穩定支撐肩胛骨"],
+      muscles:"腹肌、豎脊肌、菱形肌、前鋸肌（肩胛動態穩定）。脊椎分節靈活度。",
+      sequence:"1. Inhale: 跪在床上，雙手向前握住 Push-thru Bar，脊椎平直對線。\\n2. Exhale: 收腹、弓背呈 C 曲線，雙手將推下桿向下壓，脊椎拱起拉伸。\\n3. Inhale: 維持脊椎拱起高度，推開推桿。\\n4. Exhale: 脊椎逐節由尾椎延伸至中立平直位，還原起始姿勢。"},
+
+    {modality:"Cadillac (凱迪拉克)", category:"毛絨掛帶系列", categoryEn:"Fuzzy Straps Series", name_tw:"半懸掛姿勢", name_en:"Half Hang", level:"intermediate", springs:"2 懸掛毛絨帶 (Fuzzy Straps)",
+      goal:"高強度核心懸空動作，訓練抗重力平衡與大腿內收肌群的控制力。",
+      keypoints:["抬離床面時逐節進行，避免猛然抬起","懸空挺直位臀肌需持續夾緊","下降還原時全程受控、緩慢進行"],
+      muscles:"大腿內收肌群、腹直肌、豎脊肌。要求極佳之抗重力平衡力與核心懸空控制力。",
+      sequence:"1. Inhale: 仰臥，雙腳套入懸放的毛絨掛帶（Fuzzy Straps），雙手握住後立柱預備。\\n2. Exhale: 核心強力收縮，將骨盆與脊椎一節節抬離床面懸空，至僅有肩背部支撐，臀肌夾緊。\\n3. Inhale: 在懸空挺直位維持，拉長身體對線。\\n4. Exhale: 控制核心，將脊椎緩緩一節節鋪回床面上還原。"},
+
+    {modality:"Cadillac (凱迪拉克)", category:"毛絨掛帶系列", categoryEn:"Fuzzy Straps Series", name_tw:"完全懸掛姿勢", name_en:"Full Hang", level:"intermediate", springs:"無",
+      goal:"極限抗重力懸吊動作，訓練全身核心穩定與身體柔韌度的整合能力。",
+      keypoints:["上拉時利用後側鏈力量，避免單靠手臂","頂端停留時身體維持一直線對線","下降速度全程受控，不可自由落下"],
+      muscles:"全身核心穩定、背伸肌群、要求極高之身體柔韌度與抗重力力量",
+      sequence:"1. Inhale: 身體完全倒掛（雙腳穩固勾住毛絨帶，雙手抓緊橫桿或放開）。\n2. Exhale: 核心內收，利用後側鏈向上拉起胸背，使上半身平行於地面，呈一條完美對線。\n3. Inhale: 在頂端伸展位停留。\n4. Exhale: 緩緩將身體降回完全垂吊狀態。"},
+
+    {modality:"Cadillac (凱迪拉克)", category:"秋千系列", categoryEn:"Trapeze", name_tw:"上拉動作", name_en:"Pull Up", level:"intermediate", springs:"雙黃或雙紅彈簧",
+      goal:"訓練背闊肌與肱二頭肌力量，整合核心穩定完成引體向上動作。",
+      keypoints:["拉起時脊椎維持中立不晃動","頂端停留感受背部肌群收縮","下降速度受控，不可讓身體自由墜落"],
+      muscles:"背闊肌、肱二頭肌、下斜方肌、核心穩定",
+      sequence:"1. Inhale: 雙腳踩在秋千帶上，雙手抓緊高位橫桿，身體呈懸空 Planking。\n2. Exhale: 背肌與二頭肌收縮，將身體垂直向上拉（引體向上），維持脊椎中立。\n3. Inhale: 頂端停留。\n4. Exhale: 控制身體緩慢下降至直臂懸掛。"},
+
+    {modality:"Cadillac (凱迪拉克)", category:"秋千系列", categoryEn:"Trapeze", name_tw:"展翅雄鷹", name_en:"Spread Eagle", level:"intermediate", springs:"無",
+      goal:"大範圍後側鏈伸展動作，訓練胸大肌延展與核心抗塌腰控制。",
+      keypoints:["伸展弧度以脊椎舒適伸展為限","回正時核心啟動帶回中立位","全程身體不晃動、保持穩定連結"],
+      muscles:"全後側鏈大範圍伸展、胸大肌、腹橫肌（支撐不塌腰）",
+      sequence:"1. Inhale: 站在立柱旁，雙手握高桿，雙腳踩在秋千帶上，骨盆向前挺出，脊椎呈大懸空弧形伸展。\n2. Exhale: 核心連結，將骨盆與脊椎帶回平行中立位，控制身體不晃動。"},
+
+    {modality:"Cadillac (凱迪拉克)", category:"秋千系列", categoryEn:"Trapeze", name_tw:"芭蕾伸展站姿", name_en:"Ballet Stretches Standing", level:"intermediate", springs:"無 (使用秋千帶)",
+      goal:"站姿高位腿後腱伸展，同時挑戰單腳直立平衡能力。",
+      keypoints:["前屈折疊由髖關節啟動，非彎腰硬壓","支撐腳穩定站立、膝蓋不鎖死","起身還原時脊椎逐節堆疊"],
+      muscles:"腿後腱、內收肌群（站姿高位拉伸）、考驗單腳直立平衡",
+      sequence:"1. Inhale: 站立，一腳高放於秋千架上。\n2. Exhale: 脊椎拉長向前屈曲折疊，雙手去抓高位鐵桿，拉長後側鏈。\n3. Inhale: 停留拉長。\n4. Exhale: 起脊還原立直。"},
+
+    {modality:"Cadillac (凱迪拉克)", category:"秋千系列", categoryEn:"Trapeze", name_tw:"芭蕾伸展跪姿", name_en:"Ballet Stretches Kneeling", level:"essential", springs:"無 (使用秋千帶)",
+      goal:"跪姿腿後腱伸展動作，強化骨盆水平穩定下的柔軟度訓練。",
+      keypoints:["前傾角度依伸展感受調整，勿過度勉強","骨盆全程維持水平，不隨伸展歪斜","呼吸配合停留，感受後側肌群放鬆延展"],
+      muscles:"大腿後側（腿後腱）拉伸、髂腰肌拉伸、骨盆穩定",
+      sequence:"1. Inhale: 一膝跪地，另一腳跟抵住秋千帶（Safety strap已扣）。\n2. Exhale: 骨盆保持水平中立，向前向下微傾，拉伸大腿後側。\n3. Inhale: 在拉伸位深呼吸吸入後背。\n4. Exhale: 受控收回中立位。"},
+
+    {modality:"Cadillac (凱迪拉克)", category:"腿用彈簧系列", categoryEn:"Leg Springs Series", name_tw:"凱迪拉克雙腿屈伸", name_en:"Bend & Stretch", level:"essential", springs:"2 綠/紅腿用彈簧 (套腳踝套)",
+      goal:"訓練臀部與腿後肌群的向心伸展力量，同時維持骨盆中立穩定。",
+      keypoints:["伸直時腳跟互壓對齊，方向一致","骨盆全程維持中立，不隨動作晃動","回收速度受控，感受離心控制"],
+      muscles:"臀大肌、腿後肌群（向心伸展）、股四頭肌。等長腹橫肌收縮維持中立骨盆。",
+      sequence:"1. Inhale: 仰臥，雙腳套上腿用彈簧，雙膝彎曲呈 90 度，骨盆維持中立位。\\n2. Exhale: 啟動臀部與大腿後側力量，雙腿向斜對角線伸直延伸，腳跟互壓對齊。\\n3. Inhale: 控制彈簧阻力，緩緩彎曲膝蓋收回至 90 度桌面位。"},
+
+    {modality:"Cadillac (凱迪拉克)", category:"腿用彈簧系列", categoryEn:"Leg Springs Series", name_tw:"短脊椎", name_en:"Short Spine", level:"intermediate", springs:"雙黃或雙綠彈簧",
+      goal:"進階脊椎分節流動動作，訓練核心力量與臀部肌群協調控制。",
+      keypoints:["捲離床面時核心主導、非借力甩起","頂端彎曲膝蓋角度左右對稱","滾動貼回時脊椎逐節進行，不可一次躺平"],
+      muscles:"腹肌、臀肌、腿後腱。脊椎分節流動與控制",
+      sequence:"1. Inhale: 雙腿斜角 45 度準備。\n2. Exhale: 雙腿向上，核心發力將臀部與下脊椎捲離床面（雙腳向上高抬）。\n3. Inhale: 在頂端彎曲膝蓋（呈外旋青蛙腿）。\n4. Exhale: 保持雙腳高度，將脊椎一節節滾動平貼回床面。"},
+
+    {modality:"Cadillac (凱迪拉克)", category:"腿用彈簧系列", categoryEn:"Leg Springs Series", name_tw:"大腿畫弧", name_en:"Circles", level:"essential", springs:"雙黃彈簧 (腳用)",
+      goal:"訓練髖關節外旋與內收外展肌群的協調控制力，改善下肢活動度。",
+      keypoints:["畫圈路徑需圓順，避免忽快忽慢","併攏拉回時內收肌群主導發力","骨盆全程穩定，不隨畫圈晃動"],
+      muscles:"髖關節外旋肌、內收/外展肌群、深層骨盆穩定肌",
+      sequence:"1. Inhale: 雙腿伸直，腳踩彈簧，吸氣向上並向兩側劃圈打開的一半。\n2. Exhale: 雙腿用力併攏向下拉回至對角線起始位（畫圈完成）。"},
+
+    {modality:"Cadillac (凱迪拉克)", category:"腿用彈簧系列", categoryEn:"Leg Springs Series", name_tw:"走步", name_en:"Walks", level:"essential", springs:"雙黃彈簧 (腳用)",
+      goal:"訓練髖屈肌與臀大肌交替離心與向心控制的協調節奏。",
+      keypoints:["交替下壓節奏需與呼吸同步","骨盆全程穩定不晃動","雙腿角度左右對稱，避免代償"],
+      muscles:"髂腰肌、股直肌、臀大肌（交替單側離心與向心控制）",
+      sequence:"1. Loop: 雙腿伸直呈 45 度，以一上一下、如走路般的剪刀腳交替下壓，保持一呼一吸的穩定節奏（防止骨盆晃動）。"},
+
+    {modality:"Cadillac (凱迪拉克)", category:"臂用彈簧系列", categoryEn:"Arm Springs Series", name_tw:"中背部系列", name_en:"Midback Series", level:"essential", springs:"雙黃彈簧 (中高掛鉤)",
+      goal:"強化背闊肌與肩胛穩定肌群力量，改善划船與上肢推拉動作的力量基礎。",
+      keypoints:["下壓過程肩胛骨下沉內收，避免聳肩","核心維持穩定，勿以腰部代償出力","離心回升時全程控制速度，不讓彈簧拉回"],
+      muscles:"背闊肌、大圓肌、下斜方肌、肱三頭肌、深層核心",
+      sequence:"1. Inhale: 仰臥桌面位，直臂握手柄指向天花板。\n2. Exhale: 啟動背部力量，直臂向下拉至床面（直臂下壓）。\n3. Inhale: 緩慢釋放張力，手回升至天花板方向。"},
+
+    {modality:"Cadillac (凱迪拉克)", category:"臂用彈簧系列", categoryEn:"Arm Springs Series", name_tw:"仰臥二頭肌彎舉", name_en:"Biceps Curls Supine", level:"essential", springs:"雙黃彈簧 (手用，中低掛鉤)",
+      goal:"訓練肱二頭肌向心收縮力量，同時維持肩胛穩定不代償。",
+      keypoints:["手肘全程夾緊身體兩側，不外張","彎舉速度平穩，避免借力甩動","離心伸直時感受手臂持續張力"],
+      muscles:"肱二頭肌、肘屈肌群、前三角肌。穩定肌：肩胛下壓肌、腹肌",
+      sequence:"1. Inhale: 仰臥，雙手握住臂用彈簧把手，雙膝桌面位。\n2. Exhale: 夾手肘，彎曲肘關節將拉手拉向肩膀（二頭肌向心收縮）。\n3. Inhale: 離心受控，緩緩伸直手臂還原。"},
+
+    {modality:"Cadillac (凱迪拉克)", category:"臂用彈簧系列", categoryEn:"Arm Springs Series", name_tw:"雪地天使", name_en:"Snow Angels", level:"essential", springs:"雙黃彈簧",
+      goal:"訓練肩部外展內收肌群協調控制，同時強化肋骨穩定不外翻。",
+      keypoints:["畫圓路徑需對稱、速度一致","背部與肋骨全程平貼床面","回升過頭時避免聳肩代償"],
+      muscles:"肩外展/內收肌、下斜方肌、前鋸肌、腹直肌（穩定肋骨不外翻）",
+      sequence:"1. Inhale: 仰臥，雙手臂微張開成 45 度。\n2. Exhale: 雙臂往下滑動畫大圓圈拉至大腿旁，保持背部與肋骨平貼床面。\n3. Inhale: 順著彈簧阻力慢速畫圓回升過頭（不聳肩）。"},
+
+    {modality:"Cadillac (凱迪拉克)", category:"秋千與懸掛系列", categoryEn:"Advanced Trapeze Series", name_tw:"懸掛上拉", name_en:"Hanging Pull Up (Advanced Cadillac)", level:"advanced", springs:"秋千吊腳套 (Trapeze with Leg Springs)",
+      goal:"超高強度上肢與核心整合動作，訓練背闊肌群與臀肌協同發力完成引體向上。",
+      keypoints:["拉起時胸口確實朝立柱方向靠近","頂端停留感受背部肌群強烈收縮","下降速度全程受控，身體維持懸空平板對線"],
+      muscles:"肱二頭肌、背闊肌、大圓肌、中下斜方肌、臀肌。超高強度上肢與核心整合。",
+      sequence:"1. Inhale: 仰臥，雙腳穿入秋千吊帶中（高度懸空），雙手握住床頭兩側立柱垂直上端。\n2. Exhale: 背部與雙臂發力，執行向上引體向上（Pull Up），將胸口拉向立柱，身體呈懸空平板對線。\n3. Inhale: 在頂端停留，感受背部肌群強烈收縮與臀肌支撐。\n4. Exhale: 手臂受控伸直，將身體緩緩放回懸空仰臥位。"},
+
+    /* ---------------- Stability Chair 萬能穩定椅 ---------------- */
+    {modality:"Stability Chair (萬能穩定椅)", category:"下肢動作系列", categoryEn:"Leg Work Series", name_tw:"側上步", name_en:"Side Step Up", level:"intermediate", springs:"1 綠 (中阻力)",
+      goal:"訓練側向站姿上階的下肢力量，考驗單腿平衡與臀中肌側向穩定。",
+      keypoints:["推起身體時膝蓋對齊第二腳趾方向","骨盆全程維持水平，不隨動作歪斜","離心下降速度放慢，不可放鬆墜落"],
+      muscles:"臀中肌、股四頭肌、臀大肌。考驗側向平衡",
+      sequence:"1. Inhale: 側站於椅旁，一腳踩踏板，吸氣推起身體直立。\n2. Exhale: 離心收縮，控制身體降回地面。"},
+
+    {modality:"Stability Chair (萬能穩定椅)", category:"下肢動作系列", categoryEn:"Leg Work Series", name_tw:"前向上階", name_en:"Forward Step Up", level:"intermediate", springs:"1 Heavy 或 2 Light",
+      goal:"訓練站姿單腿平衡下的下肢推蹬力量，強化髖膝對線控制。",
+      keypoints:["站立腳伸展時避免膝蓋鎖死","踏板腳上升過程不可借力甩動","下降階段全程受控，踏板不撞擊椅身"],
+      muscles:"股四頭肌、臀中肌（站立腳）、腿後肌群。要求高度的站姿單腿平衡力。",
+      sequence:"1. Inhale: 站在椅前，一腳踩在椅面，另一腳踩在下壓的踏板上，軀幹微前傾。\\n2. Exhale: 站立腳用力踩直伸展，將身體向上帶起，踏板腳隨之升起（不借力）。\\n3. Inhale: 椅面腳受控彎曲，緩慢離心下放踏板腳回到地面，踏板不撞擊椅身。"},
+
+    {modality:"Stability Chair (萬能穩定椅)", category:"下肢動作系列", categoryEn:"Leg Work Series", name_tw:"前向下階", name_en:"Forward Step Down", level:"intermediate", springs:"1 Heavy 或 2 Light",
+      goal:"訓練下肢離心控制力，考驗單腿下降過程的骨盆水平穩定。",
+      keypoints:["下壓踏板全程骨盆維持水平不歪斜","支撐腿膝蓋方向對齊腳尖","下降速度需比上升更緩慢受控"],
+      muscles:"股四頭肌（離心控制）、臀中肌。控制骨盆水平與單腿平衡對線。",
+      sequence:"1. Inhale: 面對椅子站立，一腳在踏板，一腳在椅面。下放踏板踩至最低預備。\\n2. Exhale: 慢慢伸直椅面腳（將身體推高），踏板腳隨之上升。\\n3. Inhale: 椅面膝蓋再次緩緩彎曲，將踏板腳受控地下壓放低，骨盆不產生左右歪斜。"},
+
+    {modality:"Stability Chair (萬能穩定椅)", category:"下肢動作系列", categoryEn:"Leg Work Series", name_tw:"仰臥大腿後側壓下", name_en:"Hamstring Press Hips Up", level:"essential", springs:"2 Light (掛高位)",
+      goal:"在肩橋懸空姿勢下訓練臀部與大腿後側力量，強化脊椎分節穩定。",
+      keypoints:["橋式高度全程維持不塌陷","下壓踏板時臀肌與腿後肌同步發力","踏板回升速度需受控，不可鬆脫彈起"],
+      muscles:"臀大肌、腿後肌、背部伸肌。要求極佳之脊椎分節與肩橋懸空對位。",
+      sequence:"1. Inhale: 仰臥平躺於椅子前方地面，雙膝彎曲，雙腳跟踩在踏板上，骨盆抬起呈肩橋位。\\n2. Exhale: 臀大肌與腿後肌強烈用力，下壓踏板至接近底板，維持橋式高度不塌陷。\\n3. Inhale: 控制踏板緩緩升起還原。"},
+
+    {modality:"Stability Chair (萬能穩定椅)", category:"下肢動作系列", categoryEn:"Leg Work Series", name_tw:"俯臥大腿後側壓下", name_en:"Hamstring Press Hips Down", level:"essential", springs:"2 Light (掛高位)",
+      goal:"俯臥姿勢下訓練大腿後側與臀部力量，同時強化核心防止腰椎代償。",
+      keypoints:["下壓過程恥骨持續貼平椅面","核心保持收緊，避免腰椎過度伸展","回放踏板時速度放緩，感受離心控制"],
+      muscles:"臀大肌、大腿後側膕繩肌。穩定肌：腹肌（防止塌腰與腰椎壓迫）。",
+      sequence:"1. Inhale: 俯臥躺在椅面，髖部在邊緣，雙手輕扶手柄，腳掌踩在踏板。\\n2. Exhale: 啟動大腿後側與臀部力量，下壓膝蓋將踏板踩下，恥骨貼平椅面。\\n3. Inhale: 離心控制，緩緩回放踏板，維持核心連結與骨盆穩定。"},
+
+    {modality:"Stability Chair (萬能穩定椅)", category:"下肢動作系列", categoryEn:"Leg Work Series", name_tw:"單腿動作", name_en:"Single Leg", level:"essential", springs:"1 Heavy 或 2 Medium",
+      goal:"訓練單側下肢力量，同時考驗骨盆對抗單邊負重旋轉的穩定控制。",
+      keypoints:["下壓踏板時骨盆全程水平、不側傾","上升還原速度全程受控","非操作側維持穩定坐姿，不隨動作晃動"],
+      muscles:"單側股四頭肌、臀中肌、膕繩肌。等長核心穩定肌對抗單側扭轉力矩。",
+      sequence:"1. Inhale: 一腳踩在踏板，另一腳離地（或微屈置於椅旁），坐直預備。\\n2. Exhale: 單腳下壓踏板，保持骨盆水平對線，不發生側傾或旋轉。\\n3. Inhale: 控制踏板緩慢上升還原。"},
+
+    {modality:"Stability Chair (萬能穩定椅)", category:"下肢動作系列", categoryEn:"Leg Work Series", name_tw:"椅上腳部動作 1-5", name_en:"Footwork 1-5", level:"essential", springs:"2 Heavy (掛高位/低位)",
+      goal:"訓練雙腳同步推蹬的下肢力量，建立脊椎中立挺拔的坐姿基礎。",
+      keypoints:["下壓過程脊椎保持中立挺拔","髖膝伸展方向一致，避免內夾或外八","回升時離心控制，不可讓踏板彈起"],
+      muscles:"股四頭肌、臀大肌、腿後肌、腓腸肌、比目魚肌。穩定肌：腹橫肌、多裂肌。",
+      sequence:"1. Inhale: 坐在椅面，脊椎立直，雙腳前腳掌踩踏板預備。\\n2. Exhale: 伸展髖與膝關節，將踏板下壓至接近底座。\\n3. Inhale: 離心受控，緩緩讓踏板回升還原，維持脊椎中立挺拔。"},
+
+    {modality:"Stability Chair (萬能穩定椅)", category:"下肢動作加上肢承重系列", categoryEn:"Leg Work with Arms", name_tw:"膝部上提", name_en:"Knee Raises", level:"intermediate", springs:"1-2 灰 (輕阻力)",
+      goal:"在懸空平板姿勢下訓練核心屈曲力量，挑戰抗地心引力的核心控制。",
+      keypoints:["屈膝提起時骨盆不可上翹或下墜","雙手支撐全程穩定，肩胛骨下沉","動作節奏平穩，避免借力甩動"],
+      muscles:"腹直肌、腹外斜肌、前鋸肌（支撐）。挑戰抗地心重力核心",
+      sequence:"1. Inhale: 雙手撐椅面呈 Plank 懸空，雙腳踩踏板預備。\n2. Exhale: 屈膝，利用腹肌收縮將膝蓋往胸口提起（踏板往上升）。"},
+
+    {modality:"Stability Chair (萬能穩定椅)", category:"下肢動作加上肢承重系列", categoryEn:"Leg Work with Arms", name_tw:"雙腿畫弧", name_en:"Leg Circles", level:"intermediate", springs:"1-2 灰",
+      goal:"訓練髖外展肌群協調控制，同時考驗上肢懸空承重的肩帶穩定。",
+      keypoints:["畫弧路徑需圓順、速度一致","雙手支撐全程穩定不晃動","核心持續收緊，避免骨盆隨畫弧偏移"],
+      muscles:"臀中肌、髖外展肌群、髂腰肌。要求上肢與肩胛極高穩定",
+      sequence:"1. Inhale: 雙手壓椅面，雙腳懸空踩踏板。吸氣時單腳畫弧打開。\n2. Exhale: 核心收緊，完成圓圈將踏板拉回。"},
+
+    {modality:"Stability Chair (萬能穩定椅)", category:"手臂練習系列", categoryEn:"Arm Work", name_tw:"俯臥肩胛骨孤立練習", name_en:"Scapular Isolation Prone", level:"essential", springs:"1 灰",
+      goal:"俯臥姿勢下孤立訓練肩胛骨滑動控制，建立肩帶動態穩定的體感。",
+      keypoints:["前引後縮動作幅度清楚、不過度用力","頸椎全程維持長度、不聳肩","動作分離練習，軀幹保持穩定不晃"],
+      muscles:"前鋸肌、菱形肌、中下斜方肌。建立肩胛骨滑動體感",
+      sequence:"1. Inhale: 俯臥，手按踏板。吸氣肩胛前引。\n2. Exhale: 肩胛後縮貼平背部，維持頸椎長度。"},
+
+    {modality:"Stability Chair (萬能穩定椅)", category:"手臂練習系列", categoryEn:"Arm Work", name_tw:"跪立下臂下壓練習", name_en:"Triceps Press Sitting", level:"essential", springs:"1 灰",
+      goal:"坐姿孤立訓練肱三頭肌力量，強化手臂伸展的控制能力。",
+      keypoints:["下壓時感受胸口自然開展","手肘伸展速度平穩、不甩動","回彎時全程受控，維持肩胛穩定"],
+      muscles:"肱三頭肌、肘伸肌群、後三角肌",
+      sequence:"1. Inhale: 坐在椅前方，雙手向後按住踏板。\n2. Exhale: 手肘伸直將踏板向下壓，感覺胸口開展。\n3. Inhale: 控制踏板緩緩上升彎曲手肘。"},
+
+    {modality:"Stability Chair (萬能穩定椅)", category:"軀幹伸展系列", categoryEn:"Torso Extension Series", name_tw:"天鵝潛水預備", name_en:"Swan Dive Prep", level:"intermediate", springs:"1 綠",
+      goal:"俯臥姿勢下訓練豎脊肌群力量，建立天鵝式動作前的伸展控制基礎。",
+      keypoints:["抬起時頭頂向遠方延伸，避免頸椎過度後仰","核心持續收緊，避免腰椎過度代償","降回時速度全程受控，不可放鬆墜落"],
+      muscles:"豎脊肌、臀大肌、下斜方肌（後側鏈整合）",
+      sequence:"1. Inhale: 俯臥趴在椅面，腹部有支撐，雙手伸直握住踏板。吸氣時胸椎向上伸展，抬起上半身。\n2. Exhale: 手肘微屈，受控地將身體與踏板降回平行位。"},
+
+    {modality:"Stability Chair (萬能穩定椅)", category:"軀幹側屈與旋轉系列", categoryEn:"Torso Lateral Flexion & Rotation", name_tw:"椅上美人魚", name_en:"Mermaid", level:"essential", springs:"1 Light 或 1 Medium",
+      goal:"訓練軀幹側向屈曲的控制力，強化腰方肌與體側肌群的伸展力量。",
+      keypoints:["側屈時雙側坐骨全程平貼椅面","下壓踏板由體側肌群主導，非手臂拉力","側屈幅度依控制能力調整，勿犧牲骨盆穩定"],
+      muscles:"腰方肌、腹內外斜肌（側屈）、背闊肌、前鋸肌（側壓控制）。",
+      sequence:"1. Inhale: 側坐於椅面，外側腳踩地（或橫坐），內側手輕扶踏板，另一手高舉過頭。\\n2. Exhale: 往踏板方向側屈，雙側坐骨平貼椅面，手掌將踏板下壓，拉伸體側。\\n3. Inhale: 在側屈極限處吸氣維持，將氣送入側肋。\\n4. Exhale: 控制踏板緩緩上升，上半身回正至直立坐姿。"},
+
+    {modality:"Stability Chair (萬能穩定椅)", category:"軀幹屈曲系列", categoryEn:"Torso Flexion Series", name_tw:"一柱擎天", name_en:"Jack Knife", level:"intermediate", springs:"1 綠 + 1 灰",
+      goal:"高難度倒立控制動作，訓練腹肌與肩帶穩定肌群協同完成垂直頂起。",
+      keypoints:["頂起時雙腿方向垂直、不偏移","頂端延伸時重心穩定於肩胛骨間","滾動落地時脊椎逐節、不可一次倒下"],
+      muscles:"腹直肌、斜肌、臀肌、肩帶穩定肌。高難度控制動作",
+      sequence:"1. Inhale: 仰臥躺在椅前方地面，雙手握住椅腳，雙腳高抬垂直天花板預備。\n2. Exhale: 腹肌發力，骨盆與脊椎向天空頂起，將雙腿垂直往上推呈倒立姿。\n3. Inhale: 頂端延伸。\n4. Exhale: 逐節受控滾動回地面。"},
+
+    {modality:"Stability Chair (萬能穩定椅)", category:"軀幹屈曲系列", categoryEn:"Torso Flexion Series", name_tw:"坐姿腹部壓下", name_en:"Ab Press Sitting", level:"essential", springs:"2 Light (掛高位)",
+      goal:"坐姿訓練腹肌向心收縮帶動脊椎屈曲的控制力。",
+      keypoints:["下壓踏板時脊椎後傾呈 C 曲線","C 曲線全程維持均勻弧度不鬆散","回升還原由下腹啟動，逐節坐直"],
+      muscles:"腹直肌、腹內外斜肌（屈曲脊椎）。穩定肌：肩帶穩定肌、髂腰肌群。",
+      sequence:"1. Inhale: 坐在椅面，面對踏板，雙手掌根壓在踏板上，脊椎立直預備。\\n2. Exhale: 收縮腹肌，脊椎後傾並捲曲呈「C」曲線，雙手將踏板下壓。\\n3. Inhale: 保持圓背 C 曲線，控制踏板緩緩回升，脊椎還原至直立起始位。"},
+
+    {modality:"Stability Chair (萬能穩定椅)", category:"軀幹屈曲系列", categoryEn:"Torso Flexion Series", name_tw:"貓背跪姿", name_en:"Cat Kneeling", level:"essential", springs:"1 綠 (低位掛鉤)",
+      goal:"跪姿訓練脊椎屈曲與伸展的分節活動度，強化核心與踏板控制的協調。",
+      keypoints:["捲起時脊椎由尾椎至頸椎逐節進行","下方停留時延伸背部，感受氣息進入","捲回跪姿時腹肌持續連結，不可放鬆"],
+      muscles:"腹直肌、腹斜肌（脊椎分節屈曲與伸展）",
+      sequence:"1. Inhale: 面對椅子跪姿，手掌按在踏板上預備。\n2. Exhale: 腹肌收縮，脊椎逐節捲起呈貓背（C曲線），將踏板往下壓入低位。\n3. Inhale: 在下方拉長脊椎，吸氣回到中立或微伸展。\n4. Exhale: 保持腹肌連結，逐節捲回跪姿。"},
+
+    {modality:"Stability Chair (萬能穩定椅)", category:"軀幹屈曲系列", categoryEn:"Torso Flexion Series", name_tw:"貓背前站姿", name_en:"Cat Standing Front", level:"essential", springs:"2 Heavy (掛中高位)",
+      goal:"站姿版的脊椎屈曲練習，建立分節捲動的控制感並伸展背部與大腿後側。",
+      keypoints:["下壓時脊椎由頸椎開始逐節捲動，避免一次彎折","下背維持圓背弧度，感受氣息進入側肋與後背","起身還原由骶骨開始逐節向上堆疊脊椎","前鋸肌全程穩定支撐避免塌肩"],
+      muscles:"腹直肌、斜肌（向心屈曲）。穩定肌：前鋸肌（避免塌肩）。",
+      sequence:"1. Inhale: 面對椅子站立，雙手壓在下壓的踏板上，脊椎圓背呈C曲線。\\n2. Exhale: 利用腹肌強力收縮，逐節向後向上捲脊，拉起踏板上升。\\n3. Inhale: 吸氣時，控制踏板向下推回，身體重回平直板式或C曲線對位。"},
+
+    {modality:"Stability Chair (萬能穩定椅)", category:"進階椅上軀幹", categoryEn:"Advanced Torso Exercises", name_tw:"一柱擎天", name_en:"Jack Knife (Advanced Chair)", level:"advanced", springs:"2 顆重彈簧 (高位掛法)",
+      goal:"極限倒立平衡與核心控制動作，訓練腹肌與肩帶協同完成垂直頂起並穩定踏板。",
+      keypoints:["垂直倒立時重心穩定於肩胛骨間，避免壓頸","踏板下壓與身體穩定需同步協調","脊椎滾動下放時逐節進行，不可一次倒下"],
+      muscles:"腹直肌、腹斜肌、前鋸肌（強力推踏板）、臀大肌、腿後腱。極限倒立平衡與核心控制。",
+      sequence:"1. Inhale: 仰臥在椅子前側地板，雙腳高舉呈桌面位，雙手往後壓住座椅兩側，將骨盆捲離呈倒立橋式預備。\n2. Exhale: 強力收縮腹部，雙腿往天花板筆直伸展（垂直倒立），雙手下壓踏板，將滑車/踏板推至最底。\n3. Inhale: 保持身體完全垂直中立（不壓頸部，重心在肩胛骨之間），維持踏板完全穩定不動。\n4. Exhale: 脊椎逐節滾動下放貼地，踏板受控升回。"},
+
+    {modality:"Stability Chair (萬能穩定椅)", category:"進階椅上軀幹", categoryEn:"Advanced Torso Exercises", name_tw:"側體扭轉", name_en:"Side Body Twist (Advanced Chair)", level:"advanced", springs:"1 顆中彈簧",
+      goal:"高難度單手側撐旋轉動作，訓練腹內外斜肌與肩胛穩定肌群的整合控制。",
+      keypoints:["單手支撐全程穩定，避免聳肩或塌肩","旋轉時骨盆盡量維持坐直不歪斜","踏板下壓與軀幹回正需協調同步"],
+      muscles:"腹內外斜肌（向心旋轉）、腰方肌、前鋸肌、肩胛骨下壓肌群。難度極高的單手側撐旋轉。",
+      sequence:"1. Inhale: 側坐於椅面，單手緊握踏板並壓下，雙腿伸直懸空。另一手高舉過頭。\n2. Exhale: 啟動體側斜肌，將踏板往上釋放，同時軀幹向上側屈並轉動，將高舉的手伸向椅面下方。\n3. Inhale: 保持身體在旋轉下的極限拉伸，骨盆維持坐直不歪斜。\n4. Exhale: 核心發力將踏板再次壓下，軀幹轉回側對線起始位。"},
+
+    {modality:"Stability Chair (萬能穩定椅)", category:"進階下肢與整合", categoryEn:"Advanced Leg Work & Integration", name_tw:"倒立壓下", name_en:"Handstand Press (Advanced Chair)", level:"advanced", springs:"2 顆重彈簧 (高位)",
+      goal:"超高階倒立平衡挑戰，訓練三角肌、前鋸肌與核心在完全倒立下的穩定控制。",
+      keypoints:["倒立時重心完全落在手掌與肩帶上","腹肌持續內收，控制骨盆高度不晃動","單腿壓踏板時另一腿維持穩定不飄移","落地還原時全程受控，不可倉促"],
+      muscles:"三角肌、前鋸肌、肱三頭肌、腹肌（抗重力倒立穩定）。超高階平衡挑戰。",
+      sequence:"1. Inhale: 雙手撐在椅子兩側（or 踏板），雙腳高抬，身體呈倒立 Handstand 姿勢（重心完全在手掌與肩帶上）。\n2. Exhale: 手臂穩定不聳肩，腹肌內收，控制骨盆高度，一腿推動踏板向下壓，另一腿維持在空中。\n3. Inhale: 踏板緩緩升回，維持倒立中線不偏移。\n4. Exhale/Inhale: 交替側腿壓踏，或雙腿同時進行。結束後受控地雙腳落地還原。"},
+
+    /* ---------------- Barrels 木桶/脊椎矯正器 ---------------- */
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"伸展系列", categoryEn:"Stretches", name_tw:"芭蕾伸展", name_en:"Ballet Stretches on Ladder Barrel", level:"essential", springs:"無彈簧 (使用梯桶)",
+      goal:"利用梯桶輔助的站姿伸展動作，深度拉伸大腿後側並訓練單腳站姿對線。",
+      keypoints:["前傾折疊由髖關節啟動，非彎腰硬壓","支撐腳穩定站立、膝蓋不鎖死","起身還原時利用腹部力量、逐節捲回"],
+      muscles:"大腿內收肌群、腿後腱（Hamstrings）、股四頭肌。維持：單腳站姿與脊椎對線。",
+      sequence:"1. Inhale: 站在梯桶前方，一腿伸直踩地，另一腿抬起置於桶頂（髖關節中立外旋或平行）。\n2. Exhale: 脊椎拉長，上半身直背前傾，雙手沿著小腿前摸，深度拉伸高抬腿之大腿後側。\n3. Inhale: 保持伸展位，將氣吸入大腿後側與背闊肌。\n4. Exhale: 利用腹部力量將上半身捲回直立。換側進行。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"倒立姿勢系列", categoryEn:"Inverted Positions", name_tw:"反向卷腹", name_en:"Roll Over on Barrel", level:"intermediate", springs:"無彈簧 (使用弧形桶)",
+      goal:"訓練腹肌向心收縮捲離桶面的控制力，並考驗雙腿懸空時的平衡感。",
+      keypoints:["捲離桶面時避免頸椎承重","頂端雙腳分開寬度與肩同寬","滾動貼回時脊椎逐節、不可一次躺平"],
+      muscles:"腹直肌、腹斜肌（向心收縮捲骨盆）、髖伸肌、豎脊肌。",
+      sequence:"1. Inhale: 雙腿向對角線伸直準備。\n2. Exhale: 收縮腹肌將骨盆與脊椎逐節捲離桶面，將雙腿帶至平行地面（頭後方）。\n3. Inhale: 雙腳在頂端分開與肩同寬，腳尖勾起（Dorsi-flexed）。\n4. Exhale: 保持腿部分開，將脊椎由上至下、一節一節滾動放回弧形桶，最後併攏腿回到對角線。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"倒立姿勢系列", categoryEn:"Inverted Positions", name_tw:"空中螺旋", name_en:"Corkscrew on Barrel", level:"intermediate", springs:"無彈簧 (使用弧形桶)",
+      goal:"高階旋轉控制動作，訓練腹斜肌群主導的骨盆非對稱動態穩定。",
+      keypoints:["畫圓過程核心持續撐住，避免塌腰","方向轉換時速度平順不可甩動","骨盆微捲起回正時由腹肌主導"],
+      muscles:"腹斜肌群（主導旋轉）、腹直肌、腰方肌。挑戰骨盆動態非對稱穩定。",
+      sequence:"1. Inhale: 雙腳併攏垂直指向天花板準備。\n2. Exhale: 雙腿保持併攏往右下方畫圓下放，核心用力撐住不塌腰。\n3. Inhale: 順勢向左上方環繞一圈，帶動骨盆微捲起回正至中心。\n4. Exhale: 重複動作，但改往左下方畫圓，以交替不對稱的螺旋控制脊椎流動。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"倒立姿勢系列", categoryEn:"Inverted Positions", name_tw:"例立放腿與抬腿", name_en:"Lower & Lift Inverted", level:"essential", springs:"無彈簧 (使用弧形桶)",
+      goal:"在倒立姿勢下訓練腹肌對抗下肢重量的離心控制力，同時伸展後側鏈。",
+      keypoints:["下放幅度不超過骨盆穩定的安全範圍","下放全程維持 Imprint，避免腰椎懸空","抬回時由下腹力量主導，非甩動借力"],
+      muscles:"腹直肌、腹內外斜肌（對抗下放阻力）、股四頭肌。拉伸：後側鏈。",
+      sequence:"1. Inhale: 雙腿指向天花板，大腿內夾，腳尖拉長。\n2. Exhale: 核心深層向內壓縮，將雙腳併攏緩緩往地面下放（不超過骨盆傾斜的安全範圍，維持 Imprint）。\n3. Inhale: 利用下腹力量，將雙腿受控地帶回指向天花板的垂直起始位。\n4. Exhale: 重複下放，專注恥骨與髂前上棘保持在同一安全平面上。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"倒立姿勢系列", categoryEn:"Inverted Positions", name_tw:"倒立剪刀式", name_en:"Scissors Inverted", level:"essential", springs:"無彈簧 (使用弧形桶)",
+      goal:"倒立姿勢下的交替剪刀腿動作，訓練髖屈肌控制與核心穩定。",
+      keypoints:["剪刀腿交替時骨盆全程不晃動","雙腿交會位置需精準對齊身體中線","動作節奏流暢，避免忽快忽慢"],
+      muscles:"腹直肌、髂腰肌。拉伸：股直肌、髂腰肌、臀肌。",
+      sequence:"1. Inhale: 仰臥，雙手抓住桶緣或手把，骨盆頂在弧面，雙腿指向天花板（例立位）。\n2. Exhale: 吐氣一腿拉向頭頂，一腿向地面方向拉長（雙腿交替剪刀腳）。\n3. Inhale: 雙腿在空中中路交會合攏。\n4. Exhale: 交換腿，另一腿向頭頂拉，另一腿向地延伸，維持骨盆不前後晃動。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"倒立姿勢系列", categoryEn:"Inverted Positions", name_tw:"倒立腳踏車", name_en:"Bicycle Inverted", level:"essential", springs:"無彈簧 (使用弧形桶)",
+      goal:"倒立姿勢下的腳踏車動作，訓練髖關節多平面協調與核心等長穩定。",
+      keypoints:["骨盆全程穩定，避免隨踩踏晃動","畫圈路徑流暢連貫，不可卡頓","正逆方向切換時速度一致"],
+      muscles:"髂腰肌、股四頭肌、腹內外斜肌（等長收縮維持下半身骨盆穩定）。",
+      sequence:"1. Inhale: 雙腿在例立位，一膝彎曲呈踩腳踏車前段。\n2. Exhale: 一腳向前蹬出、另一腳彎曲收回，在空中流暢地進行畫圈屈伸運動。\n3. Inhale: 逆向旋轉（Reverse Bicycle），吸氣時彎曲一側腿，吐氣蹬直，動作需連貫。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"倒立姿勢系列", categoryEn:"Inverted Positions", name_tw:"風車", name_en:"Windmill", level:"essential", springs:"無彈簧 (使用弧形桶)",
+      goal:"高階髖關節多平面活動度訓練，並強化骨盆對抗旋轉的核心穩定。",
+      keypoints:["雙腿劃圓路徑需大而穩定，避免速度忽快忽慢","骨盆全程維持水平，勿隨腿部劃圓晃動","雙向劃圈次數對等，維持左右力量平衡"],
+      muscles:"髖內收、外展肌群，腹肌穩定。考驗髖關節多平面控制力。",
+      sequence:"1. Inhale: 雙腿在例立位指向天花板。吸氣一腿朝頭頂、一腿朝腳端分開（剪刀位）。\n2. Exhale: 將雙腿在側邊作半圓形掃動（側邊外展大劃圈），交會轉成相反方向的剪刀位。\n3. Inhale: 吸氣時，雙腿往天花板合攏回正。\n4. Exhale: 朝另一方向重複風車大旋轉，骨盆在桶頂需如黏住般平穩。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"倒立姿勢系列", categoryEn:"Inverted Positions", name_tw:"髖部起伏", name_en:"Hip Rolls on Barrel", level:"essential", springs:"無彈簧 (使用弧形桶)",
+      goal:"訓練脊椎分節流動與臀部肌群力量，強化骨盆穩定與髖伸展協調。",
+      keypoints:["捲起與貼回皆需逐節、不可整段脊椎同時離地","橋式頂端維持大腿至前胸一條斜線","貼回時由上至下逐節進行，不可放鬆墜落"],
+      muscles:"臀大肌、腿後肌、腹直肌、多裂肌。脊椎分節流動。",
+      sequence:"1. Inhale: 仰臥，骨盆置於弧形桶頂部，雙腳踩在地面上預備。\n2. Exhale: 核心內縮，骨盆向後傾斜進入 Imprint，臀肌發力將臀部與骶骨捲離桶面呈橋式。\n3. Inhale: 在橋式頂端停留，維持大腿至前胸呈一條漂亮的斜線。\n4. Exhale: 從胸椎下段開始，由上至下逐節將脊椎與骨盆放回桶面上。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"倒立姿勢系列", categoryEn:"Inverted Positions", name_tw:"平行伸展平衡", name_en:"Teaser Balance on Barrel", level:"advanced", springs:"無彈簧 (使用弧形桶)",
+      goal:"高階核心平衡動作，訓練腹肌在弧形桶頂維持 V 字坐骨平衡的控制力。",
+      keypoints:["捲起時脊椎逐節堆疊，非一次彈起","頂端平衡時雙手與雙腿角度需對稱穩定","滾動放回時速度全程受控"],
+      muscles:"腹直肌、腹斜肌、深層腹橫肌、髂腰肌、肩胛穩定肌。",
+      sequence:"1. Inhale: 仰臥準備。\n2. Exhale: 雙手拉長，點頭捲脊，將上半身與雙腿同時向上捲起，在桶頂形成「V」字坐骨平衡點。\n3. Inhale: 雙手向上延伸平行於大腿，脊椎延伸拉長，在頂端維持平衡。\n4. Exhale: 保持雙腿控制，逐節將脊椎與身體滾動放回弧形桶上。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"俯臥系列", categoryEn:"Prone", name_tw:"天鵝潛水", name_en:"Swan Dive on Barrel", level:"intermediate", springs:"無彈簧 (使用弧形桶)",
+      goal:"訓練後側鏈整合力量，考驗俯臥姿勢下前後擺動的動態控制。",
+      keypoints:["伸展時後側鏈確實發力帶動抬升","前後擺動如搖搖馬般平順不甩動","核心持續收緊，保護腰椎不過度伸展"],
+      muscles:"豎脊肌、臀大肌、腿後肌、腹肌。考驗極高之身體後側鏈整合度與動態控制。",
+      sequence:"1. Inhale: 雙手張開呈飛機姿或高舉，吸氣上半身胸椎向上做極限伸展（Swan）。\n2. Exhale: 保持身體的弓形，重心前移，上半身下沈而雙腿順勢高高挺起（像搖搖馬般前後擺動）。\n3. Inhale: 再次吸氣挺胸起，雙腿下落，回到 Swan 伸展高位。\n4. Exhale: 受控下降，平躺貼回桶面。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"俯臥系列", categoryEn:"Prone", name_tw:"泳式練習", name_en:"Swimming on Barrel", level:"intermediate", springs:"無彈簧 (使用弧形桶)",
+      goal:"訓練對角線鏈的耐力與協調性，強化俯臥伸展下的動態穩定。",
+      keypoints:["對角手腳需同時抬起、高度一致","交替節奏流暢如游泳，不可卡頓","核心持續收緊，避免腰椎塌陷"],
+      muscles:"豎脊肌群、臀大肌、腿後肌、後三角肌。等長腹肌連結。",
+      sequence:"1. Inhale: 俯臥在桶頂，吸氣將雙手、雙腳直肢抬離桶面呈一條延伸直線。\n2. Exhale: 吐氣一手臂與對側腳（如右臂加左腿）在空中向上高抬，相反臂腿下放。\n3. Loop: 保持呼吸交替（吸 5 拍，吐 5 拍），手腳在空中快節奏像游泳般上下擺動。\n4. Inhale/Exhale: 結束後在空中伸展，隨後緩緩降回桶面。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"俯臥系列", categoryEn:"Prone", name_tw:"脊椎伸展", name_en:"Spinal Extension on Barrel", level:"intermediate", springs:"無彈簧 (使用弧形桶)",
+      goal:"訓練豎脊肌群力量，在俯臥姿勢下強化脊椎伸展的控制與肩胛穩定。",
+      keypoints:["抬高時肩膀下沉，避免聳肩代償","伸展弧度以脊椎舒適伸展為限","降回時速度全程受控，不可放鬆墜落"],
+      muscles:"背部豎脊肌群、中下斜方肌、菱形肌。穩定：臀大肌、深層核心。",
+      sequence:"1. Inhale: 俯臥在桶頂，吸氣雙肩沉降，頭頂向正前延伸拉長。\n2. Exhale: 核心肌群穩固，將脊椎朝向天花板方向抬高，形成一條向上的優美伸展弧度（不聳肩）。\n3. Inhale: 保持高度，感受脊椎由下至上的拉長延伸。\n4. Exhale: 受控將身體逐節降回起始趴姿。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"俯臥系列", categoryEn:"Prone", name_tw:"蚱蜢姿", name_en:"Grasshopper on Barrel", level:"intermediate", springs:"無彈簧 (使用弧形桶)",
+      goal:"訓練臀大肌與髖外旋肌群力量，同時強化核心保護下背的能力。",
+      keypoints:["腳跟互壓姿勢全程穩定不鬆脫","抬腿時核心收緊，避免下背過度伸展","拍擊動作俐落，不影響骨盆穩定"],
+      muscles:"髖外旋肌群、臀大肌、背闊肌、竖脊肌、腹肌（保護下背）。",
+      sequence:"1. Inhale: 俯臥，膝蓋彎曲分開，腳跟互壓（Frog legs），吸氣上半身微伸展離桶。\n2. Exhale: 腳跟向天花板方向頂高，使大腿向上抬離桶面（臀肌強烈收縮）。\n3. Inhale: 在上方，雙腿在空中向後伸直併攏（Beats/拍擊）。\n4. Exhale: 彎膝、雙膝放回桶面，上半身受控躺回。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"俯臥系列", categoryEn:"Prone", name_tw:"俯臥放腿與抬腿", name_en:"Lower & Lift Prone on Barrel", level:"essential", springs:"無彈簧 (使用弧形桶)",
+      goal:"俯臥姿勢下訓練臀大肌與大腿後側力量，強化骨盆貼桶的穩定控制。",
+      keypoints:["抬腿時骨盆與腹部持續壓緊桶面","雙腿對線一致，避免左右偏移","降回懸空位速度放緩，感受離心控制"],
+      muscles:"臀大肌、大腿後側肌群、多裂肌。穩定肌：腹內外斜肌。",
+      sequence:"1. Inhale: 俯臥，兩腿併攏浮於桶面後側下方準備。\n2. Exhale: 雙側臀肌與後側鏈同時發力，將雙腿直腿向上抬高（骨盆與腹部壓緊桶面）。\n3. Inhale: 保持大腿骨盆對線，受控地將雙腿降回下方懸空位。\n4. Exhale: 重複抬高，專注臀大肌的收縮，腳尖往遠延伸拉長。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"俯臥系列", categoryEn:"Prone", name_tw:"單腳伸伸", name_en:"Single Leg Extensions on Barrel", level:"essential", springs:"無彈簧 (使用弧形桶)",
+      goal:"單腿俯臥伸展動作，訓練臀大肌力量並考驗骨盆水平穩定。",
+      keypoints:["抬腿角度適中，骨盆保持完全不動","腹肌內收保護腰椎，避免過度伸展","雙側交替時速度與幅度需一致"],
+      muscles:"臀大肌、腿後肌、豎脊肌。穩定肌：腹肌（防止超伸塌腰）。",
+      sequence:"1. Inhale: 俯臥趴在弧形桶上，額頭枕在手背上，骨盆與大腿貼桶。\n2. Exhale: 啟動右側臀肌，將右腿伸直並緩緩向上抬起（大約 10-15 度，骨盆維持不動）。\n3. Inhale: 將右腳受控下放至桶面。\n4. Exhale: 交換左腳抬起，專注骨盆 ASIS 保持平貼，腹肌內收保護腰椎。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"俯臥系列", categoryEn:"Prone", name_tw:"蛙泳準備動作", name_en:"Breast Stroke Preps on Barrel", level:"essential", springs:"無彈簧 (使用弧形桶)",
+      goal:"訓練中下斜方肌與菱形肌力量，對抗駝背體態並強化胸椎伸展控制。",
+      keypoints:["抬起時肩胛骨保持穩定、不聳肩","頭頂朝前延伸拉長，避免頸椎後仰","降回時逐節放回，不可放鬆墜落"],
+      muscles:"中下斜方肌、菱形肌、豎脊肌。要求對抗駝背體態（Counter-kyphosis）。",
+      sequence:"1. Inhale: 俯臥在弧形桶上，雙手置於肩膀旁預備。\n2. Exhale: 保持肩胛骨穩定，頭頂朝前方滑動拉長，胸椎向上伸展（Extension）抬起胸口離桶。\n3. Inhale: 在頂端停留，吸氣將胸椎兩側拓寬。\n4. Exhale: 受控將胸椎、額頭逐節放回桶面。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"俯臥系列", categoryEn:"Prone", name_tw:"雙腿畫弧", name_en:"Leg Circles Prone on Barrel", level:"essential", springs:"無彈簧 (使用弧形桶)",
+      goal:"俯臥姿勢下訓練髖外旋與內收肌群協調控制，同時考驗核心等長支撐。",
+      keypoints:["畫圈全程軀幹穩定不晃動，僅髖關節活動","雙腿分開合攏節奏需一致","雙方向次數對等維持力量平衡"],
+      muscles:"髖外旋肌群、臀中肌、臀大肌、內收肌。要求極佳之腹肌等長支撐。",
+      sequence:"1. Inhale: 雙腿直腿在後側抬高至與骨盆平行。開始向兩側外展畫圈的一半。\n2. Exhale: 雙腿向下、內收合攏並往上抬高，完成一個圓圈。\n3. 重複 5-8 次。隨後反向：吸氣下放分開，吐氣向上外展繞回併攏。\n4. 重點：軀幹要像鐵板一樣完全不動，只有髖關節在畫圈。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"坐姿系列", categoryEn:"Sitting", name_tw:"手臂動作練習", name_en:"Port de Bras", level:"essential", springs:"無彈簧 (使用弧形桶)",
+      goal:"坐姿手臂動作練習，訓練肩胛穩定肌群並建立優雅的上肢延伸控制。",
+      keypoints:["手臂畫弧全程肩胛骨下壓穩定","坐骨全程垂直承重，脊椎保持中立","動作節奏優雅流暢，避免聳肩"],
+      muscles:"背闊肌、菱形肌、斜方肌。維持坐骨垂直與脊椎中立。",
+      sequence:"1. Inhale: 坐姿挺直，雙臂垂於身體兩側。吸氣雙手臂圓弧向前抬起至胸前。\n2. Exhale: 雙手向兩側優雅打開（T字手臂），肩胛骨下壓貼平。\n3. Inhale: 雙臂向上延伸過頭，兩側肩膀保持沉肩。\n4. Exhale: 雙手往兩側劃大弧度滑落回起始位。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"坐姿系列", categoryEn:"Sitting", name_tw:"旋轉加手臂動作練習", name_en:"Rotation with Port de Bras", level:"essential", springs:"無彈簧 (使用弧形桶)",
+      goal:"坐姿旋轉搭配手臂動作，訓練腹斜肌主導的軀幹旋轉控制力。",
+      keypoints:["旋轉時骨盆與坐骨全程穩定不動","手臂動作與旋轉需協調同步","回正時速度平穩，不可甩動借力"],
+      muscles:"腹內外斜肌（旋轉軀幹）、多裂肌、脊椎伸展肌、腹橫肌維持骨盆直立。",
+      sequence:"1. Inhale: 跨坐於弧形桶前方，脊椎拉長坐直，雙手橫向抱胸或向側張開（T字手臂）。\n2. Exhale: 骨盆與坐骨不動，將脊椎向右側旋轉，手臂順勢優雅劃向身體側前方。\n3. Inhale: 保持旋轉長高。\n4. Exhale: 身體受控旋轉回正。交換側進行。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"熱身系列", categoryEn:"Warm Ups", name_tw:"手臂畫弧", name_en:"Arm Circles", level:"essential", springs:"無彈簧 (使用弧形桶)",
+      goal:"熱身動作，訓練肩帶活動度並建立肋骨定位的基礎感知。",
+      keypoints:["中背與肋骨全程壓穩桶面不離開","畫圓路徑對稱、速度一致","肩膀活動時避免聳肩代償"],
+      muscles:"肩帶穩定肌群、胸大肌、背闊肌。要求肋骨定位（Rib Cage Placement）。",
+      sequence:"1. Inhale: 雙手臂直臂向上高舉過頭，中背與肋骨保持壓在桶面上。\n2. Exhale: 雙手往側邊畫圓弧，繞回大腿旁。感受肩膀活動度的釋放與穩定。\n3. 重複畫圈 5-8 次，隨後反方向：吸氣側開，吐氣向頭頂合攏回大腿。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"熱身系列", categoryEn:"Warm Ups", name_tw:"肩胛孤立練習", name_en:"Scapula Isolation", level:"essential", springs:"無彈簧 (使用弧形桶)",
+      goal:"孤立訓練肩胛骨前引、後縮、下壓的動態控制，建立肩帶穩定基礎。",
+      keypoints:["前引後縮動作幅度清楚、不過度用力","下壓時肩膀遠離耳朵放鬆","深層腹肌全程維持穩定支撐"],
+      muscles:"前鋸肌、胸小肌、菱形肌、中下斜方肌。維持：深層腹肌。",
+      sequence:"1. Inhale: 仰臥於弧面上，雙手直臂指向天花板。吸氣時，肩胛骨前引（Protraction），雙手往天花板伸展。\n2. Exhale: 肩胛骨後縮（Retraction），感覺肩胛骨在背後輕輕夾緊並向下滑動，貼合桶面。\n3. Inhale: 保持中立，肩膀放鬆遠離耳朵。\n4. Exhale: 吐氣時向下壓肩胛骨（Depression），滑向臀部。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"熱身系列", categoryEn:"Warm Ups", name_tw:"配合呼吸側屈", name_en:"Breathing Side", level:"essential", springs:"無彈簧 (使用弧形桶)",
+      goal:"側向呼吸伸展動作，訓練體側肌群延展能力與呼吸擴胸幅度。",
+      keypoints:["側屈時骨盆保持垂直，不前後晃動","延伸方向從腋下拉長，而非壓縮","吸氣時感受肋骨側邊擴張"],
+      muscles:"腹內外斜肌、腰方肌、肋間肌。拉伸：側體與背闊肌。",
+      sequence:"1. Inhale: 側臥於弧形桶側面上，一腳在前一腳在後交叉穩定。\n2. Exhale: 骨盆保持垂直，啟動體側核心向側邊彎曲屈起，上方手臂滑向大腿。\n3. Inhale: 保持側屈，氣吸入拉長的一側肋骨。\n4. Exhale: 緩慢下降，讓身體受控貼回弧形桶側面。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"熱身系列", categoryEn:"Warm Ups", name_tw:"配合呼吸前屈", name_en:"Breathing Forward", level:"essential", springs:"無彈簧 (使用弧形桶)",
+      goal:"配合呼吸的前屈熱身動作，訓練腹直肌基礎屈曲控制力。",
+      keypoints:["屈曲由點頭啟動，逐節向上捲","雙手平伸維持穩定，不影響屈曲角度","放回時脊椎逐節、有控制地進行"],
+      muscles:"腹肌（特別是腹直肌）、深層頸部屈肌。拉伸：脊椎伸展肌群。",
+      sequence:"1. Inhale: 仰臥於弧形桶弧面上，脊椎維持支撐中立位預備。\n2. Exhale: 從頭頸部點頭，收縮腹肌將胸椎向上屈曲，雙手平伸指置大腿旁。\n3. Inhale: 保持屈曲，將氣吸入後肋。\n4. Exhale: 有控制地將胸椎與頭部逐節放回弧面上。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"熱身系列", categoryEn:"Warm Ups", name_tw:"雙臂剪刀式", name_en:"Arm Scissors", level:"essential", springs:"無彈簧 (使用弧形桶)",
+      goal:"熱身動作，訓練肩帶穩定肌群對抗手臂交替移動的抗旋轉能力。",
+      keypoints:["交替過程肋骨與胸廓全程貼平桶面","動作節奏流暢，不可甩動借力","腹橫肌全程收緊，避免腰椎超伸"],
+      muscles:"肩帶穩定肌群。穩定肌：腹內外斜肌、腹橫肌（對抗手臂移動帶來的肋骨外翻與腰椎超伸）。",
+      sequence:"1. Inhale: 雙手直臂指向天花板。吸氣一臂往頭頂滑落，一臂往臀部滑落。\n2. Exhale: 吐氣兩手在空中交替（剪刀手交錯），專注肋骨與胸廓貼平桶面，不產生晃動。\n3. Inhale: 再次在對角線交替。\n4. Exhale: 回收雙手至垂直起始位。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"梯桶盒子橫放系列", categoryEn:"Ladder Barrel Short Box", name_tw:"大樹式", name_en:"Tree on Ladder Barrel", level:"intermediate", springs:"無彈簧 (使用梯桶)",
+      goal:"考驗空中後捲平衡力的進階動作，訓練深層腹肌與腿後肌拉伸控制。",
+      keypoints:["後捲時脊椎逐節、不可整段傾倒","下方懸空伸展時感受腿後肌拉長","爬回坐姿由腹肌主導，勿用手臂硬拉"],
+      muscles:"深部腹肌（腹橫肌）、股四頭肌、大腿後側腱拉伸。挑戰空中後捲平衡力。",
+      sequence:"1. Inhale: 單腿扣橫桿，抱另一腿，吸氣蹬直彎膝三次熱身。\n2. Exhale: 雙手爬著小腿（像爬樹），脊椎逐節往後捲下，直至身體完全懸空往後伸展（Extension）。\n3. Inhale: 在最下方增加脊椎伸展位，雙手可向後摸梯。\n4. Exhale: 雙手重新爬回腳踝，收縮腹肌，一節節將軀幹爬回立姿平衡。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"梯桶盒子橫放系列", categoryEn:"Ladder Barrel Short Box", name_tw:"圓背後捲", name_en:"Round Back on Ladder Barrel", level:"essential", springs:"無彈簧 (使用梯桶)",
+      goal:"訓練脊椎屈曲方向的分節活動度，強化腹肌向心與離心收縮控制。",
+      keypoints:["後捲時脊椎逐節貼合桶面，避免整段一次下捲","最低位置維持圓背 C 型曲線，勿突然放鬆","捲起還原由下腹啟動，一節節堆疊回坐直"],
+      muscles:"腹直肌、腹斜肌、深層腹橫肌（等心/離心/向心收縮）。",
+      sequence:"1. Inhale: 坐在梯桶頂部，雙腳扣在安全橫桿（Ladder）下，脊椎坐直拉長準備。\n2. Exhale: 收縮腹肌，骨盆向後傾斜，將脊椎由尾椎、腰椎一節節捲落往後滾動（呈 C 曲線）。\n3. Inhale: 在下落後端停留，感受腹部深度發力支撐。\n4. Exhale: 保持 C 曲線，由下腹帶動身體往前收回至坐骨上方，最後還原長高坐直。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"梯桶盒子橫放系列", categoryEn:"Ladder Barrel Short Box", name_tw:"平背傾斜", name_en:"Straight Back on Ladder Barrel", level:"essential", springs:"無彈簧 (使用梯桶)",
+      goal:"訓練脊椎在後傾角度下維持完全直立對線的等長控制力，強化髖屈肌向心收縮。",
+      keypoints:["後傾全程脊椎維持一直線，避免彎折","安全橫桿確實固定，雙腳提供穩定支點","拉回動作由髖屈肌與核心共同發力"],
+      muscles:"髂腰肌、股四頭肌、腹橫肌、脊椎伸展肌（等長收縮維直背）。",
+      sequence:"1. Inhale: 脊椎中立挺直，雙臂可舉 Pole 過頭或交叉在胸前。\n2. Exhale: 保持脊椎完全一條直線，從髖關節處將身體直背向後傾斜（Lean Back，不駝背不塌腰）。\n3. Inhale: 保持身體一直線長高，吸氣回到垂直坐骨上方起點。\n4. Exhale: 重複倾斜，用核心與髖屈肌的力量抗阻重力拉力。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"雙手扶梯系列", categoryEn:"Hands on Ladder", name_tw:"天鵝潛水", name_en:"Swan Dive on Ladder Barrel", level:"intermediate", springs:"無彈簧 (使用梯桶)",
+      goal:"高架桶面上的後側鏈力量訓練，考驗雙手扶梯下的動態平衡控制。",
+      keypoints:["放開梯桿前確保胸椎伸展位穩定","雙腿擺起與上半身下沈需協調同步","重心回滑抓桿時速度受控，不可甩動"],
+      muscles:"豎脊肌、臀大肌、腿後肌。考驗在高架桶面上的後側鏈力量。",
+      sequence:"1. Inhale: 俯臥於桶面，雙腳朝向梯桿，雙手扶梯。吸氣胸椎向上伸展進入天鵝位。\n2. Exhale: 雙手放開梯桿，上半身往前沈，雙腿同時向後上方擺起，呈美麗的空中懸浮弧線。\n3. Inhale: 重心回滑，雙手重新抓住橫桿，推回高位天鵝脊椎伸展姿。\n4. Exhale: 骨盆與核心受控，緩緩貼回桶面。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"雙手支撐系列", categoryEn:"Supported on Hands", name_tw:"單腿前提", name_en:"Leg Pull Front on Barrel", level:"intermediate", springs:"無彈簧 (使用弧形桶)",
+      goal:"高難度平板支撐動作，考驗肩帶承重下的單腿抬高控制力。",
+      keypoints:["支撐全程肩膀與雙手垂直對齊不塌陷","抬腿時骨盆保持水平，不可旋轉","放回時速度受控，避免踩踏不穩"],
+      muscles:"前鋸肌、斜方肌、腹肌、臀大肌、腿後肌。挑戰高難度平板支撐（Plank）。",
+      sequence:"1. Inhale: 雙手撐在弧形桶前側（或兩側），雙腳往後伸直，身體在桶上方呈標準 Plank 板式。\n2. Exhale: 骨盆保持水平，一腿伸直往後上方抬高（大約與軀幹同高，臀部發力）。\n3. Inhale: 將腳受控放回桶面或地面腳踩穩。\n4. Exhale: 交換腿，另一腿往後上方抬，肩膀維持與雙手垂直對齊不塌陷。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"雙手支撐系列", categoryEn:"Supported on Hands", name_tw:"單腿提拉", name_en:"Leg Pull on Barrel", level:"advanced", springs:"無彈簧 (使用弧形桶)",
+      goal:"進階反向板式動作，訓練後側鏈與核心在挑戰性支撐下的協調控制。",
+      keypoints:["反向板式全程骨盆頂高、不可塌陷","踢腿時對側核心需確實支撐","降回速度受控，避免髖部下墜"],
+      muscles:"大後側鏈（腿後腱、臀肌、豎脊肌）、肱三頭肌、肩胛下壓肌。挑戰反向板式（Reverse Plank）。",
+      sequence:"1. Inhale: 雙手在身後推住桶頂，腳掌貼地，身體在桶上方呈反向板式（仰臥挺拔姿）。\n2. Exhale: 核心撐起骨盆維持中立，吸氣右腿垂直向上踢高（挑戰髖屈柔韌度與對側核心支撐）。\n3. Inhale: 將右腿受控降回反向板式起始線。\n4. Exhale: 吐氣交換左腿踢高，臀部保持高頂不塌陷。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"雙腳蹬梯系列", categoryEn:"Feet on Ladder", name_tw:"旋轉加屈曲", name_en:"Obliques with Flexion on Ladder Barrel", level:"intermediate", springs:"無彈簧 (使用梯桶)",
+      goal:"雙腳固定於梯桿的旋轉屈曲動作，訓練腹內外斜肌主導的複合控制力。",
+      keypoints:["旋轉屈曲需由核心啟動，非手臂拉扯","側肋充氣停留延伸背部","回正時對側腹肌主導，逐節坐直"],
+      muscles:"腹內外斜肌、腹直肌。穩定肌：腰大肌、股四頭肌。",
+      sequence:"1. Inhale: 坐在桶面上，腳踩梯桿預備，雙手抱在腦後。\n2. Exhale: 上半身向右側旋轉，並順勢向後捲下（屈曲旋轉），腹部深深向內壓縮。\n3. Inhale: 保持旋轉高度，將氣吸入側肋。\n4. Exhale: 利用對側腹肌將上半身捲回正中，再吸氣還原坐直。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"雙腳蹬梯系列", categoryEn:"Feet on Ladder", name_tw:"側彎", name_en:"Side Bend on Ladder Barrel", level:"essential", springs:"無彈簧 (使用梯桶)",
+      goal:"側臥於桶面的側彎伸展動作，訓練腰方肌與腹斜肌的等長及向心控制。",
+      keypoints:["側屈全程脊椎與骨盆對線一致","延伸方向朝斜下方拉長，不可扭轉","拉回時由下方體側斜肌主導發力"],
+      muscles:"腰方肌、腹內外斜肌（等長與向心控制）。拉伸：胸腔側壁與體側。",
+      sequence:"1. Inhale: 側臥於桶面，雙腳踩在梯桶橫桿上（前腳在前，後腳在後），雙手拿著小桿（Pole）高舉過頭。\n2. Exhale: 保持脊椎與骨盆對線，將上半身往側下方長長延伸側屈（側彎）。\n3. Inhale: 在最低處停留拉伸。\n4. Exhale: 啟動下方體側斜肌力量，將上半身一節節拉回至斜對角線的垂直線上。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"梯桶平背與進階系列", categoryEn:"Advanced Ladder Barrel Flat Back", name_tw:"梯桶手倒立", name_en:"Handstand on Ladder Barrel", level:"advanced", springs:"無阻力 (Ladder Barrel 空間挑戰)",
+      goal:"超高階倒立平衡動作，訓練前鋸肌與核心在梯桶空間挑戰下的完全支撐控制。",
+      keypoints:["重心穩定落在手掌與肩胛之間","倒立時脊椎維持中立，肩胛完全推平不翼狀","落地還原時一腳一腳受控踩回"],
+      muscles:"前鋸肌、三角肌、肱三頭肌、深層腹橫肌、脊椎伸展肌群（維持倒立支撐）。",
+      sequence:"1. Inhale: 雙手撐在梯桶頂部兩側立柱，雙腳踩在梯桿。微跳起使身體過渡到倒立（Handstand）。\n2. Exhale: 保持重心在手掌與肩胛稳定上，雙腿向上併攏直立，脊椎維持中立（倒立平板）。\n3. Inhale: 在頂端維持 3-5 次深呼吸，感受抗重力核心啟動與肩胛完全推平（不翼狀）。\n4. Exhale: 控制核心，一腳一腳受控踩回梯桿，還原直立。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"梯桶平背與進階系列", categoryEn:"Advanced Ladder Barrel Flat Back", name_tw:"梯桶天鵝潛水", name_en:"Swan Dive (Advanced Ladder Barrel)", level:"advanced", springs:"無阻力 (Ladder Barrel)",
+      goal:"梯桶上的極限反向伸展動作，訓練後側鏈爆發力與動態平衡控制。",
+      keypoints:["雙腿高舉時身體弧度維持不變","雙手釋放呈大字時肩胛骨穩定不聳肩","回收壓梯桿時速度全程受控"],
+      muscles:"豎脊肌、臀大肌、腿後腱。考願木桶上的極限反向伸展與動態平衡。",
+      sequence:"1. Inhale: 腹部趴在桶頂，雙腳掌扣住後側梯桿。胸骨抬起呈中立或微伸展預備。\n2. Exhale: 臀肌與腿後肌爆發收縮，雙腿朝天高舉，帶動雙手釋放向兩側呈大字，身體在桶頂呈圓弧向前俯衝（Swan Dive 弧線）。\n3. Inhale: 保持身體的彩虹弧度不變，雙腳再次下壓梯桿，上半身挺直回伸展起始位。\n4. Exhale: 受控放平，還原中立俯臥。"},
+
+    {modality:"Barrels (木桶/脊椎矯正器)", category:"梯桶平背與進階系列", categoryEn:"Advanced Ladder Barrel Flat Back", name_tw:"梯桶騎馬姿", name_en:"Horseback (Advanced Ladder Barrel)", level:"advanced", springs:"無阻力 (Ladder Barrel)",
+      goal:"跨坐平衡動作，訓練大腿內收肌群向心收縮並挑戰骨盆極限平衡控制。",
+      keypoints:["夾起身體時內收肌群主導發力","上方維持平衡時脊椎持續拉長","釋放降落時速度放緩，不可驟然坐下"],
+      muscles:"大腿內收肌群（向心強力夾緊）、腹肌、髂腰肌。考驗大腿內側與骨盆極限平衡。",
+      sequence:"1. Inhale: 跨坐在桶頂（如騎馬），雙腳懸空不踩梯，脊椎直立預備。\n2. Exhale: 大腿內側內收肌群強力收縮，將身體「夾起」離開桶頂，雙手高舉過頭（呈懸空騎馬姿）。\n3. Inhale: 在上方維持平衡，拉長脊椎與核心。\n4. Exhale: 受控地將大腿內側阻力釋放，骨盆緩緩降落回桶頂坐姿。"}
+  ];
+
+  var TIPS = [
+    {num:"01", title:"彈簧與阻力邏輯 Spring & Resistance Logic",
+      text:"核心床與凱迪拉克的彈簧具有抗阻（Resistance）與協助（Assistance）雙重屬性。例如 Short Spine 時，重彈簧能協助抬起下肢；Long Stretch 中，較輕的彈簧則大幅增加抗不穩定的難度。穩定椅的踏板阻力由強力拉力彈簧組成，按壓踏板為主要做功，上升時需控制速度，防止失控彈回。"},
+    {num:"02", title:"骨盆與核心 Placement",
+      text:"中立骨盆：當雙腳在受支撐或承重狀態下（如 Footwork、坐於穩定椅），骨盆應維持恥骨與 ASIS 在同一垂直或水平面。印記骨盆：當雙下肢懸空、重力力臂變長時（如 Hundred、凱迪拉克 Leg Springs），必須啟動腹內外斜肌使骨盆略微後傾，腰椎微幅貼平，以保護腰椎安全。"},
+    {num:"03", title:"肩胛帶穩定意識 Scapular Girdle Stabilization",
+      text:"在所有上肢拉繩或推按踏板／推檔桿的練習中（如凱迪拉克 Push-Thru、穩定椅 Cat Standing），必須保持前鋸肌與下斜方肌的協同作用，使肩胛骨貼合胸廓，防止肩胛骨聳起（Elevation）或突起（Winging）。"}
+  ];
+
+  var MODALITY_ICONS = {
+    "Reformer (核心床)": '<path d="M3 10h13v5H3z"/><path d="M16 12.5h1.5c.4-2 1.1-2 1.5 0s1.1 2 1.5 0"/>',
+    "Matwork (墊上)": '<rect x="3" y="8" width="18" height="9" rx="4.5"/>',
+    "Cadillac (凱迪拉克)": '<path d="M5 20V6a2 2 0 012-2h10a2 2 0 012 2v14"/><path d="M9 10.5h6"/>',
+    "Stability Chair (萬能穩定椅)": '<path d="M6 4v9a2 2 0 002 2h8a2 2 0 002-2V4"/><path d="M8 15v5M16 15v5"/>',
+    "Barrels (木桶/脊椎矯正器)": '<path d="M4 15c4-7 12-7 16 0"/><path d="M4 15v2c4 5.5 12 5.5 16 0v-2"/>'
+  };
+
+  var LEVEL_LABEL = {essential:"初級", intermediate:"中級", both:"初/中級", advanced:"高級", unspecified:"未標示"};
+
+  /* ---------- muscle-group tagging (derived from the "muscles" text) ---------- */
+  var MUSCLE_KEYWORD_TABLE = [
+    ["腹直肌","核心與腹部","腹直肌"],
+    ["腹橫肌","核心與腹部","腹橫肌"],
+    ["深層腹橫肌","核心與腹部","腹橫肌"],
+    ["腹內外斜肌","核心與腹部","腹斜肌群"],
+    ["腹斜肌","核心與腹部","腹斜肌群"],
+    ["斜肌","核心與腹部","腹斜肌群"],
+    ["深層核心","核心與腹部","深層核心穩定"],
+    ["核心穩定","核心與腹部","深層核心穩定"],
+    ["盆底肌","核心與腹部","深層核心穩定"],
+    ["腹肌","核心與腹部","核心腹肌（綜合）"],
+    ["脊椎屈曲肌群","核心與腹部","核心腹肌（綜合）"],
+    ["臀大肌","臀部與髖關節","臀大肌"],
+    ["臀中肌","臀部與髖關節","臀中肌"],
+    ["臀小肌","臀部與髖關節","臀中肌"],
+    ["臀肌","臀部與髖關節","臀部肌群（綜合）"],
+    ["臀部肌群","臀部與髖關節","臀部肌群（綜合）"],
+    ["髂腰肌","臀部與髖關節","髂腰肌／髖屈肌"],
+    ["髖屈肌","臀部與髖關節","髂腰肌／髖屈肌"],
+    ["髖外旋肌群","臀部與髖關節","髖外旋肌群"],
+    ["深層髖外旋肌","臀部與髖關節","髖外旋肌群"],
+    ["大腿外旋肌群","臀部與髖關節","髖外旋肌群"],
+    ["內收肌群","臀部與髖關節","內收／外展肌群"],
+    ["大腿內收肌群","臀部與髖關節","內收／外展肌群"],
+    ["髖外展肌群","臀部與髖關節","內收／外展肌群"],
+    ["外展肌群","臀部與髖關節","內收／外展肌群"],
+    ["股四頭肌","大腿前側","股四頭肌"],
+    ["股直肌","大腿前側","股四頭肌"],
+    ["髂脛束","大腿前側","髂脛束"],
+    ["腿後肌群","大腿後側","腿後肌群（膕繩肌）"],
+    ["腿後肌","大腿後側","腿後肌群（膕繩肌）"],
+    ["腿後腱","大腿後側","腿後肌群（膕繩肌）"],
+    ["大腿後側","大腿後側","腿後肌群（膕繩肌）"],
+    ["豎脊肌","背部與脊椎","豎脊肌"],
+    ["多裂肌","背部與脊椎","多裂肌"],
+    ["深層多裂肌","背部與脊椎","多裂肌"],
+    ["脊椎伸展肌群","背部與脊椎","脊椎伸展肌群"],
+    ["脊椎伸展肌","背部與脊椎","脊椎伸展肌群"],
+    ["背伸肌群","背部與脊椎","脊椎伸展肌群"],
+    ["背闊肌","背部與脊椎","背闊肌／大圓肌"],
+    ["大圓肌","背部與脊椎","背闊肌／大圓肌"],
+    ["菱形肌","背部與脊椎","菱形肌"],
+    ["腰方肌","背部與脊椎","腰方肌"],
+    ["前鋸肌","肩帶與手臂","前鋸肌"],
+    ["下斜方肌","肩帶與手臂","斜方肌群"],
+    ["中下斜方肌","肩帶與手臂","斜方肌群"],
+    ["斜方肌","肩帶與手臂","斜方肌群"],
+    ["肩帶穩定肌群","肩帶與手臂","肩帶／肩胛穩定肌（綜合）"],
+    ["肩帶穩定肌","肩帶與手臂","肩帶／肩胛穩定肌（綜合）"],
+    ["肩胛穩定肌群","肩帶與手臂","肩帶／肩胛穩定肌（綜合）"],
+    ["肩胛穩定肌","肩帶與手臂","肩帶／肩胛穩定肌（綜合）"],
+    ["肩胛下壓肌群","肩帶與手臂","肩帶／肩胛穩定肌（綜合）"],
+    ["肩胛下壓肌","肩帶與手臂","肩帶／肩胛穩定肌（綜合）"],
+    ["肩部穩定肌","肩帶與手臂","肩帶／肩胛穩定肌（綜合）"],
+    ["前三角肌","肩帶與手臂","三角肌"],
+    ["後三角肌","肩帶與手臂","三角肌"],
+    ["三角肌","肩帶與手臂","三角肌"],
+    ["大胸肌","肩帶與手臂","胸大肌／胸小肌"],
+    ["胸大肌","肩帶與手臂","胸大肌／胸小肌"],
+    ["胸小肌","肩帶與手臂","胸大肌／胸小肌"],
+    ["肱三頭肌","肩帶與手臂","肱三頭肌"],
+    ["肘伸肌群","肩帶與手臂","肱三頭肌"],
+    ["肱二頭肌","肩帶與手臂","肱二頭肌"],
+    ["腓腸肌","小腿與足踝","腓腸肌／比目魚肌"],
+    ["比目魚肌","小腿與足踝","腓腸肌／比目魚肌"],
+    ["頸部深層屈肌","頸部與深層穩定","頸部深層屈肌"],
+    ["頭前直肌","頸部與深層穩定","頸部深層屈肌"],
+    ["頸長肌","頸部與深層穩定","頸部深層屈肌"]
+  ];
+  var MUSCLE_GROUP_DISPLAY_ORDER = ["核心與腹部","臀部與髖關節","大腿前側","大腿後側","背部與脊椎","肩帶與手臂","小腿與足踝","頸部與深層穩定"];
+
+  function getMuscleTags(musclesText){
+    var groups = [];
+    var fine = []; // {group, label}
+    var seenLabel = {};
+    MUSCLE_KEYWORD_TABLE.forEach(function(row){
+      var kw = row[0], group = row[1], label = row[2];
+      if(musclesText.indexOf(kw) !== -1){
+        if(groups.indexOf(group) === -1) groups.push(group);
+        var key = group+"|"+label;
+        if(!seenLabel[key]){
+          seenLabel[key] = true;
+          fine.push({group:group, label:label});
+        }
+      }
+    });
+    return {groups:groups, fine:fine};
+  }
+
+  DATA.forEach(function(d){
+    var tags = getMuscleTags(d.muscles);
+    d._muscleGroups = tags.groups;
+    d._muscleFine = tags.fine;
+  });
+
+  var state = { query:"", level:"all", modality:"all", view:"equipment", muscleGroup:"all" };
+
+  function escapeHtml(s){
+    return s.replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  }
+
+  function modalityParts(m){
+    var match = m.match(/^(.*?)\s*\((.*)\)$/);
+    return match ? {en:match[1], tw:match[2]} : {en:m, tw:m};
+  }
+
+  function matchesLevel(item, level){
+    if(level==="all") return true;
+    if(item.level==="both" && (level==="essential"||level==="intermediate")) return true;
+    return item.level===level;
+  }
+
+  function matchesModality(item, modality){
+    return modality==="all" || item.modality===modality;
+  }
+
+  function matchesMuscleGroup(item, group){
+    return group==="all" || item._muscleGroups.indexOf(group) !== -1;
+  }
+
+  function matchesQuery(item, q){
+    if(!q) return true;
+    var hay = (item.name_tw+" "+item.name_en+" "+item.muscles+" "+item.goal+" "+item.keypoints.join(" ")+" "+item.category+" "+item.categoryEn+" "+item.modality).toLowerCase();
+    return hay.indexOf(q) !== -1;
+  }
+
+  /* ---------- structure ---------- */
+  var MODALITY_ORDER = [];
+  var CATEGORY_BY_MODALITY = {};
+  DATA.forEach(function(d){
+    if(MODALITY_ORDER.indexOf(d.modality)===-1) MODALITY_ORDER.push(d.modality);
+    if(!CATEGORY_BY_MODALITY[d.modality]) CATEGORY_BY_MODALITY[d.modality] = [];
+    if(CATEGORY_BY_MODALITY[d.modality].indexOf(d.category)===-1) CATEGORY_BY_MODALITY[d.modality].push(d.category);
+  });
+
+  var MUSCLE_GROUP_ORDER = MUSCLE_GROUP_DISPLAY_ORDER.filter(function(g){
+    return DATA.some(function(d){ return d._muscleGroups.indexOf(g) !== -1; });
+  });
+  var FINE_LABELS_BY_GROUP = {};
+  MUSCLE_GROUP_ORDER.forEach(function(g){
+    var labels = [];
+    DATA.forEach(function(d){
+      d._muscleFine.forEach(function(f){
+        if(f.group===g && labels.indexOf(f.label)===-1) labels.push(f.label);
+      });
+    });
+    FINE_LABELS_BY_GROUP[g] = labels;
+  });
+
+  /* ---------- render stats ---------- */
+  function renderStats(){
+    var total = DATA.length;
+    var modalityCount = MODALITY_ORDER.length;
+    var essentialCount = DATA.filter(function(d){return d.level==="essential"||d.level==="both";}).length;
+    var intermediateCount = DATA.filter(function(d){return d.level==="intermediate"||d.level==="both";}).length;
+    var advancedCount = DATA.filter(function(d){return d.level==="advanced";}).length;
+    document.getElementById("stats").innerHTML =
+      '<div class="stat"><span class="n">'+total+'</span><span class="l">動作總數</span></div>'+
+      '<div class="stat"><span class="n">'+modalityCount+'</span><span class="l">器械類別</span></div>'+
+      '<div class="stat"><span class="n">'+essentialCount+'</span><span class="l">初級可用</span></div>'+
+      '<div class="stat"><span class="n">'+intermediateCount+'</span><span class="l">中級可用</span></div>'+
+      '<div class="stat"><span class="n">'+advancedCount+'</span><span class="l">高級可用</span></div>';
+  }
+
+  /* ---------- render filters ---------- */
+  function renderViewToggle(){
+    var wrap = document.getElementById("viewToggle");
+    Array.prototype.forEach.call(wrap.querySelectorAll(".chip"), function(el){ el.remove(); });
+    var views = [
+      {key:"equipment", label:"依器械瀏覽"},
+      {key:"muscle", label:"依肌群瀏覽"}
+    ];
+    views.forEach(function(v){
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "chip"+(state.view===v.key ? " active":"");
+      btn.textContent = v.label;
+      btn.addEventListener("click", function(){
+        if(state.view === v.key) return;
+        state.view = v.key;
+        state.modality = "all";
+        state.muscleGroup = "all";
+        renderViewToggle();
+        renderModalityFilters();
+        var hint = document.getElementById("viewHint");
+        if(hint) hint.classList.toggle("active", state.view==="muscle");
+        renderResults();
+      });
+      wrap.appendChild(btn);
+    });
+  }
+
+  function renderModalityFilters(){
+    var wrap = document.getElementById("modalityFilters");
+    Array.prototype.forEach.call(wrap.querySelectorAll(".chip"), function(el){ el.remove(); });
+    var label = wrap.querySelector(".row-label");
+
+    if(state.view === "muscle"){
+      if(label) label.textContent = "肌群";
+      var mchips = [{key:"all", label:"全部"}].concat(MUSCLE_GROUP_ORDER.map(function(g){
+        return {key:g, label:g};
+      }));
+      mchips.forEach(function(c){
+        var count = c.key==="all" ? DATA.length : DATA.filter(function(d){return matchesMuscleGroup(d, c.key);}).length;
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "chip"+(state.muscleGroup===c.key ? " active":"");
+        btn.innerHTML = c.label+' <span class="cnt">'+count+'</span>';
+        btn.addEventListener("click", function(){
+          state.muscleGroup = c.key;
+          renderModalityFilters();
+          renderResults();
+        });
+        wrap.appendChild(btn);
+      });
+      return;
+    }
+
+    if(label) label.textContent = "器械";
+    var chips = [{key:"all", label:"全部", icon:null}].concat(MODALITY_ORDER.map(function(m){
+      return {key:m, label:modalityParts(m).tw, icon:MODALITY_ICONS[m]};
+    }));
+    chips.forEach(function(c){
+      var count = c.key==="all" ? DATA.length : DATA.filter(function(d){return d.modality===c.key;}).length;
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "chip"+(state.modality===c.key ? " active":"");
+      var iconSvg = c.icon ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+c.icon+'</svg>' : "";
+      btn.innerHTML = iconSvg+c.label+' <span class="cnt">'+count+'</span>';
+      btn.addEventListener("click", function(){
+        state.modality = c.key;
+        renderModalityFilters();
+        renderResults();
+      });
+      wrap.appendChild(btn);
+    });
+  }
+
+  function renderLevelFilters(){
+    var wrap = document.getElementById("levelFilters");
+    Array.prototype.forEach.call(wrap.querySelectorAll(".chip"), function(el){ el.remove(); });
+    var levels = [
+      {key:"all", label:"全部", cls:""},
+      {key:"essential", label:"初級", cls:"level-essential"},
+      {key:"intermediate", label:"中級", cls:"level-intermediate"},
+      {key:"advanced", label:"高級", cls:"level-advanced"}
+    ];
+    levels.forEach(function(lv){
+      var count = lv.key==="all" ? DATA.length : DATA.filter(function(d){return matchesLevel(d, lv.key);}).length;
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "chip "+lv.cls+(state.level===lv.key ? " active":"");
+      btn.innerHTML = lv.label+' <span class="cnt">'+count+'</span>';
+      btn.addEventListener("click", function(){
+        state.level = lv.key;
+        renderLevelFilters();
+        renderResults();
+      });
+      wrap.appendChild(btn);
+    });
+  }
+
+  /* ---------- card rendering ---------- */
+  function formatSequence(raw){
+    var lines = raw.split("\n");
+    var html = "";
+    lines.forEach(function(line){
+      var m = line.match(/^\s*\d+\.\s*(Inhale|Exhale|Loop)\s*:\s*(.*)$/);
+      if(m){
+        var breathClass = m[1].toLowerCase()==="inhale" ? "inhale" : (m[1].toLowerCase()==="exhale" ? "exhale" : "loop");
+        html += '<div class="step"><span class="breath '+breathClass+'">'+m[1]+'</span><span class="text">'+escapeHtml(m[2])+'</span></div>';
+      } else if(line.trim()){
+        html += '<div class="step"><span class="text">'+escapeHtml(line)+'</span></div>';
+      }
+    });
+    return html;
+  }
+
+  var idxCounter = 0;
+  function cardHtml(item, dimensionMatch){
+    idxCounter++;
+    var levelCls = item.level;
+    var kp = item.keypoints.map(function(k){ return "<li>"+escapeHtml(k)+"</li>"; }).join("");
+    var seqId = "seq-"+idxCounter;
+    var visible = dimensionMatch && matchesLevel(item, state.level) && matchesQuery(item, state.query.trim().toLowerCase());
+    return {
+      visible: visible,
+      html: (
+      '<article class="card'+(visible?"":" is-hidden")+'">'+
+        '<div class="card-head">'+
+          '<div>'+
+            '<h3 class="card-name-tw">'+escapeHtml(item.name_tw)+'</h3>'+
+            '<p class="card-name-en">'+escapeHtml(item.name_en)+'</p>'+
+          '</div>'+
+          '<span class="level-pill '+levelCls+'">'+LEVEL_LABEL[item.level]+'</span>'+
+        '</div>'+
+        '<div class="meta-row">'+
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12c1.5-4 3-4 4 0s3 4 4 0 3-4 4 0 3 4 4 0"/></svg>'+
+          '<span>'+escapeHtml(item.springs)+'</span>'+
+        '</div>'+
+        '<div class="goal"><b>動作目標</b>'+escapeHtml(item.goal)+'</div>'+
+        '<ul class="keypoints"><span class="label">動作重點</span>'+kp+'</ul>'+
+        '<div class="muscles"><b>主要動作肌肉</b>'+escapeHtml(item.muscles)+'</div>'+
+        '<button class="seq-toggle" aria-expanded="false" aria-controls="'+seqId+'">'+
+          '呼吸與動作對線順序'+
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>'+
+        '</button>'+
+        '<div class="seq-body" id="'+seqId+'">'+formatSequence(item.sequence)+'</div>'+
+      '</article>'
+      )
+    };
+  }
+
+  function renderResults(){
+    if(state.view === "muscle"){ renderResultsByMuscle(); return; }
+
+    var main = document.getElementById("results");
+    main.innerHTML = "";
+    idxCounter = 0;
+    var visibleTotal = 0;
+
+    MODALITY_ORDER.forEach(function(modality){
+      var parts = modalityParts(modality);
+      var section = document.createElement("section");
+      section.className = "modality-section";
+
+      var modalityVisibleCount = 0;
+      var modalityTotalCount = 0;
+      var categoriesHtml = "";
+
+      CATEGORY_BY_MODALITY[modality].forEach(function(cat){
+        var items = DATA.filter(function(d){ return d.modality===modality && d.category===cat; });
+        var categoryEn = items[0].categoryEn;
+        var catVisibleCount = 0;
+        var cardsHtml = "";
+        items.forEach(function(item){
+          var r = cardHtml(item, matchesModality(item, state.modality));
+          if(r.visible) catVisibleCount++;
+          cardsHtml += r.html;
+        });
+        modalityVisibleCount += catVisibleCount;
+        modalityTotalCount += items.length;
+        categoriesHtml +=
+          '<div class="category-block'+(catVisibleCount===0 ? " is-hidden":"")+'">'+
+            '<div class="category-sub-head">'+
+              '<h3>'+cat+'</h3>'+
+              '<span class="count">'+catVisibleCount+' / '+items.length+'</span>'+
+            '</div>'+
+            '<div class="card-grid">'+cardsHtml+'</div>'+
+          '</div>';
+      });
+
+      if(modalityVisibleCount===0){ section.classList.add("is-hidden"); }
+
+      var iconSvg = MODALITY_ICONS[modality] ? '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+MODALITY_ICONS[modality]+'</svg>' : "";
+
+      section.innerHTML =
+        '<div class="modality-head">'+
+          iconSvg+
+          '<h2>'+parts.tw+'</h2>'+
+          '<span class="en">'+parts.en+'</span>'+
+          '<span class="count">'+modalityVisibleCount+' / '+modalityTotalCount+'</span>'+
+        '</div>'+
+        categoriesHtml;
+
+      visibleTotal += modalityVisibleCount;
+      main.appendChild(section);
+    });
+
+    if(visibleTotal===0){
+      var empty = document.createElement("div");
+      empty.className = "empty-state";
+      empty.textContent = "沒有符合條件的動作，請調整搜尋或篩選條件。";
+      main.appendChild(empty);
+    }
+
+    bindSeqToggles();
+  }
+
+  function renderResultsByMuscle(){
+    var main = document.getElementById("results");
+    main.innerHTML = "";
+    idxCounter = 0;
+    var visibleTotal = 0;
+
+    MUSCLE_GROUP_ORDER.forEach(function(group){
+      var section = document.createElement("section");
+      section.className = "modality-section";
+
+      var groupVisibleCount = 0;
+      var groupTotalCount = 0;
+      var subHtml = "";
+
+      FINE_LABELS_BY_GROUP[group].forEach(function(label){
+        var items = DATA.filter(function(d){
+          return d._muscleFine.some(function(f){ return f.group===group && f.label===label; });
+        });
+        var subVisibleCount = 0;
+        var cardsHtml = "";
+        items.forEach(function(item){
+          var dimMatch = matchesMuscleGroup(item, state.muscleGroup);
+          var r = cardHtml(item, dimMatch);
+          if(r.visible) subVisibleCount++;
+          cardsHtml += r.html;
+        });
+        groupVisibleCount += subVisibleCount;
+        groupTotalCount += items.length;
+        subHtml +=
+          '<div class="category-block'+(subVisibleCount===0 ? " is-hidden":"")+'">'+
+            '<div class="category-sub-head">'+
+              '<h3>'+label+'</h3>'+
+              '<span class="count">'+subVisibleCount+' / '+items.length+'</span>'+
+            '</div>'+
+            '<div class="card-grid">'+cardsHtml+'</div>'+
+          '</div>';
+      });
+
+      if(groupVisibleCount===0){ section.classList.add("is-hidden"); }
+
+      section.innerHTML =
+        '<div class="modality-head">'+
+          '<h2>'+group+'</h2>'+
+          '<span class="count">'+groupVisibleCount+' / '+groupTotalCount+'</span>'+
+        '</div>'+
+        subHtml;
+
+      visibleTotal += groupVisibleCount;
+      main.appendChild(section);
+    });
+
+    if(visibleTotal===0){
+      var empty = document.createElement("div");
+      empty.className = "empty-state";
+      empty.textContent = "沒有符合條件的動作，請調整搜尋或篩選條件。";
+      main.appendChild(empty);
+    }
+
+    bindSeqToggles();
+  }
+
+  function bindSeqToggles(){
+    var toggles = document.querySelectorAll(".seq-toggle");
+    Array.prototype.forEach.call(toggles, function(btn){
+      btn.addEventListener("click", function(){
+        var open = btn.getAttribute("aria-expanded")==="true";
+        btn.setAttribute("aria-expanded", open ? "false":"true");
+        var body = document.getElementById(btn.getAttribute("aria-controls"));
+        body.classList.toggle("open", !open);
+      });
+    });
+  }
+
+  /* ---------- tips ---------- */
+  function renderTips(){
+    var grid = document.getElementById("tipGrid");
+    grid.innerHTML = TIPS.map(function(t){
+      return '<div class="tip-card"><span class="num">'+t.num+'</span><h3>'+t.title+'</h3><p>'+t.text+'</p></div>';
+    }).join("");
+  }
+
+  /* ---------- init ---------- */
+  document.getElementById("searchInput").addEventListener("input", function(e){
+    state.query = e.target.value;
+    renderResults();
+  });
+
+  renderStats();
+  renderViewToggle();
+  renderModalityFilters();
+  renderLevelFilters();
+  renderTips();
+  renderResults();
+
+})();
+</script>
