@@ -1,0 +1,762 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>中秋問候與旅程靈感</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ink: #262420;
+    --ink-soft: #4a463f;
+    --muted: #77705f;
+    --paper: #f5f2ea;
+    --paper-raised: #fbf9f4;
+    --line: #ddd6c4;
+    --line-soft: #e8e2d2;
+    --accent-neutral: #8b6b3d;
+
+    --c1: #b34a37; --c1-soft: #f2e2dc; --c1-tint: #fbf3f0;
+    --c2: #4f7266; --c2-soft: #e0e8e2; --c2-tint: #f2f6f3;
+    --c3: #a9791f; --c3-soft: #efe3c6; --c3-tint: #faf5e8;
+    --c4: #6d3c4b; --c4-soft: #ecdde2; --c4-tint: #f8f0f2;
+    --c5: #4a5a72; --c5-soft: #dee3ea; --c5-tint: #eff2f6;
+
+    --ok: #4f7266; --ok-tint: #eef3ef;
+    --warn: #a9541f; --warn-tint: #f7e9dc;
+    --shadow: 0 1px 2px rgba(38,36,32,0.06), 0 10px 28px -10px rgba(38,36,32,0.18);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #ece7db; --ink-soft: #cbc4b3; --muted: #a49b86;
+      --paper: #1c1a16; --paper-raised: #24211c;
+      --line: #3a3529; --line-soft: #2c2820;
+      --accent-neutral: #d2a256;
+      --c1: #d97b64; --c1-soft: #3a2621; --c1-tint: #241d1a;
+      --c2: #86a898; --c2-soft: #223026; --c2-tint: #1c211d;
+      --c3: #d3a94f; --c3-soft: #3a3020; --c3-tint: #24211a;
+      --c4: #ba8593; --c4-soft: #362027; --c4-tint: #221a1e;
+      --c5: #8fa3bd; --c5-soft: #232a33; --c5-tint: #1c2027;
+      --ok: #86a898; --ok-tint: #1c211d;
+      --warn: #e0a468; --warn-tint: #332319;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 32px -10px rgba(0,0,0,0.55);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #ece7db; --ink-soft: #cbc4b3; --muted: #a49b86;
+    --paper: #1c1a16; --paper-raised: #24211c;
+    --line: #3a3529; --line-soft: #2c2820;
+    --accent-neutral: #d2a256;
+    --c1: #d97b64; --c1-soft: #3a2621; --c1-tint: #241d1a;
+    --c2: #86a898; --c2-soft: #223026; --c2-tint: #1c211d;
+    --c3: #d3a94f; --c3-soft: #3a3020; --c3-tint: #24211a;
+    --c4: #ba8593; --c4-soft: #362027; --c4-tint: #221a1e;
+    --c5: #8fa3bd; --c5-soft: #232a33; --c5-tint: #1c2027;
+    --ok: #86a898; --ok-tint: #1c211d;
+    --warn: #e0a468; --warn-tint: #332319;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 32px -10px rgba(0,0,0,0.55);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height: 1.75; font-size: 16px;
+  }
+  ::selection { background: var(--accent-neutral); color: var(--paper); }
+  .en { font-family: "EB Garamond", "Noto Serif TC", serif; font-style: italic; }
+  h1, h2, h3 { font-family: "Noto Serif TC", "Noto Sans TC", serif; font-weight: 700; text-wrap: balance; margin: 0; color: var(--ink); }
+  button { font-family: inherit; }
+  textarea, input, select { font-family: inherit; }
+
+  .page { max-width: 620px; margin: 0 auto; padding: 56px 24px 90px; }
+  .page.wide { max-width: 760px; }
+
+  .brand { display: flex; align-items: center; gap: 10px; margin-bottom: 30px; }
+  .brand .mark {
+    width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--accent-neutral);
+    display: flex; align-items: center; justify-content: center; flex: none;
+    font-family: "EB Garamond", serif; font-style: italic; font-size: 14px; color: var(--accent-neutral);
+  }
+  .brand .name { font-size: 13px; letter-spacing: 0.08em; color: var(--muted); }
+
+  .hero { margin-bottom: 40px; }
+  .hero .eyebrow { font-family: "EB Garamond", serif; font-style: italic; font-size: 15px; color: var(--muted); letter-spacing: 0.03em; margin-bottom: 8px; display: block; }
+  .hero h1 { font-size: clamp(24px, 6vw, 30px); margin-bottom: 12px; }
+  .hero p { color: var(--ink-soft); font-size: 15px; max-width: 46ch; }
+
+  .stepper { display: flex; align-items: center; gap: 6px; margin-bottom: 34px; }
+  .stepper .seg { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+  .stepper .bar { height: 3px; border-radius: 3px; background: var(--line); overflow: hidden; }
+  .stepper .bar i { display: block; height: 100%; width: 0%; background: var(--accent-neutral); transition: width .3s ease; }
+  .stepper .seg.done .bar i { width: 100%; }
+  .stepper .seg.current .bar i { width: 100%; background: var(--accent-neutral); }
+  .stepper .label { font-size: 11.5px; color: var(--muted); }
+  .stepper .seg.current .label { color: var(--ink); font-weight: 600; }
+  .stepper .seg.done .label { color: var(--ink-soft); }
+
+  .step { display: none; animation: fade .25s ease; }
+  .step.active { display: block; }
+  @keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+  @media (prefers-reduced-motion: reduce) { .step { animation: none !important; } }
+
+  .card {
+    background: var(--paper-raised); border: 1px solid var(--line); border-radius: 14px;
+    padding: 26px 24px; box-shadow: var(--shadow); margin-bottom: 22px;
+  }
+  .step h2 { font-size: 20px; margin-bottom: 6px; }
+  .step .step-desc { color: var(--muted); font-size: 14px; margin-bottom: 20px; }
+
+  .field { margin-bottom: 16px; }
+  .field:last-child { margin-bottom: 0; }
+  .field label { display: block; font-size: 12.5px; letter-spacing: 0.03em; color: var(--muted); margin-bottom: 6px; }
+  .field input, .field textarea {
+    width: 100%; border: 1px solid var(--line); border-radius: 8px; background: var(--paper);
+    color: var(--ink); padding: 11px 13px; font-size: 15px; resize: vertical;
+  }
+  .field textarea { min-height: 72px; line-height: 1.6; }
+  .field input:focus, .field textarea:focus { outline: 2px solid var(--accent-neutral); outline-offset: 1px; }
+
+  .timeslot-group { display: flex; gap: 10px; flex-wrap: wrap; }
+  .timeslot-group .timeslot-opt {
+    display: flex; align-items: center; gap: 7px; border: 1px solid var(--line); border-radius: 100px;
+    padding: 9px 16px; font-size: 13.5px; color: var(--ink-soft); cursor: pointer; background: var(--paper);
+    transition: border-color .12s ease, background .12s ease, color .12s ease; white-space: nowrap;
+  }
+  .timeslot-group .timeslot-opt input { margin: 0; accent-color: var(--accent-neutral); cursor: pointer; }
+  .timeslot-group .timeslot-opt:has(input:checked) { border-color: var(--accent-neutral); background: var(--paper-raised); color: var(--ink); font-weight: 600; }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    border: none; border-radius: 9px; padding: 13px 22px; font-size: 15px; font-weight: 600;
+    cursor: pointer; transition: opacity .15s ease, transform .1s ease;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn:disabled { opacity: 0.6; cursor: default; }
+  .btn-primary { background: var(--ink); color: var(--paper); width: 100%; }
+  .btn-primary:hover { opacity: 0.88; }
+  .btn-ghost { background: transparent; color: var(--muted); padding: 13px 8px; }
+  .btn-ghost:hover { color: var(--ink); }
+  .btn:focus-visible { outline: 2px solid var(--accent-neutral); outline-offset: 2px; }
+
+  .row-nav { display: flex; align-items: center; gap: 12px; }
+  .row-nav .btn-primary { flex: 1; }
+
+  /* Client-facing inspiration cards */
+  .insp-grid { display: flex; flex-direction: column; gap: 12px; margin-bottom: 22px; }
+  .insp-card {
+    background: var(--swatch-tint); border: 1px solid var(--swatch-soft); border-radius: 12px;
+    overflow: hidden; position: relative;
+  }
+  .insp-select {
+    position: absolute; top: 12px; right: 12px; z-index: 2;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--paper-raised); border: 2px solid var(--swatch);
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  }
+  .insp-select input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+  .insp-select .mark { width: 14px; height: 14px; border-radius: 50%; background: transparent; transition: background .12s ease; }
+  .insp-select input:checked ~ .mark { background: var(--swatch); }
+  .insp-select input:focus-visible ~ .mark { outline: 2px solid var(--swatch); outline-offset: 2px; }
+  .insp-card .insp-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; background: var(--line-soft); }
+  .insp-card .insp-body { border-left: 3px solid var(--swatch); padding: 16px 18px; }
+  .insp-card .insp-img + .insp-body { border-left: none; border-top: 3px solid var(--swatch); }
+  .insp-card .insp-eyebrow { font-size: 11.5px; letter-spacing: 0.05em; color: var(--swatch); font-weight: 700; margin-bottom: 4px; }
+  .insp-card h3 { font-size: 15.5px; margin-bottom: 6px; }
+  .insp-card p { font-size: 13.5px; color: var(--ink-soft); margin: 0; white-space: pre-wrap; }
+  .insp-card p a { color: var(--swatch); text-decoration: underline; text-underline-offset: 2px; }
+
+  .done-icon {
+    width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 22px; margin-bottom: 16px;
+  }
+  .done-icon.ok { background: var(--ok-tint); color: var(--ok); }
+  .done-icon.warn { background: var(--warn-tint); color: var(--warn); }
+
+  .summary-box {
+    background: var(--paper); border: 1px dashed var(--line); border-radius: 10px; padding: 16px 18px;
+    font-size: 13.5px; color: var(--ink-soft); white-space: pre-wrap; line-height: 1.9; margin-bottom: 16px;
+  }
+  .copy-feedback { font-size: 13px; color: var(--ok); margin-top: 10px; min-height: 18px; }
+  .mail-fallback { font-size: 13px; color: var(--muted); margin-top: 18px; text-align: center; }
+  .mail-fallback a { color: var(--accent-neutral); }
+
+  footer.page-footer { margin-top: 50px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 12px; color: var(--muted); text-align: center; }
+
+  .tool-badge { display: inline-block; font-size: 11px; background: var(--c3-tint); color: var(--c3); border: 1px solid var(--c3-soft); padding: 3px 10px; border-radius: 100px; margin-bottom: 16px; }
+  .tool-out { display: flex; gap: 8px; align-items: center; }
+  .tool-out input { flex: 1; }
+  .tool-note { font-size: 12.5px; color: var(--muted); margin-top: 10px; }
+
+  /* Editor (?edit=1) */
+  .editor-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+  .editor-toolbar .btn { width: auto; }
+  .editor-card {
+    display: grid; grid-template-columns: 140px 1fr; gap: 16px;
+    background: var(--paper-raised); border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin-bottom: 14px;
+  }
+  @media (max-width: 520px) { .editor-card { grid-template-columns: 1fr; } }
+  .editor-photo {
+    position: relative; width: 100%; aspect-ratio: 4/3; border-radius: 8px; overflow: hidden;
+    background: var(--paper); border: 1px dashed var(--line); cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .editor-photo img { width: 100%; height: 100%; object-fit: cover; display: none; }
+  .editor-photo .ph { font-size: 12px; color: var(--muted); text-align: center; padding: 8px; }
+  .editor-photo input[type=file] { display: none; }
+  .editor-fields { display: flex; flex-direction: column; gap: 8px; }
+  .editor-fields input, .editor-fields select, .editor-fields textarea {
+    width: 100%; border: 1px solid var(--line); border-radius: 7px; background: var(--paper);
+    color: var(--ink); padding: 8px 10px; font-size: 13.5px;
+  }
+  .editor-fields textarea { min-height: 56px; resize: vertical; }
+  .editor-remove { align-self: flex-start; background: transparent; border: none; color: var(--warn); font-size: 12.5px; cursor: pointer; padding: 2px 0; }
+  .editor-section-label { font-size: 12px; letter-spacing: 0.05em; color: var(--muted); margin: 26px 0 10px; }
+  .editor-note { font-size: 12.5px; color: var(--muted); margin-top: 6px; }
+</style>
+</head>
+<body>
+<div class="page" id="page">
+
+  <div class="brand">
+    <span class="mark en">F</span>
+    <span class="name en">FineDayClub</span>
+  </div>
+
+  <!-- ===================== CLIENT FLOW ===================== -->
+  <div id="client-flow">
+
+    <div class="hero">
+      <span class="eyebrow en" id="hero-eyebrow">Mid-Autumn Greetings</span>
+      <h1 id="hero-title">中秋佳節，向您問聲好</h1>
+      <p id="hero-desc">在為您確認今年中秋送禮地址的同時，也想和您分享我們正在準備的幾個秋冬旅程提案，希望能為您帶來一點靈感。</p>
+    </div>
+
+    <div class="stepper">
+      <div class="seg" data-step="1"><div class="bar"><i></i></div><span class="label">地址確認</span></div>
+      <div class="seg" data-step="2"><div class="bar"><i></i></div><span class="label">旅程靈感</span></div>
+      <div class="seg" data-step="3"><div class="bar"><i></i></div><span class="label">完成</span></div>
+    </div>
+
+    <section class="step" data-step="1">
+      <h2>先為您確認送禮地址</h2>
+      <p class="step-desc">以下是我們目前紀錄的資訊，請確認是否正確；如有需要，也可以直接修改。</p>
+      <div class="card">
+        <div class="field">
+          <label for="f-name">收件人姓名</label>
+          <input type="text" id="f-name" placeholder="請輸入姓名">
+        </div>
+        <div class="field">
+          <label for="f-phone">聯絡電話</label>
+          <input type="tel" id="f-phone" placeholder="請輸入聯絡電話">
+        </div>
+        <div class="field">
+          <label for="f-addr">送達地址</label>
+          <textarea id="f-addr" placeholder="請輸入送達地址"></textarea>
+        </div>
+        <div class="field">
+          <label>方便收貨時段（可複選）</label>
+          <div class="timeslot-group">
+            <label class="timeslot-opt"><input type="checkbox" class="f-timeslot" value="上午">上午</label>
+            <label class="timeslot-opt"><input type="checkbox" class="f-timeslot" value="下午">下午</label>
+            <label class="timeslot-opt"><input type="checkbox" class="f-timeslot" value="晚上">晚上</label>
+          </div>
+        </div>
+        <div class="field" style="margin-bottom:0">
+          <label for="f-remark">備註（選填）</label>
+          <textarea id="f-remark" placeholder="例如：請洽大樓警衛室代收、家中有犬隻等"></textarea>
+        </div>
+      </div>
+      <div class="row-nav">
+        <button class="btn btn-primary" id="addr-btn" onclick="confirmAddress()">地址正確，繼續 →</button>
+      </div>
+    </section>
+
+    <section class="step" data-step="2">
+      <h2>順道，給您一點旅程靈感</h2>
+      <p class="step-desc">這是我們正在規劃的幾個秋冬提案方向，若有興趣，歡迎直接勾選讓我們知道。<br>如果有其他許願，也歡迎在下方輸入欄輸入您的願望清單。</p>
+      <div class="insp-grid" id="insp-grid"></div>
+      <div class="card">
+        <div class="field" style="margin-bottom:0">
+          <label for="f-note">願望清單（選填）</label>
+          <textarea id="f-note" placeholder="自由許願，我們會放在心上 ✨"></textarea>
+        </div>
+      </div>
+      <div class="row-nav" style="margin-top:20px">
+        <button class="btn btn-ghost" onclick="goStep(1)">← 上一步</button>
+        <button class="btn btn-primary" id="submit-btn" onclick="submitSurvey()">送出</button>
+      </div>
+    </section>
+
+    <section class="step" data-step="3">
+      <div id="done-success" style="display:none">
+        <div class="done-icon ok">✓</div>
+        <h2>已送出，謝謝您！</h2>
+        <p class="step-desc">我們已經收到您的回覆，稍後會有專人與您聯繫。</p>
+      </div>
+      <div id="done-fallback" style="display:none">
+        <div class="done-icon warn">!</div>
+        <h2>資料已整理好，但自動送出時遇到問題</h2>
+        <div class="card">
+          <p style="font-size:13.5px;color:var(--muted);margin:0 0 12px">可能是網路不穩定。請幫忙複製以下摘要，貼回剛才與您聯繫的對話視窗，我們會盡快為您更新紀錄：</p>
+          <div class="summary-box" id="summary-box"></div>
+          <button class="btn btn-primary" onclick="copySummary()">複製摘要</button>
+          <div class="copy-feedback" id="copy-feedback"></div>
+        </div>
+        <div class="mail-fallback">若不方便複製，也可以 <a id="mail-link" href="#">點此用 Email 傳送</a>。</div>
+      </div>
+      <div class="row-nav" style="margin-top:20px">
+        <button class="btn btn-ghost" onclick="goStep(2)">← 上一步</button>
+      </div>
+    </section>
+
+    <footer class="page-footer">FineDayClub · 誠摯感謝您一直以來的支持</footer>
+  </div>
+
+  <!-- ===================== LINK GENERATOR (internal, ?tool=1) ===================== -->
+  <div id="tool-flow" style="display:none">
+    <span class="tool-badge">內部工具・客人不會看到這個畫面</span>
+    <h1 style="font-size:22px;margin-bottom:8px">產生客人專屬連結</h1>
+    <p style="color:var(--muted);font-size:14px;margin-bottom:24px">輸入客人姓名與目前地址，產生一個專屬連結；客人打開後，姓名與地址會自動預填在「地址確認」步驟。此連結含有客人個資，請僅以一對一訊息個別傳送，勿公開分享或群發。</p>
+    <div class="card">
+      <div class="field">
+        <label for="t-name">客人姓名</label>
+        <input type="text" id="t-name" placeholder="例如：陳小姐">
+      </div>
+      <div class="field">
+        <label for="t-phone">目前紀錄的電話（選填）</label>
+        <input type="tel" id="t-phone" placeholder="請輸入電話">
+      </div>
+      <div class="field" style="margin-bottom:0">
+        <label for="t-addr">目前紀錄的地址</label>
+        <textarea id="t-addr" placeholder="請貼上地址"></textarea>
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="generateLink()">產生連結</button>
+    <div class="card" id="t-output" style="display:none;margin-top:18px">
+      <label style="display:block;font-size:12.5px;color:var(--muted);margin-bottom:8px">專屬連結</label>
+      <div class="tool-out">
+        <input type="text" id="t-url" readonly>
+        <button class="btn btn-primary" style="width:auto;padding:11px 18px" onclick="copyLink()">複製</button>
+      </div>
+      <div class="tool-note" id="t-copy-note"></div>
+    </div>
+  </div>
+
+  <!-- ===================== INSPIRATION EDITOR (internal, ?edit=1) ===================== -->
+  <div id="editor-flow" style="display:none">
+    <span class="tool-badge">內部工具・客人不會看到這個畫面</span>
+    <div class="editor-toolbar">
+      <div>
+        <h1 style="font-size:22px;margin-bottom:6px">編輯旅程靈感卡片</h1>
+        <p style="color:var(--muted);font-size:13.5px;margin:0">上傳圖片、修改文字，或新增/刪除卡片，改完按右邊匯出，重新上傳到 Netlify 覆蓋原本的檔案即可。</p>
+      </div>
+      <button class="btn btn-primary" onclick="exportEdited()">📥 匯出更新版 HTML</button>
+    </div>
+
+    <div class="editor-section-label" style="margin-top:0">問候文案（頁面最上方的標題與說明文字）</div>
+    <div class="card">
+      <div class="field">
+        <label for="e-eyebrow-en">英文小標籤</label>
+        <input type="text" id="e-eyebrow-en" oninput="updateHero('eyebrowEn', this.value)">
+      </div>
+      <div class="field">
+        <label for="e-title-default">首頁大標題（客人姓名未知時顯示）</label>
+        <input type="text" id="e-title-default" oninput="updateHero('titleDefault', this.value)">
+      </div>
+      <div class="field">
+        <label for="e-title-prefix">大標題前綴（客人有專屬連結、已知姓名時，會顯示成「前綴＋姓名＋ 您好」）</label>
+        <input type="text" id="e-title-prefix" oninput="updateHero('titlePrefix', this.value)">
+      </div>
+      <div class="field" style="margin-bottom:0">
+        <label for="e-desc">一句話說明</label>
+        <textarea id="e-desc" oninput="updateHero('desc', this.value)"></textarea>
+      </div>
+    </div>
+
+    <div class="editor-section-label">旅程靈感卡片</div>
+    <div id="editor-cards"></div>
+    <button class="btn btn-ghost" style="border:1px dashed var(--line);width:100%;justify-content:center" onclick="addCard()">＋ 新增卡片</button>
+    <p class="editor-note">提示：圖片建議先壓縮到 500KB 以內再上傳，卡片數量多時檔案會變大，影響客人端載入速度。</p>
+
+    <div class="editor-section-label">預覽（客人實際看到的樣子）</div>
+    <div class="insp-grid" id="editor-preview"></div>
+  </div>
+
+</div>
+
+<script>
+  // 這段一定要放在最前面：在任何 JS 修改畫面之前，先把「原始檔案」的完整 HTML 存起來，
+  // 之後「匯出更新版」會以這份乾淨的原始版本為底，只替換 CARDS 資料，不會把編輯模式的畫面狀態一併烤進去。
+  var PRISTINE_HTML = document.documentElement.outerHTML;
+
+  // ---- 寫入 Google Sheet 的設定（沿用 FDC 通用 Apps Script 後端） ----
+  var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxUFs0fc06U6bgMzVPGkSMFLl82G2lvwO7w6Lpe99wqrVPGjNtuHhRUTygNJeyFDVqi_g/exec";
+  var SPREADSHEET_ID = "1zsR9aVnkdIMAgspQ5d9VQeROSR1kmkSmshG5zPSbV64";
+  var SHEET_NAME = "客戶回覆";
+  var CASE_ID = "中秋問候";
+
+  // ---- 編輯模式用的色卡選單文字（要放在最前面：下面 renderEditor() 在頁面載入時就會被呼叫，
+  // 如果這個變數宣告寫在後面，執行到 renderEditor() 當下會抓到 undefined 而整段壞掉） ----
+  var SWATCH_LABELS = { c1: '紅（東北）', c2: '綠（Amanemu）', c3: '金（歐洲市集）', c4: '酒紅（酒莊）', c5: '藍（其他／郵輪河輪）' };
+
+  // ---- 問候文案（唯一資料來源，客人版與編輯版都從這裡渲染；同樣要放在 renderHero() 之前宣告） ----
+  var HERO = {
+    eyebrowEn: 'Mid-Autumn Greetings',
+    titleDefault: '中秋佳節，向您問聲好',
+    titlePrefix: '中秋佳節，',
+    desc: '在為您確認今年中秋送禮地址的同時，也想和您分享我們正在準備的幾個秋冬旅程提案，希望能為您帶來一點靈感。'
+  };
+
+  // ---- 旅程靈感卡片資料（唯一資料來源，客人版與編輯版都從這裡渲染） ----
+  var CARDS = [
+    { swatch: 'c1', eyebrow: '東北紅葉溫泉小旅行', title: '仙台・山形・藏王 3 日', desc: '用溫泉、山寺與紅葉串起一段安靜的秋日行程，節奏比東京近郊更從容。', img: '' },
+    { swatch: 'c2', eyebrow: 'Amanemu 伊勢志摩療癒假期', title: '伊勢神宮・英虞灣 3 日', desc: '以 Amanemu 為核心，串起伊勢神宮參拜、海女文化與英虞灣的慢旅時光。', img: '' },
+    { swatch: 'c3', eyebrow: '歐洲冬日聖誕市集', title: '維也納／慕尼黑 3 日', desc: '飯店質感、咖啡館香氣與市集燈火交織而成的歐洲冬季片刻。', img: '' },
+    { swatch: 'c4', eyebrow: '日本葡萄酒風土之旅', title: '山梨甲州酒莊 3 日', desc: '走訪甲州葡萄酒發源地與精品酒莊，一趟真正喝懂日本 wine 的品飲行程。', img: '' }
+  ];
+
+  var params = new URLSearchParams(location.search);
+  var isTool = params.get('tool') === '1';
+  var isEdit = params.get('edit') === '1';
+
+  renderInspiration('insp-grid');
+
+  if (isEdit) {
+    document.getElementById('client-flow').style.display = 'none';
+    document.getElementById('editor-flow').style.display = 'block';
+    document.getElementById('page').classList.add('wide');
+    populateHeroFields();
+    renderEditor();
+  } else if (isTool) {
+    document.getElementById('client-flow').style.display = 'none';
+    document.getElementById('tool-flow').style.display = 'block';
+  } else {
+    var raw = params.get('d');
+    var prefill = { n: '', a: '', p: '' };
+    if (raw) {
+      try { prefill = JSON.parse(decodeURIComponent(raw)); } catch (e) {}
+    }
+    document.getElementById('f-name').value = prefill.n || '';
+    document.getElementById('f-addr').value = prefill.a || '';
+    document.getElementById('f-phone').value = prefill.p || '';
+    renderHero(prefill.n);
+    goStep(1);
+  }
+
+  // 問候文案渲染：prefillName 有值時，標題改用「前綴＋姓名＋ 您好」，否則用預設標題
+  function renderHero(prefillName) {
+    document.getElementById('hero-eyebrow').textContent = HERO.eyebrowEn;
+    document.getElementById('hero-desc').textContent = HERO.desc;
+    document.getElementById('hero-title').textContent = prefillName ? (HERO.titlePrefix + prefillName + ' 您好') : HERO.titleDefault;
+  }
+
+  function populateHeroFields() {
+    document.getElementById('e-eyebrow-en').value = HERO.eyebrowEn;
+    document.getElementById('e-title-default').value = HERO.titleDefault;
+    document.getElementById('e-title-prefix').value = HERO.titlePrefix;
+    document.getElementById('e-desc').value = HERO.desc;
+  }
+
+  function updateHero(key, val) {
+    HERO[key] = val;
+  }
+
+  function esc(str) {
+    var d = document.createElement('div');
+    d.textContent = str || '';
+    return d.innerHTML;
+  }
+
+  // 描述文字專用：先跳脫成安全的文字，再把「純網址」或「[顯示文字](網址)」格式轉成可點擊連結。
+  function linkify(str) {
+    var s = esc(str || '');
+    var store = [];
+    function stash(html) {
+      var token = '\uE000' + store.length + '\uE001';
+      store.push(html);
+      return token;
+    }
+    // [顯示文字](https://...)
+    s = s.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, function (m, text, url) {
+      return stash('<a href="' + url + '" target="_blank" rel="noopener">' + text + '</a>');
+    });
+    // 剩下的純網址（去掉句尾可能誤黏到的標點）
+    s = s.replace(/https?:\/\/[^\s<]+/g, function (m) {
+      var trail = '';
+      var stripped = m.match(/^(.*?)([),.!?，。！？」』】]*)$/);
+      if (stripped) { m = stripped[1]; trail = stripped[2]; }
+      return stash('<a href="' + m + '" target="_blank" rel="noopener">' + m + '</a>') + trail;
+    });
+    store.forEach(function (html, i) {
+      s = s.split('\uE000' + i + '\uE001').join(html);
+    });
+    return s;
+  }
+
+  function renderInspiration(targetId) {
+    var el = document.getElementById(targetId);
+    if (!el) return;
+    el.innerHTML = CARDS.map(function (c) {
+      var swatchVar = 'var(--' + c.swatch + ')';
+      var swatchSoft = 'var(--' + c.swatch + '-soft)';
+      var swatchTint = 'var(--' + c.swatch + '-tint)';
+      var style = '--swatch:' + swatchVar + ';--swatch-soft:' + swatchSoft + ';--swatch-tint:' + swatchTint;
+      var imgHtml = c.img ? '<img class="insp-img" src="' + c.img + '" alt="">' : '';
+      var checkHtml = '<label class="insp-select"><input type="checkbox" class="insp-cb" value="' + esc(c.eyebrow) + '"><span class="mark"></span></label>';
+      return '<div class="insp-card" style="' + style + '">' + imgHtml + checkHtml +
+        '<div class="insp-body"><div class="insp-eyebrow">' + esc(c.eyebrow) + '</div>' +
+        '<h3>' + esc(c.title) + '</h3><p>' + linkify(c.desc) + '</p></div></div>';
+    }).join('');
+  }
+
+  function goStep(n) {
+    document.querySelectorAll('.step').forEach(function (el) {
+      el.classList.toggle('active', el.getAttribute('data-step') === String(n));
+    });
+    document.querySelectorAll('.stepper .seg').forEach(function (seg) {
+      var s = Number(seg.getAttribute('data-step'));
+      seg.classList.toggle('done', s < n);
+      seg.classList.toggle('current', s === n);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function getTimeslotText() {
+    var slots = Array.from(document.querySelectorAll('.f-timeslot:checked')).map(function (i) { return i.value; });
+    return slots.length ? slots.join('、') : '（尚未選擇）';
+  }
+
+  // ---- Step 1: 地址確認，按下繼續時先送一筆到 Sheet ----
+  function confirmAddress() {
+    var name = document.getElementById('f-name').value.trim() || '（未提供）';
+    var phone = document.getElementById('f-phone').value.trim() || '（未提供）';
+    var addr = document.getElementById('f-addr').value.trim() || '（未提供）';
+    var timeslotText = getTimeslotText();
+    var remark = document.getElementById('f-remark').value.trim();
+    var btn = document.getElementById('addr-btn');
+    btn.disabled = true;
+    btn.textContent = '確認中...';
+
+    var payload = {
+      spreadsheetId: SPREADSHEET_ID,
+      sheetName: SHEET_NAME,
+      caseId: CASE_ID,
+      guestName: name,
+      selections: [
+        { day: '姓名', meal: '', name: name },
+        { day: '電話', meal: '', name: phone },
+        { day: '地址', meal: '', name: addr },
+        { day: '收貨時段', meal: '', name: timeslotText },
+        { day: '備註', meal: '', name: remark || '（無）' }
+      ]
+    };
+
+    function proceed() {
+      btn.disabled = false;
+      btn.textContent = '地址正確，繼續 →';
+      goStep(2);
+    }
+
+    fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(payload)
+    }).then(proceed).catch(proceed);
+  }
+
+  // ---- Step 2 送出（興趣勾選＋願望清單），單獨一筆，不重複帶地址 ----
+  function buildSummary() {
+    var name = document.getElementById('f-name').value.trim() || '（未提供）';
+    var phone = document.getElementById('f-phone').value.trim() || '（未提供）';
+    var addr = document.getElementById('f-addr').value.trim() || '（未提供）';
+    var timeslotText = getTimeslotText();
+    var remark = document.getElementById('f-remark').value.trim();
+    var note = document.getElementById('f-note').value.trim();
+    var interests = Array.from(document.querySelectorAll('#insp-grid .insp-cb:checked')).map(function (i) { return i.value; });
+    var interestText = interests.length ? interests.join('、') : '（尚未選擇）';
+
+    var summary =
+      '【中秋送禮地址確認】\n' +
+      '收件人：' + name + '\n' +
+      '聯絡電話：' + phone + '\n' +
+      '送達地址：' + addr + '\n' +
+      '方便收貨時段：' + timeslotText + '\n' +
+      '備註：' + (remark || '（無）') + '\n\n' +
+      '【感興趣的行程】\n' +
+      interestText +
+      '\n\n【旅行小許願】\n' +
+      (note || '（無）');
+
+    return { name: name, phone: phone, addr: addr, timeslotText: timeslotText, remark: remark, interestText: interestText, note: note, summary: summary };
+  }
+
+  function submitSurvey() {
+    var data = buildSummary();
+    var btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = '送出中...';
+
+    var payload = {
+      spreadsheetId: SPREADSHEET_ID,
+      sheetName: SHEET_NAME,
+      caseId: CASE_ID,
+      guestName: data.name,
+      selections: [
+        { day: '興趣行程', meal: '', name: data.interestText },
+        { day: '小許願', meal: '', name: data.note || '（無）' }
+      ]
+    };
+
+    fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(payload)
+    }).then(function () {
+      btn.disabled = false;
+      btn.textContent = '送出';
+      document.getElementById('done-success').style.display = 'block';
+      document.getElementById('done-fallback').style.display = 'none';
+      goStep(3);
+    }).catch(function () {
+      btn.disabled = false;
+      btn.textContent = '送出';
+      document.getElementById('summary-box').textContent = data.summary;
+      var mailBody = encodeURIComponent(data.summary);
+      var mailLink = document.getElementById('mail-link');
+      mailLink.href = 'mailto:angela.tu@finedayclub.com?subject=' + encodeURIComponent('中秋送禮地址確認｜' + data.name) + '&body=' + mailBody;
+      document.getElementById('done-success').style.display = 'none';
+      document.getElementById('done-fallback').style.display = 'block';
+      goStep(3);
+    });
+  }
+
+  function copySummary() {
+    var text = document.getElementById('summary-box').textContent;
+    var feedback = document.getElementById('copy-feedback');
+    copyText(text, function (ok) {
+      feedback.textContent = ok ? '已複製，請貼回對話視窗給我們 🙏' : '無法自動複製，請直接長按選取上方文字複製';
+    });
+  }
+
+  function copyText(text, cb) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { cb(true); }).catch(function () { legacyCopy(text, cb); });
+    } else {
+      legacyCopy(text, cb);
+    }
+  }
+
+  function legacyCopy(text, cb) {
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.focus(); ta.select();
+      var ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      cb(ok);
+    } catch (e) { cb(false); }
+  }
+
+  function generateLink() {
+    var name = document.getElementById('t-name').value.trim();
+    var phone = document.getElementById('t-phone').value.trim();
+    var addr = document.getElementById('t-addr').value.trim();
+    var data = { n: name, a: addr, p: phone };
+    var url = location.origin + location.pathname + '?d=' + encodeURIComponent(JSON.stringify(data));
+    document.getElementById('t-url').value = url;
+    document.getElementById('t-output').style.display = 'block';
+    document.getElementById('t-copy-note').textContent = '';
+  }
+
+  function copyLink() {
+    var input = document.getElementById('t-url');
+    copyText(input.value, function (ok) {
+      document.getElementById('t-copy-note').textContent = ok ? '已複製連結' : '複製失敗，請手動選取後複製';
+    });
+  }
+
+  // ---- 編輯模式：卡片增刪改、圖片上傳、匯出 ----
+  function renderEditor() {
+    var wrap = document.getElementById('editor-cards');
+    wrap.innerHTML = CARDS.map(function (c, i) {
+      var options = Object.keys(SWATCH_LABELS).map(function (k) {
+        return '<option value="' + k + '"' + (c.swatch === k ? ' selected' : '') + '>' + SWATCH_LABELS[k] + '</option>';
+      }).join('');
+      var imgTag = c.img ? ' style="display:block"' : '';
+      var phStyle = c.img ? ' style="display:none"' : '';
+      return '<div class="editor-card">' +
+        '<div class="editor-photo" onclick="document.getElementById(\'file-' + i + '\').click()">' +
+          '<input type="file" id="file-' + i + '" accept="image/*" onchange="handleUpload(' + i + ', this)">' +
+          '<img id="img-' + i + '"' + imgTag + ' src="' + (c.img || '') + '">' +
+          '<div class="ph" id="ph-' + i + '"' + phStyle + '>📷<br>點擊上傳圖片</div>' +
+        '</div>' +
+        '<div class="editor-fields">' +
+          '<select onchange="updateCard(' + i + ',\'swatch\',this.value)">' + options + '</select>' +
+          '<input value="' + esc(c.eyebrow) + '" placeholder="小標籤，例如：東北紅葉溫泉小旅行" oninput="updateCard(' + i + ',\'eyebrow\',this.value)">' +
+          '<input value="' + esc(c.title) + '" placeholder="標題，例如：仙台・山形・藏王 3 日" oninput="updateCard(' + i + ',\'title\',this.value)">' +
+          '<textarea placeholder="一句話描述，可直接貼網址，或用 [顯示文字](網址) 自訂連結文字" oninput="updateCard(' + i + ',\'desc\',this.value)">' + esc(c.desc) + '</textarea>' +
+          '<button class="editor-remove" onclick="removeCard(' + i + ')">刪除這張卡片</button>' +
+        '</div></div>';
+    }).join('');
+    renderInspiration('editor-preview');
+  }
+
+  function updateCard(i, key, val) {
+    CARDS[i][key] = val;
+    renderInspiration('editor-preview');
+  }
+
+  function handleUpload(i, input) {
+    var file = input.files && input.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      CARDS[i].img = e.target.result;
+      renderEditor();
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function addCard() {
+    CARDS.push({ swatch: 'c5', eyebrow: '新卡片標籤', title: '標題', desc: '一句話描述這個行程。', img: '' });
+    renderEditor();
+  }
+
+  function removeCard(i) {
+    CARDS.splice(i, 1);
+    renderEditor();
+  }
+
+  function exportEdited() {
+    try {
+      var newHeroLiteral = 'var HERO = ' + JSON.stringify(HERO) + ';';
+      var newCardsLiteral = 'var CARDS = ' + JSON.stringify(CARDS) + ';';
+      var updated = PRISTINE_HTML.replace(/var HERO = \{[\s\S]*?\};/, newHeroLiteral);
+      updated = updated.replace(/var CARDS = \[[\s\S]*?\];/, newCardsLiteral);
+      var htmlContent = '<!doctype html>\n' + updated;
+      var blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = '中秋問候與旅程靈感.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    } catch (err) {
+      alert('匯出失敗，請確認瀏覽器支援下載功能');
+    }
+  }
+</script>
+</body>
+</html>
