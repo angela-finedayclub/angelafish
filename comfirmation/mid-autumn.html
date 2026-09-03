@@ -140,6 +140,12 @@
   .btn-ghost { background: transparent; color: var(--muted); padding: 13px 8px; }
   .btn-ghost:hover { color: var(--ink); }
   .btn:focus-visible { outline: 2px solid var(--accent-neutral); outline-offset: 2px; }
+  .btn-spinner {
+    display: inline-block; width: 14px; height: 14px; margin-right: 8px; vertical-align: -2px;
+    border: 2px solid rgba(255,255,255,0.4); border-top-color: #fff; border-radius: 50%;
+    animation: btn-spin .7s linear infinite;
+  }
+  @keyframes btn-spin { to { transform: rotate(360deg); } }
 
   .row-nav { display: flex; align-items: center; gap: 12px; }
   .row-nav .btn-primary { flex: 1; }
@@ -267,7 +273,7 @@
         </div>
         <div class="field" style="margin-bottom:0">
           <label for="f-remark">備註（選填）</label>
-          <textarea id="f-remark" placeholder="例如：請洽大樓警衛室代收、家中有犬隻等"></textarea>
+          <textarea id="f-remark" placeholder="例如：請洽大樓警衛室代收 / 如需註明具體可收件的時段，可於此告訴我們"></textarea>
         </div>
       </div>
       <div class="row-nav">
@@ -528,8 +534,9 @@
     var timeslotText = getTimeslotText();
     var remark = document.getElementById('f-remark').value.trim();
     var btn = document.getElementById('addr-btn');
+    var originalLabel = btn.textContent;
     btn.disabled = true;
-    btn.textContent = '確認中...';
+    btn.innerHTML = '<span class="btn-spinner"></span>確認中，請稍候...';
 
     var payload = {
       spreadsheetId: SPREADSHEET_ID,
@@ -547,7 +554,7 @@
 
     function proceed() {
       btn.disabled = false;
-      btn.textContent = '地址正確，繼續 →';
+      btn.textContent = originalLabel;
       goStep(2);
     }
 
@@ -588,8 +595,9 @@
   function submitSurvey() {
     var data = buildSummary();
     var btn = document.getElementById('submit-btn');
+    var originalLabel = btn.textContent;
     btn.disabled = true;
-    btn.textContent = '送出中...';
+    btn.innerHTML = '<span class="btn-spinner"></span>送出中，請稍候...';
 
     var payload = {
       spreadsheetId: SPREADSHEET_ID,
@@ -609,13 +617,13 @@
       body: JSON.stringify(payload)
     }).then(function () {
       btn.disabled = false;
-      btn.textContent = '送出';
+      btn.textContent = originalLabel;
       document.getElementById('done-success').style.display = 'block';
       document.getElementById('done-fallback').style.display = 'none';
       goStep(3);
     }).catch(function () {
       btn.disabled = false;
-      btn.textContent = '送出';
+      btn.textContent = originalLabel;
       document.getElementById('summary-box').textContent = data.summary;
       var mailBody = encodeURIComponent(data.summary);
       var mailLink = document.getElementById('mail-link');
